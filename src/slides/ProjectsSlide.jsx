@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, AnimateSharedLayout, motion } from 'framer-motion';
 
 import { roubineStack, minglerStack, whileTap } from '../Globals';
@@ -446,7 +446,7 @@ const Roubine = () => {
 export const ProjectsSlide = () => {
   return (
     <SlideWrapper>
-      <div className='column project-slide'>
+      <div id='ele' className='column project-slide'>
         <Mingler />
         <Roubine />
         <h2 className='header-menu-content-header'></h2>

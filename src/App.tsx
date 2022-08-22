@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   AnimatePresence,
   AnimateSharedLayout,
   motion,
   useAnimationControls,
 } from 'framer-motion';
-import useMeasure from 'react-use-measure';
 
 import './App.css';
 import { ProjectsSlide } from './slides/ProjectsSlide';
@@ -112,11 +111,10 @@ const MenuItem = ({
 //   },
 // ];
 
-type SliderProps = { direction: string; expanded: number; width: number };
-const Slider = ({ direction, expanded, width }: SliderProps) => {
+type SliderProps = { direction: string; expanded: number };
+const Slider = ({ direction, expanded }: SliderProps) => {
   type VariantProps = {
     direction: string;
-    width: number;
     expanded: number;
   };
 
@@ -148,9 +146,44 @@ const Slider = ({ direction, expanded, width }: SliderProps) => {
 function App() {
   const [expanded, setExpanded] = useState(0);
   const [tuple, setTuple] = useState([0, expanded]);
+  const [scroll, setScroll] = useState(0);
 
-  const [sliderContainerRef, { width }] = useMeasure();
+  const sliderContainerRef = useRef<any>();
   const controls = useAnimationControls();
+
+  useEffect(() => {
+    const handleScroll = (event: any) => {
+      setScroll((prevState) => {
+        let newScrollPosition = prevState + event.deltaY;
+        let elementHeight =
+          sliderContainerRef.current &&
+          sliderContainerRef?.current.offsetHeight;
+
+        if (elementHeight && newScrollPosition >= elementHeight + 200) {
+          return elementHeight;
+        }
+        if (newScrollPosition <= 0) {
+          return 0;
+        }
+        return newScrollPosition;
+      });
+    };
+
+    window.addEventListener('wheel', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('wheel', handleScroll);
+    };
+  }, [sliderContainerRef]);
+
+  useEffect(() => {
+    console.log({ scroll });
+
+    sliderContainerRef?.current?.scroll({
+      top: scroll,
+      behavior: 'smooth',
+    });
+  }, [scroll, sliderContainerRef]);
 
   if (tuple[1] !== expanded) setTuple([tuple[1], expanded]);
   let direction = expanded < tuple[0] ? 'left' : 'right';
@@ -163,13 +196,6 @@ function App() {
     });
   }, []);
 
-  const onScroll = () => ref.scrollTop = another scrolltop;
-  useEffect(() => {
-    // clean up code
-    window.removeEventListener('scroll', onScroll);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-}, []);
   // useEffect(() => {
   //   if (expanded === -1 || expanded === null)
   //     controls.start({ opacity: 0, scaleX: 0 });
@@ -209,7 +235,7 @@ function App() {
             className='header-menu-content'
             ref={sliderContainerRef}
           >
-            <Slider expanded={expanded} direction={direction} width={width} />
+            <Slider expanded={expanded} direction={direction} />{' '}
           </motion.div>
         </AnimateSharedLayout>
       </header>
