@@ -14,6 +14,7 @@ export const ReactIcon = () => (
 
 export const TypeScriptIcon = () => (
   <span
+    className='no-select'
     style={{
       // transform: 'scale(1, 0.9) translateY(-22%)',
       color: 'rgba(14, 14, 14, 1)',

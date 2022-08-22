@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
+import debounce from 'lodash/debounce';
+import Tooltip from './Tooltip';
 
 type SkillsProps = {
   skills: Array<{
@@ -8,10 +10,17 @@ type SkillsProps = {
     rating?: string;
     opacity?: number;
   }>;
+  vertical?: boolean;
+  tooltips?: boolean;
   cardHovered?: boolean;
 };
 
-export const Skills = ({ skills, cardHovered = false }: SkillsProps) => {
+export const Skills = ({
+  skills,
+  vertical = false,
+  tooltips = false,
+  cardHovered = false,
+}: SkillsProps) => {
   const SkillComponent = ({ skill }: any) => {
     const [skillHovered, setSkillHovered] = useState(false);
 
@@ -23,6 +32,9 @@ export const Skills = ({ skills, cardHovered = false }: SkillsProps) => {
       >
         {skill.icon}
 
+        {tooltips && (
+          <Tooltip text={skill.title} show={skillHovered} vertical={vertical} />
+        )}
         <AnimatePresence>
           {!skillHovered && cardHovered && skill.rating && (
             <motion.div
@@ -50,13 +62,17 @@ export const Skills = ({ skills, cardHovered = false }: SkillsProps) => {
   };
 
   return (
-    <div className='row' style={{ gap: 6 }}>
+    <div
+      className={vertical ? 'column' : 'row'}
+      style={{ gap: vertical ? 2 : 6 }}
+    >
       {skills.map((skill, index) => (
         <motion.div
+          key={skill.title}
           initial={{ opacity: 0 }}
           animate={{
             opacity: 1,
-            transition: { duration: 0.75, delay: 0.25 * index },
+            transition: { duration: 0.5 },
           }}
         >
           <SkillComponent skill={skill} />

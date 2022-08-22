@@ -120,34 +120,9 @@ const Slider = ({ direction, expanded, width }: SliderProps) => {
     expanded: number;
   };
 
-  let sliderVariants = {
-    initial: ({ direction, width, expanded }: VariantProps) => ({
-      x: direction === 'left' ? '-100%' : '100%',
-    }),
-    // animate: ({ expanded }: VariantProps) =>
-    //   expanded === 0
-    //     ? { x: '0%' }
-    //     : expanded === 1
-    //     ? { x: '-100%' }
-    //     : expanded === 2
-    //     ? { x: '-200%' }
-    //     : { x: '0%' },
-    exit: ({ direction, width, expanded }: VariantProps) => ({
-      x: direction === 'left' ? '100%' : '-100%',
-    }),
-  };
-
   return (
     <div>
-      {/* <AnimatePresence custom={{ direction, width, expanded }}> */}
       <motion.div
-        // key={expanded}
-        // variants={sliderVariants}
-        // custom={{ direction, width, expanded }}
-        // initial={'initial'}
-        // animate={'animate'}
-        // exit={'exit'}
-        // transition={{ bounce: 0, duration: 0.8 }}
         style={{
           transition: '0.3s ease',
           WebkitTransition: '0.3s ease',
@@ -165,12 +140,7 @@ const Slider = ({ direction, expanded, width }: SliderProps) => {
         <ProjectsSlide />
         <AboutSlide />
         <ContactSlide />
-        {/* <div className='row'>
-        {expanded === 0 && <ProjectsSlide />}
-        {expanded === 1 && <AboutSlide />}
-      </div> */}
       </motion.div>
-      {/* </AnimatePresence> */}
     </div>
   );
 };
@@ -185,6 +155,21 @@ function App() {
   if (tuple[1] !== expanded) setTuple([tuple[1], expanded]);
   let direction = expanded < tuple[0] ? 'left' : 'right';
 
+  useEffect(() => {
+    controls.start({
+      scale: 1,
+      opacity: 1,
+      transition: { ease: 'circOut', duration: 0.5 },
+    });
+  }, []);
+
+  const onScroll = () => ref.scrollTop = another scrolltop;
+  useEffect(() => {
+    // clean up code
+    window.removeEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+}, []);
   // useEffect(() => {
   //   if (expanded === -1 || expanded === null)
   //     controls.start({ opacity: 0, scaleX: 0 });
@@ -219,7 +204,7 @@ function App() {
 
           <motion.div
             animate={controls}
-            initial={{ x: '-26%' }}
+            initial={{ x: -180, scale: 0.8, opacity: 0 }}
             transition={{ duration: 0.32 }}
             className='header-menu-content'
             ref={sliderContainerRef}
