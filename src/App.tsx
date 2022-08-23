@@ -10,7 +10,7 @@ import './styles/App.css';
 import { ProjectsSlide } from './slides/ProjectsSlide';
 import { AboutSlide } from './slides/AboutSlide';
 import { ContactSlide } from './slides/ContactSlide';
-import background from './assets/af.jpg';
+import Background from './Reusables/Background';
 
 const menuItems = ['projects', 'about', 'contact'];
 
@@ -131,19 +131,10 @@ const Slider = ({ expanded }: SliderProps) => {
         }}
         className='row'
       >
-        <img
-          src={background}
-          style={{
-            position: 'absolute',
-            pointerEvents: 'none',
-            width: '100%',
-            height: '100vh',
-            zIndex: -1,
-          }}
-        />
         <ProjectsSlide />
         <AboutSlide />
         <ContactSlide />
+        <Background />
       </motion.div>
     </div>
   );
