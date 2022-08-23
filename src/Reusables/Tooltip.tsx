@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import '../styles/Tooltip.css';
 
 type TooltipProps = {
   text: string;

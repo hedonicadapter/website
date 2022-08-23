@@ -1,0 +1,32 @@
+.roubine {
+  opacity: 0;
+  margin-top: 200px;
+
+  height: 95vh;
+}
+
+.roubine-prototype-and-header-container {
+}
+
+.roubine-header {
+  font-family: Arial, Helvetica, sans-serif;
+
+  display: flex;
+  color: var(--on-background);
+  align-items: center;
+  gap: 0.1vw;
+  margin-bottom: 8px;
+  margin-left: max(26px, 1.1vw);
+  margin-right: max(12px, 0.3vw);
+}
+.roubine-header h1 {
+  font-size: max(2.4em, 4vw);
+}
+.roubine-header-skills {
+}
+
+.phone {
+  /* object-fit: cover; */
+}
+.phones {
+}

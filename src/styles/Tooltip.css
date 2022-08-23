@@ -1,0 +1,15 @@
+.tooltip {
+  position: absolute;
+  bottom: max(24px, 1.6vw);
+  white-space: nowrap;
+}
+.tooltip-vertical {
+  position: absolute;
+  right: max(24px, 1.2vw);
+  bottom: -21px;
+  white-space: nowrap;
+
+  transform: rotate(180deg);
+  transform-origin: (0 0);
+  /* transform: rotateY(0deg) rotate(-45deg); */
+}

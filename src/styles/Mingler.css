@@ -1,0 +1,61 @@
+.mingler {
+  opacity: 0;
+  height: 100vh;
+}
+
+.mingler-prototype-and-header-container {
+  margin-inline: 20px;
+}
+
+.mingler-header {
+  font-family: 'CormorantGaramond-Light';
+  display: flex;
+  justify-content: space-between;
+  color: var(--on-background);
+  align-items: flex-end;
+
+  margin-left: max(12px, 1.1vw);
+  margin-right: max(12px, 0.3vw);
+}
+.mingler-header h1 {
+  font-size: max(2.4em, 5vw);
+}
+
+.figma-prototype-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+}
+.figma-prototype-container iframe {
+  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, 0);
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+}
+
+.mingler-description {
+  text-align: center;
+  font-family: 'CormorantGaramond-light';
+  font-weight: 100;
+  font-size: 1.4em;
+  padding-inline: 30px;
+  color: var(--on-surface);
+}
+
+.come-mingle {
+  text-align: center;
+  margin: auto;
+}
+.come-mingle h4 {
+  margin: 0;
+  margin-top: 10px;
+  font-family: 'CormorantGaramond-Light';
+  font-size: 2.5em;
+  font-weight: 100;
+  color: var(--on-background);
+}

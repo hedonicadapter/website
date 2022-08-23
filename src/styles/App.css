@@ -1,0 +1,206 @@
+:root {
+  --main-color: #06c;
+  --off-white: rgba(253, 245, 241, 1);
+  --off-white-hovered: rgba(241, 235, 232, 255);
+  --off-white-pressed: rgba(196, 196, 196, 0.2);
+  --off-white-pressed2: rgba(196, 196, 196, 0.3);
+
+  --coffee-brown: rgba(96, 70, 59, 1);
+  --coffee-beige: rgba(230, 204, 178, 1);
+  --coffee-orange: rgba(255, 160, 92, 1);
+  --coffee-blue: #62b6cb;
+  --coffee-red: #8d3f3f;
+  --coffee-pink: #cea1a1;
+  --coffee-green: #73a580;
+
+  --default-placeholder-text-color: #757575;
+
+  --dark-mode-disabled-text: rgba(14, 14, 14, 0.6);
+
+  --background: rgba(14, 14, 14, 1);
+  --on-background: rgba(255, 255, 255, 1);
+
+  --surface: rgba(255, 255, 255, 0.06);
+  --on-surface: rgba(255, 255, 255, 0.87);
+  --on-surface-medium: rgba(255, 255, 255, 0.6);
+  --on-surface-disabled: rgba(255, 255, 255, 0.38);
+
+  --primary: rgba(255, 160, 92, 1);
+  --on-primary: rgba(14, 14, 14, 1);
+
+  --secondary: #cea1a1;
+  --on-secondary: rgba(18, 18, 18, 1);
+
+  --hover: rgba(255, 255, 255, 0.04);
+  --tap: rgba(255, 255, 255, 0.1);
+
+  --error: #cf6679;
+  --disabled: rgba(255, 255, 255, 0.38);
+}
+
+@font-face {
+  font-family: 'DMSerifText-Regular';
+  src: local('DMSerifText-Regular'),
+    url(../assets/fonts/DMSerifText-Regular.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'DMSerifText-Italic';
+  src: local('DMSerifText-Italic'),
+    url(../assets/fonts/DMSerifText-Italic.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'CormorantGaramond-Light';
+  src: local('CormorantGaramond-Light'),
+    url(../assets/fonts/CormorantGaramond-Light.ttf) format('truetype');
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+ul {
+  margin: 0;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-inline: 6px;
+  margin-bottom: 2px;
+}
+p {
+  margin: 0;
+}
+
+.container {
+}
+
+body {
+  overflow-y: overlay;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background);
+  background-size: cover;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: auto;
+
+  min-width: 580px;
+  width: 40vw;
+}
+
+.no-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.header-menu-item {
+  z-index: 2;
+  margin-top: 35vh;
+  color: var(--on-background);
+  font-size: 1.4rem;
+  letter-spacing: -0.2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  cursor: pointer;
+  padding: 3rem;
+}
+
+.header-menu-content-space-maker {
+  width: 40vw;
+  max-width: 600px;
+  min-width: 312px;
+  height: 100vh;
+  display: flex;
+}
+
+.header-menu-content {
+  width: 40vw;
+  max-width: 600px;
+  min-width: 312px;
+  height: 100%;
+  display: flex;
+  position: absolute;
+
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box; /* Firefox, other Gecko */
+  box-sizing: border-box; /* Opera/IE 8+ */
+
+  /* background-color: var(--surface); */
+
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.header-skills {
+  margin-bottom: 0.4vw;
+  color: var(--on-surface);
+}
+
+.skills-container {
+  justify-self: flex-end;
+  margin-left: 20px;
+  padding-inline: 4px;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+/* Don't know what this is lmao */
+.item {
+  display: block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 20px;
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Don't know what this is lmao */
+.outline {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  border: 10px solid white;
+  border-radius: 50%;
+}

@@ -1,0 +1,32 @@
+.text-box {
+  overflow-y: scroll;
+  height: 300px;
+
+  background-color: var(--background);
+
+  font-family: 'CormorantGaramond-Light';
+}
+.text-box h2 {
+  position: sticky;
+  height: 27px;
+  top: 0;
+  margin: 0;
+  padding-top: 20px;
+  padding-inline: 50px;
+
+  left: 0;
+  right: 0;
+  color: var(--on-surface-medium);
+  background-color: var(--background);
+
+  font-weight: 100;
+  font-size: 1.1em;
+}
+.text-box p {
+  z-index: 2;
+  padding-inline: 50px;
+  margin-bottom: 10px;
+  /* padding-top: 8px; */
+  color: var(--on-surface);
+  font-size: 1.4em;
+}

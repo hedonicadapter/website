@@ -1,0 +1,11 @@
+.slide-wrapper {
+  /* outline: 1px solid blue; */
+  /* flex-shrink: 0; */
+  width: calc(40vw);
+  max-width: 600px;
+  min-width: 312px;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+}

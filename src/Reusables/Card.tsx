@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import '../styles/Card.css';
 
 type CardProps = {
   title?: string;
@@ -32,7 +33,7 @@ export const Card = ({
   return (
     <motion.div
       whileTap={cardLink && { opacity: 0.6, scale: 0.99 }}
-      className={cardLink ? 'card-link no-select' : 'no-select'}
+      className={cardLink ? 'pointer no-select' : 'no-select'}
       onClick={() => cardLink && handleCardLinkOnClick()}
     >
       {!titleInside && <h3 className='card-outside-title'>{title}</h3>}

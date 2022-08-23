@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import debounce from 'lodash/debounce';
 import Tooltip from './Tooltip';
+import '../styles/Skills.css';
 
 type SkillsProps = {
   skills: Array<{

@@ -6,10 +6,11 @@ import {
   useAnimationControls,
 } from 'framer-motion';
 
-import './App.css';
+import './styles/App.css';
 import { ProjectsSlide } from './slides/ProjectsSlide';
 import { AboutSlide } from './slides/AboutSlide';
 import { ContactSlide } from './slides/ContactSlide';
+import background from './assets/af.jpg';
 
 const menuItems = ['projects', 'about', 'contact'];
 
@@ -111,13 +112,8 @@ const MenuItem = ({
 //   },
 // ];
 
-type SliderProps = { direction: string; expanded: number };
-const Slider = ({ direction, expanded }: SliderProps) => {
-  type VariantProps = {
-    direction: string;
-    expanded: number;
-  };
-
+type SliderProps = { expanded: number };
+const Slider = ({ expanded }: SliderProps) => {
   return (
     <div>
       <motion.div
@@ -135,6 +131,16 @@ const Slider = ({ direction, expanded }: SliderProps) => {
         }}
         className='row'
       >
+        <img
+          src={background}
+          style={{
+            position: 'absolute',
+            pointerEvents: 'none',
+            width: '100%',
+            height: '100vh',
+            zIndex: -1,
+          }}
+        />
         <ProjectsSlide />
         <AboutSlide />
         <ContactSlide />
@@ -145,14 +151,16 @@ const Slider = ({ direction, expanded }: SliderProps) => {
 
 function App() {
   const [expanded, setExpanded] = useState(0);
-  const [tuple, setTuple] = useState([0, expanded]);
   const [scroll, setScroll] = useState(0);
+  const [sliderContainerHovered, setSliderContainerHovered] = useState(false);
 
-  const sliderContainerRef = useRef<any>();
+  const sliderContainerRef = useRef<HTMLInputElement | null>(null);
   const controls = useAnimationControls();
 
   useEffect(() => {
-    const handleScroll = (event: any) => {
+    const handleScroll = (event: WheelEvent) => {
+      if (sliderContainerHovered) return;
+
       setScroll((prevState) => {
         let newScrollPosition = prevState + event.deltaY;
         let elementHeight =
@@ -174,19 +182,14 @@ function App() {
     return () => {
       window.removeEventListener('wheel', handleScroll);
     };
-  }, [sliderContainerRef]);
+  }, [sliderContainerRef, sliderContainerHovered]);
 
   useEffect(() => {
-    console.log({ scroll });
-
     sliderContainerRef?.current?.scroll({
       top: scroll,
       behavior: 'smooth',
     });
   }, [scroll, sliderContainerRef]);
-
-  if (tuple[1] !== expanded) setTuple([tuple[1], expanded]);
-  let direction = expanded < tuple[0] ? 'left' : 'right';
 
   useEffect(() => {
     controls.start({
@@ -233,9 +236,11 @@ function App() {
             initial={{ x: -180, scale: 0.8, opacity: 0 }}
             transition={{ duration: 0.32 }}
             className='header-menu-content'
+            onMouseEnter={() => setSliderContainerHovered(true)}
+            onMouseLeave={() => setSliderContainerHovered(false)}
             ref={sliderContainerRef}
           >
-            <Slider expanded={expanded} direction={direction} />{' '}
+            <Slider expanded={expanded} />
           </motion.div>
         </AnimateSharedLayout>
       </header>

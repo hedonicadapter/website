@@ -1,0 +1,49 @@
+.card {
+  min-width: 150px;
+  border-radius: 4px;
+  background-color: var(--surface);
+  padding-bottom: 1px;
+  margin-block: 10px;
+  margin-bottom: 14px;
+}
+
+.card-outside-title {
+  margin-top: 0;
+  color: var(--on-background);
+  font-size: 98%;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card-content {
+  padding: 10px;
+  margin-inline: 4px;
+  margin-block: 6px;
+}
+.card-content p {
+  padding-bottom: 8px;
+}
+
+.color-default * {
+  color: var(--on-surface-medium);
+}
+.color-default h3 {
+  color: var(--on-surface);
+}
+
+.color-primary {
+  background-color: var(--primary);
+  color: var(--on-primary);
+}
+.color-secondary {
+  background-color: var(--secondary);
+  color: var(--on-secondary);
+}
+.color-inverted {
+  background-color: var(--background);
+  color: var(--on-surface);
+}

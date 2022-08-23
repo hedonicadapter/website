@@ -1,3 +1,5 @@
+import '../styles/SlideWrapper.css';
+
 type SlideWrapperProps = {
   children: JSX.Element;
 };
