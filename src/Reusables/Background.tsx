@@ -13,7 +13,7 @@ const Background = () => (
       zIndex: -1,
     }}
   >
-    {/* <img
+    <img
       src={background}
       className='test'
       style={{
@@ -23,7 +23,7 @@ const Background = () => (
         width: '100%',
         filter: '',
       }}
-    /> */}
+    />
   </div>
 );
 

@@ -7,11 +7,10 @@
 }
 .description-and-arrow-underneath {
   cursor: pointer;
-  width: 18vw;
   justify-content: flex-start;
   padding-left: 30px;
   padding-right: 10px;
-  min-width: 18vw;
+  width: 18vw;
 }
 
 .description {
@@ -24,14 +23,24 @@
   color: var(--on-background);
 }
 
+.arrow-container {
+  /* width: 100px; */
+  /* height: 40px; */
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .arrow {
+  transform-origin: left center;
   margin-bottom: 15px;
-  margin-right: 35px;
+  margin-right: 1.9vw;
+  padding-left: 4px;
+  margin-left: 16px;
 }
 
 .arrow-line {
-  padding-left: 4px;
-  margin-left: 16px;
   width: 10vw;
   background: var(--on-surface);
   height: 3px;
@@ -52,14 +61,10 @@
 .arrow-underneath {
   margin-top: 22px;
   padding-right: 30%;
-  /* margin-bottom: 15px; */
-  /* margin-right: 35px; */
+  transform-origin: left center;
 }
 
 .arrow-line-underneath {
-  /* padding-left: 4px; */
-  /* margin-left: 16px; */
-  /* width: 10vw; */
   background: var(--on-surface);
   height: 3px;
 }

@@ -81,14 +81,27 @@ const Roubine = () => {
               onHoverEnd={() => setNotExpandedHovered(false)}
               transition={{ duration: 0.15 }}
             >
-              <a className='no-select' href='www.google.com' target='_blank'>
+              <a
+                className='no-select'
+                onClick={(evt) => {
+                  evt.stopPropagation();
+                  setExpanded(!expanded);
+                }}
+              >
                 <h1>Roubine</h1>
               </a>
             </motion.div>
           </div>
-          {expanded && <SmallArrow setExpanded={setExpanded} />}
+          <div style={{ width: 110 }}>
+            <SmallArrow
+              expandOnClick={true}
+              hovered={notExpandedHovered}
+              expanded={expanded}
+              setExpanded={setExpanded}
+            />
+          </div>
         </div>
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence>
           {!expanded ? (
             <ExpansionWrapper
               key={0}
@@ -101,9 +114,10 @@ const Roubine = () => {
                 >
                   <Description
                     links={[{ title: 'github', url: 'www.google.com' }]}
-                    descriptionText='Chat and share your digital life with friends.'
+                    descriptionText='Create good routines with psychology.'
                     arrowUnderneath={true}
                     hovered={notExpandedHovered}
+                    setHovered={setNotExpandedHovered}
                     expanded={expanded}
                     setExpanded={setExpanded}
                   />

@@ -83,6 +83,10 @@ const Dots = ({ timelineEvent, hovered, clicked, firstOrLast }: DotsProps) => {
               height: 50,
               margin: '0 auto',
               textAlign: 'center',
+              zIndex: firstOrLast ? 0 : 1,
+              background: firstOrLast
+                ? ''
+                : 'radial-gradient(circle, rgba(32, 28, 28, 1) 35%, rgba(0,0,0,0) 100%)',
             }}
           >
             {timelineEvent.title}
@@ -145,7 +149,7 @@ const Timeline = ({
           transition: { ease: 'linear', delay: 0.25, duration: 0.45 },
         }}
         className='timeline-dots-line'
-      ></motion.div>
+      />
       <ul>
         {timelineEvents.map((timelineEvent, index) => (
           <motion.div

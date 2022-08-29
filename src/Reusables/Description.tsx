@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import Links from './Links';
 import '../styles/Description.css';
+import { arrowTransition } from '../Globals';
+import SmallArrow from './SmallArrow';
 
 type DescriptionProps = {
   descriptionText: string;
@@ -10,6 +12,7 @@ type DescriptionProps = {
     url: string;
   }>;
   hovered: boolean;
+  setHovered: (bool: boolean) => void;
   expanded: boolean;
   setExpanded: (bool: boolean) => void;
 };
@@ -19,12 +22,16 @@ const Description = ({
   arrowUnderneath,
   links,
   hovered,
+  setHovered,
   expanded,
   setExpanded,
 }: DescriptionProps) => {
   return (
     <div
-      onClick={() => setExpanded(true)}
+      onClick={() => {
+        setExpanded(true);
+        setHovered(false);
+      }}
       className={
         !arrowUnderneath
           ? 'row description-and-arrow'
@@ -41,26 +48,42 @@ const Description = ({
         </motion.h2>
         <Links align='left' links={links} />
       </div>
-      <motion.div animate={hovered ? { x: 10 } : { x: 0 }}>
+
+      <div
+        style={{
+          transform: 'scale(-1)',
+          width: arrowUnderneath ? '70%' : '70%',
+        }}
+      >
+        <SmallArrow
+          expandOnClick={false}
+          hovered={hovered}
+          expanded={!expanded}
+          setExpanded={setExpanded}
+        />
+      </div>
+
+      {/* <motion.div animate={hovered ? { x: 10 } : { x: 0 }}>
         <motion.div
-          className={!arrowUnderneath ? 'arrow' : 'arrow-underneath'}
-          initial={{ opacity: 0, width: 0 }}
-          animate={{ opacity: 1, width: 'auto' }}
-          exit={{ opacity: 0, width: 0 }}
-          transition={{ delay: 0.25, duration: 1, easing: 'easeOut' }}
+          initial={{ width: 0 }}
+          animate={{ width: 'auto' }}
+          exit={{ width: 0 }}
+          className='arrow-container'
+          transition={arrowTransition}
         >
+          <div className={!arrowUnderneath ? 'arrow' : 'arrow-underneath'} />
           <div
             className={
               !arrowUnderneath ? 'arrow-line' : 'arrow-line-underneath'
             }
           />
-          <div
+          <motion.div
             className={
               !arrowUnderneath ? 'arrow-point' : 'arrow-point-underneath'
             }
           />
         </motion.div>
-      </motion.div>
+      </motion.div> */}
     </div>
   );
 };

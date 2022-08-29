@@ -17,11 +17,11 @@ const minglerLinks = [
 ];
 
 const MinglerTitle = ({
-  hovered,
   setHovered,
+  setExpanded,
 }: {
-  hovered: boolean;
   setHovered: (bool: boolean) => void;
+  setExpanded: () => void;
 }) => {
   const [titleIndex, setTitleIndex] = useState(0);
   const [shownOnce, setShownOnce] = useState(false);
@@ -76,14 +76,13 @@ const MinglerTitle = ({
     <motion.a
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
+      onClick={() => setExpanded()}
       initial={{ opacity: 0 }}
       animate={{
         opacity: 1,
         transition: { delay: 0.15, duration: 0.55 },
       }}
       className='no-select'
-      href='www.google.com'
-      target='_blank'
     >
       <motion.h1 transition={{ duration: 0.15 }}>
         <AnimatePresence exitBeforeEnter>
@@ -134,8 +133,8 @@ const Mingler = () => {
       <div className='mingler-prototype-and-header-container'>
         <div className='mingler-header'>
           <MinglerTitle
-            hovered={notExpandedHovered}
             setHovered={setNotExpandedHovered}
+            setExpanded={() => setExpanded(!expanded)}
           />
 
           <motion.div
@@ -202,24 +201,24 @@ const Mingler = () => {
                 links={minglerLinks}
                 descriptionText='Chat and share your digital life with friends.'
                 hovered={notExpandedHovered}
+                setHovered={setNotExpandedHovered}
                 expanded={expanded}
                 setExpanded={setExpanded}
               />
             </motion.div>
           </ExpansionWrapper>
         ) : (
-          <ExpansionWrapper
-            key={1}
-
-            // animate={expanded ? 'show' : 'hide'}
-            // variants={{
-            //   show: { height: 'auto', opacity: 1 },
-            //   hide: { height: '0', opacity: 0 },
-            // }}
-          >
+          <ExpansionWrapper key={1}>
             <>
               <div className='row small-arrow-and-links-container'>
-                <SmallArrow setExpanded={setExpanded} />
+                <div style={{ marginTop: 10, width: 110 }}>
+                  <SmallArrow
+                    expandOnClick={true}
+                    hovered={notExpandedHovered}
+                    expanded={expanded}
+                    setExpanded={setExpanded}
+                  />
+                </div>
                 <Links align='right' links={minglerLinks} />
               </div>
 
@@ -253,7 +252,7 @@ const Mingler = () => {
                 timelineItemClicked={timelineItemClicked}
                 timelineItemClickHandler={timelineItemClickHandler}
               />
-              <motion.a
+              {/* <motion.a
                 initial={{ opacity: 0 }}
                 animate={{
                   opacity: 1,
@@ -270,7 +269,7 @@ const Mingler = () => {
                 >
                   come mingle
                 </motion.h4>
-              </motion.a>
+              </motion.a> */}
             </>
           </ExpansionWrapper>
         )}

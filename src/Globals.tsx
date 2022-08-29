@@ -168,3 +168,8 @@ export const whileTap = {
   scale: 0.99,
   transition: { duration: 0.1 },
 };
+
+export const arrowTransition = {
+  duration: 0.5,
+  ease: [0.18, 0.72, 0, 0.67],
+};

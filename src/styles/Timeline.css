@@ -1,7 +1,7 @@
 .timeline {
   /* padding: 20px; */
   padding-bottom: 0;
-  /* height: 78px; */
+  height: 70px;
   justify-content: space-between;
   position: relative;
   justify-content: center;
@@ -29,9 +29,9 @@
   left: 0;
   right: 0;
   margin: 0 auto;
-  width: 262px;
+  width: 290px;
   position: absolute;
-  margin-top: 43px;
+  margin-top: 37px;
 }
 .timeline-dot {
   z-index: 2;
