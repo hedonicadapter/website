@@ -1,15 +1,46 @@
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { TimelineEvent } from '../Globals';
 import '../styles/Timeline.css';
 
 type DotsProps = {
   timelineEvent: TimelineEvent;
   hovered: boolean;
+  clicked: boolean;
+  firstOrLast: boolean;
 };
-const Dots = ({ timelineEvent, hovered }: DotsProps) => {
+const Dots = ({ timelineEvent, hovered, clicked, firstOrLast }: DotsProps) => {
   return (
     <li>
       <motion.div className='column no-select timeline-dot-container'>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.35, duration: 0.75 }}
+          className='text-box-triangle-container'
+        >
+          <AnimatePresence>
+            {clicked && (
+              <motion.div
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: 1, scaleX: 1 }}
+                exit={{ opacity: 0, scaleX: 0 }}
+                transition={{ duration: 0.35 }}
+              >
+                {hovered && (
+                  <motion.div
+                    layoutId='outline'
+                    transition={{
+                      type: 'spring',
+                      stiffness: 1000,
+                      damping: 70,
+                    }}
+                    className='text-box-triangle'
+                  />
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
         <motion.div
           className='timeline-dot'
           animate={
@@ -20,35 +51,43 @@ const Dots = ({ timelineEvent, hovered }: DotsProps) => {
                   marginTop: -2,
                 }
               : {
-                  width: 14,
-                  height: 14,
+                  width: firstOrLast ? 16 : 14,
+                  height: firstOrLast ? 16 : 14,
                   marginTop: 1,
                 }
           }
         />
-        <motion.div
-          animate={
-            hovered
-              ? { fontSize: '1.2em', color: 'white', marginTop: -4 }
-              : { fontSize: '1.1em', opacity: 0 }
-          }
-          transition={{ duration: 0.15 }}
+        <div
+          style={{
+            position: 'relative',
+            width: 80,
+          }}
         >
-          {timelineEvent.title}
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.35, duration: 0.75 }}
-        >
-          {hovered && (
-            <motion.div
-              layoutId='outline'
-              transition={{ type: 'spring', stiffness: 1000, damping: 70 }}
-              className='text-box-triangle'
-            />
-          )}
-        </motion.div>
+          <motion.div
+            animate={
+              hovered || firstOrLast
+                ? {
+                    fontSize: '1.2em',
+                    color: 'white',
+                    marginTop: -4,
+                    opacity: 1,
+                  }
+                : { fontSize: '1.1em', opacity: 0 }
+            }
+            transition={{ duration: 0.15 }}
+            style={{
+              position: 'absolute',
+              left: 0,
+              right: 0,
+              width: 80,
+              height: 50,
+              margin: '0 auto',
+              textAlign: 'center',
+            }}
+          >
+            {timelineEvent.title}
+          </motion.div>
+        </div>
       </motion.div>
     </li>
   );
@@ -58,8 +97,16 @@ type TimelineProps = {
   timelineEvents: TimelineEvent[];
   hovered: number;
   setHovered: (index: number) => void;
+  timelineItemClicked: number | boolean;
+  timelineItemClickHandler: (index: number) => void;
 };
-const Timeline = ({ timelineEvents, hovered, setHovered }: TimelineProps) => {
+const Timeline = ({
+  timelineEvents,
+  hovered,
+  setHovered,
+  timelineItemClicked,
+  timelineItemClickHandler,
+}: TimelineProps) => {
   const dotsContainerVariants = {
     hide: { opacity: 0 },
     show: {
@@ -106,8 +153,14 @@ const Timeline = ({ timelineEvents, hovered, setHovered }: TimelineProps) => {
             variants={dotVariants}
             style={{ cursor: 'pointer' }}
             onHoverStart={() => setHovered(index)}
+            onClick={() => timelineItemClickHandler(index)}
           >
-            <Dots timelineEvent={timelineEvent} hovered={hovered === index} />
+            <Dots
+              timelineEvent={timelineEvent}
+              hovered={hovered === index}
+              clicked={timelineItemClicked !== false}
+              firstOrLast={index === 0 || index === timelineEvents.length - 1}
+            />
           </motion.div>
         ))}
       </ul>

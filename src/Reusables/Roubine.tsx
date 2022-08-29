@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Skills } from './Skills';
 import { roubineStack } from '../Globals';
 import { Card } from './Card';
@@ -7,8 +7,23 @@ import '../styles/Roubine.css';
 
 import iphonex from '../assets/iphonex.png';
 import roubineDemo from '../assets/roubineDemo.mp4';
+import Description from './Description';
+import SmallArrow from './SmallArrow';
+import ExpansionWrapper from './ExpansionWrapper';
 
-const Phone = () => {
+type PhoneProps = { hovered?: boolean };
+const Phone = ({ hovered = true }: PhoneProps) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Play/pause depending on hovered
+  useEffect(() => {
+    if (hovered) {
+      videoRef.current && videoRef.current.play();
+      return;
+    }
+    if (!hovered) videoRef.current && videoRef.current.pause();
+  }, [hovered]);
+
   return (
     <div
       style={{
@@ -26,127 +41,177 @@ const Phone = () => {
         }}
         className='phone'
         width='100%'
-        height='84%'
+        height='95%'
         src={iphonex}
       />
       <video
+        ref={videoRef}
         autoPlay={true}
         muted
         style={{
           gridRowStart: 1,
           gridColumnStart: 1,
-          marginTop: 12,
+          marginTop: 14,
         }}
         src={roubineDemo}
         width='100%'
-        height='78%'
+        height='88%'
         controls
-      ></video>
+      />
     </div>
   );
 };
 
 const Roubine = () => {
-  const [hovered, setHovered] = useState(0);
+  const [notExpandedHovered, setNotExpandedHovered] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+
+  const [phoneHovered, setPhoneHovered] = useState(0);
 
   return (
     <motion.div whileInView={{ opacity: 1 }} className='roubine'>
       <div className='roubine-prototype-and-header-container'>
-        <div className='roubine-header'>
-          <div className='header-skills roubine-header-skills'>
-            <Skills vertical tooltips skills={roubineStack} />
+        <div className='row roubine-header-and-arrow-container'>
+          <div className='roubine-header'>
+            <div className='header-skills roubine-header-skills'>
+              <Skills vertical tooltips skills={roubineStack} />
+            </div>
+            <motion.div
+              onHoverStart={() => setNotExpandedHovered(true)}
+              onHoverEnd={() => setNotExpandedHovered(false)}
+              transition={{ duration: 0.15 }}
+            >
+              <a className='no-select' href='www.google.com' target='_blank'>
+                <h1>Roubine</h1>
+              </a>
+            </motion.div>
           </div>
-          <motion.div
-            whileHover={{ opacity: 0.7, scale: 0.992 }}
-            transition={{ duration: 0.15 }}
-          >
-            <motion.a
-              className='no-select'
-              href='www.google.com'
-              target='_blank'
-            >
-              <motion.h1>Roubine</motion.h1>
-            </motion.a>
-          </motion.div>
+          {expanded && <SmallArrow setExpanded={setExpanded} />}
         </div>
-
-        <div className='phones'>
-          <motion.div
-            className='row'
-            onMouseEnter={() => setHovered(0)}
-            initial={'show'}
-            animate={hovered ? 'hide' : 'show'}
-            variants={{
-              show: { scale: 1, x: 5, y: 0, opacity: 1, filter: 'blur(0)' },
-              hide: {
-                scale: 0.95,
-                x: -0,
-                y: -10,
-                opacity: 0.6,
-                filter: 'blur(2px)',
-              },
-            }}
-            transition={{ ease: 'easeOut', duration: 0.2 }}
-            style={{
-              gap: 20,
-              justifyItems: 'flex-start',
-              marginRight: 0,
-              paddingRight: 40,
-              marginLeft: 35,
-            }}
-          >
-            <div>
-              <Phone />
-            </div>
-
-            <div style={{ width: '55vw', marginRight: 0 }}>
-              <Card
-                inverted
-                title='Create good routines with psychology'
-                text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu nisi a nunc maximus consequat. Nullam lobortis, nibh nec maximus congue, sem risus interdum nunc, non egestas est leo sed tellus. Morbi consectetur leo quis velit commodo, sed feugiat quam eleifend.'
-              ></Card>
-            </div>
-          </motion.div>
-          <motion.div
-            onMouseEnter={() => setHovered(1)}
-            initial={'hide'}
-            animate={hovered ? 'show' : 'hide'}
-            variants={{
-              show: { scale: 1, x: -5, y: 20, opacity: 1, filter: 'blur(0)' },
-              hide: {
-                scale: 0.95,
-                x: 0,
-                y: 0,
-                opacity: 0.6,
-                filter: 'blur(2px)',
-              },
-            }}
-            transition={{ ease: 'easeOut', duration: 0.2 }}
-            className='row'
-            style={{
-              gap: 25,
-              marginLeft: 25,
-              marginRight: 65,
-              paddingLeft: 20,
-            }}
-          >
-            <div
-              style={{
-                textAlign: 'right',
-                width: '45vw',
-                marginTop: -75,
-              }}
+        <AnimatePresence exitBeforeEnter>
+          {!expanded ? (
+            <ExpansionWrapper
+              key={0}
+              className='row description-and-phone-container'
             >
-              <Card
-                title='Create good routines with psychology'
-                text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu nisi a nunc maximus consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-              ></Card>
-            </div>
-            <div style={{ marginTop: -225 }}>
-              <Phone />
-            </div>
-          </motion.div>
-        </div>
+              <>
+                <motion.div
+                  onHoverStart={() => setNotExpandedHovered(true)}
+                  onHoverEnd={() => setNotExpandedHovered(false)}
+                >
+                  <Description
+                    links={[{ title: 'github', url: 'www.google.com' }]}
+                    descriptionText='Chat and share your digital life with friends.'
+                    arrowUnderneath={true}
+                    hovered={notExpandedHovered}
+                    expanded={expanded}
+                    setExpanded={setExpanded}
+                  />
+                </motion.div>
+                <motion.div
+                  onHoverStart={() => setNotExpandedHovered(true)}
+                  onHoverEnd={() => setNotExpandedHovered(false)}
+                  onClick={() => setExpanded(true)}
+                  className='phone-container'
+                >
+                  <Phone />
+                </motion.div>
+              </>
+            </ExpansionWrapper>
+          ) : (
+            <ExpansionWrapper key={1} className='phones'>
+              <>
+                <motion.div
+                  className='row'
+                  onMouseEnter={() => setPhoneHovered(0)}
+                  initial={'show'}
+                  animate={phoneHovered ? 'hide' : 'show'}
+                  variants={{
+                    show: {
+                      scale: 1,
+                      x: 5,
+                      y: 0,
+                      opacity: 1,
+                      filter: 'blur(0)',
+                    },
+                    hide: {
+                      scale: 0.95,
+                      x: -0,
+                      y: -10,
+                      opacity: 0.6,
+                      filter: 'blur(2px)',
+                    },
+                  }}
+                  transition={{ ease: 'easeOut', duration: 0.2 }}
+                  style={{
+                    gap: 20,
+                    justifyItems: 'flex-start',
+                    marginRight: 0,
+                    paddingRight: 40,
+                    marginLeft: 35,
+                  }}
+                >
+                  <div>
+                    <Phone hovered={phoneHovered === 0} />
+                  </div>
+
+                  <div style={{ width: '55vw', marginRight: 0 }}>
+                    <Card
+                      inverted
+                      title='Create good routines with psychology'
+                      text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu nisi a nunc maximus consequat. Nullam lobortis, nibh nec maximus congue, sem risus interdum nunc, non egestas est leo sed tellus. Morbi consectetur leo quis velit commodo, sed feugiat quam eleifend.'
+                    />
+                  </div>
+                </motion.div>
+                <motion.div
+                  onMouseEnter={() => setPhoneHovered(1)}
+                  initial={'hide'}
+                  animate={phoneHovered ? 'show' : 'hide'}
+                  variants={{
+                    show: {
+                      scale: 1,
+                      x: -5,
+                      y: 20,
+                      opacity: 1,
+                      filter: 'blur(0)',
+                    },
+                    hide: {
+                      scale: 0.95,
+                      x: 0,
+                      y: 0,
+                      opacity: 0.6,
+                      filter: 'blur(2px)',
+                    },
+                  }}
+                  transition={{ ease: 'easeOut', duration: 0.2 }}
+                  className='row'
+                  style={{
+                    gap: 25,
+                    marginLeft: 25,
+                    marginRight: 65,
+                    paddingLeft: 20,
+                  }}
+                >
+                  <div
+                    style={{
+                      textAlign: 'right',
+                      width: '45vw',
+                      marginTop: -75,
+                    }}
+                  >
+                    <Card
+                      title='Create good routines with psychology'
+                      text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu nisi a nunc maximus consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                    />
+                  </div>
+                  <div style={{ marginTop: -225 }}>
+                    <Phone hovered={phoneHovered === 1} />
+                  </div>
+                </motion.div>
+              </>
+            </ExpansionWrapper>
+          )}
+        </AnimatePresence>
       </div>
     </motion.div>
   );

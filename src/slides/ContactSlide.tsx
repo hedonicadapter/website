@@ -1,39 +1,42 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 
-import { Card } from '../Reusables/Card';
+import { BsFillTelephoneFill, BsGithub, BsLinkedin } from 'react-icons/bs';
+import { IoMail } from 'react-icons/io5';
+import { DiGithubAlt } from 'react-icons/di';
+
 import { SlideWrapper } from '../Reusables/SlideWrapper';
-import { Skills } from '../Reusables/Skills';
-import { languages } from '../Globals';
 import '../styles/ContactSlide.css';
 
 export const ContactSlide = () => {
-  const [languageHovered, setLanguageHovered] = useState(false);
-
   return (
     <SlideWrapper>
-      <div className='row' style={{ gap: 14 }}>
-        <div
-          onMouseEnter={() => setLanguageHovered(true)}
-          onMouseLeave={() => setLanguageHovered(false)}
-        >
-          <Card
-            secondary={true}
-            title='Languages'
-            titleElement={
-              <motion.div
-                animate={languageHovered ? 'show' : 'hide'}
-                variants={{
-                  show: { height: '165px' },
-                  hide: { height: 0 },
-                }}
-                className='skills-container'
-              >
-                <Skills skills={languages} cardHovered={languageHovered} />
-              </motion.div>
-            }
-            titleInside={true}
-          ></Card>
+      <div className='contact-slide-container'>
+        <div className='row'>
+          <div className='column'>
+            <a className='row' href='tel:123-456-7890'>
+              <BsFillTelephoneFill /> 123-456-7890
+            </a>
+            <a className='row' href='mailto: abc@example.com'>
+              <IoMail size={23} /> filtersome@gmail.com
+            </a>
+          </div>
+          <div className='row'>
+            <a
+              className='row'
+              target='_blank'
+              href='https://github.com/YungMilky'
+            >
+              <BsGithub size={20} />
+            </a>
+            <a
+              className='row'
+              target='_blank'
+              href='https://www.linkedin.com/in/sam-herman-950a50a7/'
+            >
+              <BsLinkedin />
+            </a>
+          </div>
         </div>
       </div>
     </SlideWrapper>

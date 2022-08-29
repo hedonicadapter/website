@@ -18,12 +18,7 @@ const Textbox = ({
   let hoveredEvent = timelineEvents[hovered];
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.35, duration: 0.75 }}
-      className='text-box'
-    >
+    <div className='text-box'>
       <AnimatePresence exitBeforeEnter>
         <motion.div
           key={hovered}
@@ -31,19 +26,25 @@ const Textbox = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <motion.h2
-            initial={{ opacity: 0 }}
-            animate={
-              !hasBeenViewed
-                ? {
-                    opacity: 1,
-                    transition: { ease: 'linear', delay: 1.2, duration: 0.45 },
-                  }
-                : { opacity: 1, transition: { duration: 0.1 } }
-            }
-          >
-            {hoveredEvent.subTitle}
-          </motion.h2>
+          {hoveredEvent.subTitle && (
+            <motion.h2
+              initial={{ opacity: 0 }}
+              animate={
+                !hasBeenViewed
+                  ? {
+                      opacity: 1,
+                      transition: {
+                        ease: 'linear',
+                        delay: 1.2,
+                        duration: 0.45,
+                      },
+                    }
+                  : { opacity: 1, transition: { duration: 0.1 } }
+              }
+            >
+              {hoveredEvent.subTitle}
+            </motion.h2>
+          )}
           <motion.p
             initial={{ opacity: 0 }}
             animate={
@@ -55,12 +56,13 @@ const Textbox = ({
                 : { opacity: 1, transition: { duration: 0.15 } }
             }
             onAnimationComplete={() => setHasBeenViewed(true)}
+            style={!hoveredEvent.subTitle ? { paddingTop: 12 } : {}}
           >
             {hoveredEvent.text}
           </motion.p>
         </motion.div>
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 };
 

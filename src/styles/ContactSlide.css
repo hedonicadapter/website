@@ -1,0 +1,27 @@
+.contact-slide-container a,
+.contact-slide-container a:hover,
+.contact-slide-container a:focus,
+.contact-slide-container a:active {
+  text-decoration: none;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  padding-block: 8px;
+
+  font-size: 1.3em;
+  color: var(--on-surface);
+}
+
+.contact-slide-container {
+  margin-inline: 5vw;
+  margin-top: 15vh;
+}
+
+.contact-slide-container .row {
+  justify-content: space-between;
+  align-items: center;
+}
+.contact-slide-container .row .row {
+  justify-content: flex-start;
+  gap: 10px;
+}

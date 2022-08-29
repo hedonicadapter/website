@@ -117,9 +117,11 @@ const Slider = ({ expanded }: SliderProps) => {
   return (
     <div>
       <motion.div
+        className='row'
         style={{
           transition: '0.3s ease',
           WebkitTransition: '0.3s ease',
+
           transform:
             expanded === 0
               ? 'translateX(0%)'
@@ -129,7 +131,6 @@ const Slider = ({ expanded }: SliderProps) => {
               ? 'translateX(max(-80vw, -1200px))' // double
               : 'translateX(0%)',
         }}
-        className='row'
       >
         <ProjectsSlide />
         <AboutSlide />

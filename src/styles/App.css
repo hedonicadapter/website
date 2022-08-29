@@ -83,7 +83,7 @@ p {
 }
 
 body {
-  overflow-y: overlay;
+  overflow-y: hidden;
   margin: 0;
   padding: 0;
   background-color: var(--background);
@@ -98,6 +98,26 @@ header {
 
   min-width: 580px;
   width: 40vw;
+}
+
+.links {
+  margin-top: 6px;
+  /* margin-bottom: 10px; */
+  gap: 20px;
+
+  font-size: 0.9em;
+  font-family: 'CormorantGaramond-Light';
+}
+.links a {
+  color: var(--on-surface-medium);
+}
+.left {
+  justify-content: flex-start;
+  margin-inline: 4px;
+}
+.right {
+  justify-content: flex-end;
+  margin-inline: max(3vw, 40px);
 }
 
 .no-select {
@@ -125,6 +145,29 @@ header {
   display: flex;
 }
 
+.testone {
+  background-color: var(--surface);
+}
+.test {
+  /* background-color: var(--surface); */
+  /* mix-blend-mode: normal; */
+  /* mix-blend-mode: multiply; */
+  /* mix-blend-mode: screen; */
+  /* mix-blend-mode: overlay; */
+  /* mix-blend-mode: darken; */
+  /* mix-blend-mode: lighten; */
+  /* mix-blend-mode: color-dodge; */
+  /* mix-blend-mode: color-burn; */
+  /* mix-blend-mode: hard-light; */
+  /* mix-blend-mode: soft-light; */
+  /* mix-blend-mode: difference; */
+  /* mix-blend-mode: exclusion; */
+  /* mix-blend-mode: hue; */
+  /* mix-blend-mode: saturation; */
+  /* mix-blend-mode: color; */
+  /* mix-blend-mode: luminosity; */
+}
+
 .header-menu-content {
   width: 40vw;
   max-width: 600px;
@@ -136,8 +179,6 @@ header {
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box; /* Firefox, other Gecko */
   box-sizing: border-box; /* Opera/IE 8+ */
-
-  /* background-color: var(--surface); */
 
   overflow-x: hidden;
 }

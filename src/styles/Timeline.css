@@ -1,7 +1,7 @@
 .timeline {
-  padding: 20px;
+  /* padding: 20px; */
   padding-bottom: 0;
-  height: 78px;
+  /* height: 78px; */
   justify-content: space-between;
   position: relative;
   justify-content: center;
@@ -9,8 +9,8 @@
 .timeline-dot-container {
   font-family: 'CormorantGaramond-Light';
 
-  margin: auto;
-  margin-inline: -10px;
+  width: 35px;
+  /* margin-inline: -20px; */
   align-items: center;
   color: var(--on-surface);
 }
@@ -28,10 +28,10 @@
   background-size: 100%;
   left: 0;
   right: 0;
-  margin: auto;
+  margin: 0 auto;
   width: 262px;
   position: absolute;
-  margin-top: 7px;
+  margin-top: 43px;
 }
 .timeline-dot {
   z-index: 2;
@@ -42,13 +42,15 @@
 .timeline-dot:after {
   content: '';
 }
+
+.text-box-triangle-container {
+  height: 30px;
+}
 .text-box-triangle {
-  margin-top: 10px;
   height: 0;
   width: 0;
-  border-left: 13px solid transparent;
-  border-right: 13px solid transparent;
+  border-left: 22px solid transparent;
+  border-right: 22px solid transparent;
 
-  border-bottom: 23px solid var(--background);
-  /* transition: all 0.3s ease-in-out; */
+  border-top: 18px solid var(--background);
 }

@@ -2,7 +2,7 @@ import background from '../assets/background.png';
 
 const Background = () => (
   <div
-    className='no-select'
+    className='testone no-select'
     style={{
       position: 'absolute',
       top: 0,
@@ -13,15 +13,17 @@ const Background = () => (
       zIndex: -1,
     }}
   >
-    <img
+    {/* <img
       src={background}
+      className='test'
       style={{
         position: 'sticky',
         top: 0,
         height: '100vh',
         width: '100%',
+        filter: '',
       }}
-    />
+    /> */}
   </div>
 );
 

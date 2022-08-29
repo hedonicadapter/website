@@ -113,20 +113,54 @@ export const languages = [
 
 export interface TimelineEvent {
   title: string;
-  subTitle: string;
-  text: string;
+  subTitle?: string;
+  text?: string;
 }
 export const minglerTimelineEvents: TimelineEvent[] = [
   {
     title: 'prototype',
     subTitle: 'A year ago',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus nulla a purus vulputate cursus. Vestibulum at eros condimentum, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus nulla a purus vulputate cursus. Vestibulum at eros condimentum, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus nulla a purus vulputate cursus. Vestibulum at eros condimentum, dictum dui sit amet, porta augue. Nam semper, mauris vel placerat aliquam, tortor nisi facilisis urna, vitae dictum urna odio et urna. Suspendisse potenti. Cras varius, tortor et maximus mollis, dui enim elementum odio, sed hendrerit risus leo at felis. Nam mattis porttitor orci vel vestibulum. ',
+    text: 'The next big chat app? Probably not. Something that will keep me busy and teach me stuff? Definitely. ',
   },
-  { title: 'prototype', subTitle: 'A year ago', text: 'busting' },
-  { title: 'prototype', subTitle: 'A year ago', text: 'busting' },
-  { title: 'prototype', subTitle: 'A year ago', text: 'busting' },
-  { title: 'prototype', subTitle: 'A year ago', text: 'busting' },
-  { title: 'production', subTitle: 'Today', text: 'busting' },
+  {
+    title: 'backlog',
+    subTitle: 'Overexcited',
+    text: 'As always, I set out to do much more than I ended up doing. Maybe I learned to not underestimate user stories.',
+  },
+  {
+    title: 'initial stack',
+    subTitle: 'My last project went ok...',
+    text: '...so React and firestore should be fine, right?',
+  },
+  {
+    title: 'activities',
+    subTitle: 'How tf do you get window data in real time?',
+    text: "To be honest I still don't know, but it works 😎",
+  },
+  {
+    title: 'browser activities',
+    subTitle: 'How tf do you get browser tab data in real time?',
+    text: 'Chrome extension.',
+  },
+  {
+    title: 'node.js',
+    subTitle: 'Pain',
+    text: 'Tried to force things to work with firestore for a couple weeks. Moved to RealmDB for a while. Finally gave up, deleted it all, and learned and rewrote everything with MongoDB, node.js, and express.',
+  },
+  {
+    title: 'Discord :(',
+    subTitle: 'The day I realized discord also has an activities feature',
+    text: 'Man. My big idea was already a thing. Also I realized their server and channel systems and stuff go hard. Thought I had something. Coding is still fun though, so I just move on.',
+  },
+  {
+    title: 'socket.io',
+    text: 'took some time to figure out how to connect users to each other.',
+  },
+  {
+    title: 'almost there',
+    text: 'Nothing works, first time making something production-ready.',
+  },
+  { title: 'production', subTitle: 'Today', text: 'goes kinda hard tho' },
 ];
 
 export const whileTap = {

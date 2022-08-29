@@ -1,6 +1,25 @@
 .mingler {
   opacity: 0;
-  height: 100vh;
+  padding-top: 32px;
+}
+
+.mingler a,
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  cursor: pointer;
+
+  z-index: 5;
+}
+.mingler a h1 {
+  text-shadow: 0px 2px 6px rgba(0, 0, 0, 0.04);
+
+  padding: 0;
+  margin: 0;
+
+  font-weight: lighter;
+  color: var(--on-background);
 }
 
 .mingler-prototype-and-header-container {
@@ -10,22 +29,26 @@
 .mingler-header {
   font-family: 'CormorantGaramond-Light';
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   color: var(--on-background);
   align-items: flex-end;
 
   margin-left: max(12px, 1.1vw);
   margin-right: max(12px, 0.3vw);
 }
-.mingler-header h1 {
-  font-size: max(2.4em, 5vw);
+.mingler-header a {
+  margin-left: max(34px, 1.1vw);
+  justify-self: flex-start;
+  left: 0;
+  position: absolute;
 }
 
 .figma-prototype-container {
+  border-radius: 18px;
   position: relative;
   overflow: hidden;
-  width: 100%;
   padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+  padding-right: 3px;
 }
 .figma-prototype-container iframe {
   border-radius: 18px;
@@ -38,22 +61,51 @@
   width: 100%;
 }
 
-.mingler-description {
-  text-align: center;
-  font-family: 'CormorantGaramond-light';
-  font-weight: 100;
-  font-size: 1.4em;
-  padding-inline: 30px;
-  color: var(--on-surface);
+.small-arrow-and-links-container {
+  align-items: center;
+  justify-content: space-between;
+}
+.small-arrow-container {
+  width: 100px;
+  height: 40px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.small-arrow {
+  /* margin-right: 35px; */
+  width: 80px;
+  /* padding-top: 10px; */
+}
+
+.small-arrow-line {
+  /* padding-right: 4px; */
+  /* margin-right: 16px; */
+  /* width: 1.5vw; */
+  background: var(--on-surface);
+  height: 3px;
+}
+
+.small-arrow-point {
+  height: 10px;
+  width: 10px;
+  border-style: solid;
+  border-color: var(--on-surface);
+  border-width: 0 0 3px 3px;
+  border-radius: 3px;
+  transform: rotate(45deg);
+  margin-top: -8px;
+  /* float: right; */
 }
 
 .come-mingle {
   text-align: center;
-  margin: auto;
+  margin: 0 auto;
 }
 .come-mingle h4 {
+  padding-top: 30px;
   margin: 0;
-  margin-top: 10px;
   font-family: 'CormorantGaramond-Light';
   font-size: 2.5em;
   font-weight: 100;
