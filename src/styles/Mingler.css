@@ -45,14 +45,26 @@ a:active {
 }
 
 .figma-prototype-container {
-  border-radius: 18px;
   position: relative;
-  overflow: hidden;
-  padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
-  padding-right: 3px;
+  padding-top: 58.5%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+  /* margin-right: 4px; */
+  border-radius: 5px;
+}
+.figma-prototype-container h5 {
+  position: absolute;
+  margin: 0;
+  padding-inline: 39px;
+  padding-top: 5px;
+  font-size: 0.7em;
+  font-weight: 600;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  color: var(--on-secondary);
+  z-index: 10;
 }
 .figma-prototype-container iframe {
-  border-radius: 18px;
+  border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0);
   position: absolute;
   top: 0;
@@ -60,6 +72,23 @@ a:active {
   bottom: 0;
   right: 0;
   width: 100%;
+  z-index: 1;
+}
+
+.figma-prototype-bg {
+  border-radius: 6px;
+  margin-top: 1px;
+  margin-left: 1px;
+  position: absolute;
+  content: '';
+  height: 99.99%;
+  width: 99.99%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  background-color: black;
 }
 
 .small-arrow-and-links-container {
@@ -71,7 +100,6 @@ a:active {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-left: 38px;
 }
 .small-arrow {
   width: 100%;
@@ -90,11 +118,10 @@ a:active {
   width: 8px;
   border-style: solid;
   border-color: var(--on-surface);
-  border-width: 0 0 2px 2px;
+
   border-radius: 2px;
   transform: rotate(45deg);
   margin-top: -6px;
-  /* float: right; */
 }
 
 .come-mingle {

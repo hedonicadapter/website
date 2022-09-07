@@ -105,7 +105,7 @@ header {
   /* margin-bottom: 10px; */
   gap: 20px;
 
-  font-size: 0.9em;
+  font-size: 1em;
   font-family: 'CormorantGaramond-Light';
 }
 .links a {
@@ -117,7 +117,7 @@ header {
 }
 .right {
   justify-content: flex-end;
-  margin-inline: max(3vw, 40px);
+  margin-inline: max(2.5vw, 40px);
 }
 
 .no-select {
@@ -139,7 +139,7 @@ header {
 
 .header-menu-content-space-maker {
   width: 40vw;
-  max-width: 600px;
+  max-width: 780px;
   min-width: 312px;
   height: 100vh;
   display: flex;
@@ -170,7 +170,7 @@ header {
 
 .header-menu-content {
   width: 40vw;
-  max-width: 600px;
+  max-width: 780px;
   min-width: 312px;
   height: 100%;
   display: flex;

@@ -25,6 +25,7 @@ export const ContactSlide = () => {
             <a
               className='row'
               target='_blank'
+              rel='noreferrer'
               href='https://github.com/YungMilky'
             >
               <BsGithub size={20} />
@@ -32,6 +33,7 @@ export const ContactSlide = () => {
             <a
               className='row'
               target='_blank'
+              rel='noreferrer'
               href='https://www.linkedin.com/in/sam-herman-950a50a7/'
             >
               <BsLinkedin />

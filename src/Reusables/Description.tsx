@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { AnimationControls, motion } from 'framer-motion';
 import Links from './Links';
 import '../styles/Description.css';
 import { arrowTransition } from '../Globals';
@@ -15,6 +15,7 @@ type DescriptionProps = {
   setHovered: (bool: boolean) => void;
   expanded: boolean;
   setExpanded: (bool: boolean) => void;
+  arrowAnimationController: AnimationControls;
 };
 
 const Description = ({
@@ -25,6 +26,7 @@ const Description = ({
   setHovered,
   expanded,
   setExpanded,
+  arrowAnimationController,
 }: DescriptionProps) => {
   return (
     <div
@@ -51,15 +53,16 @@ const Description = ({
 
       <div
         style={{
-          transform: 'scale(-1)',
-          width: arrowUnderneath ? '70%' : '70%',
+          width: '70%',
         }}
       >
         <SmallArrow
+          leftToRight={true}
           expandOnClick={false}
           hovered={hovered}
           expanded={!expanded}
           setExpanded={setExpanded}
+          animationController={arrowAnimationController}
         />
       </div>
 

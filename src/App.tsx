@@ -126,9 +126,9 @@ const Slider = ({ expanded }: SliderProps) => {
             expanded === 0
               ? 'translateX(0%)'
               : expanded === 1
-              ? 'translateX(max(-40vw, -600px))' // same size as slide-wrapper
+              ? 'translateX(max(-40vw, -780px))' // same size as slide-wrapper
               : expanded === 2
-              ? 'translateX(max(-80vw, -1200px))' // double
+              ? 'translateX(max(-80vw, -1560px))' // double
               : 'translateX(0%)',
         }}
       >

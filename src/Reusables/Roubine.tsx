@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import { Skills } from './Skills';
 import { roubineStack } from '../Globals';
 import { Card } from './Card';
@@ -68,6 +68,8 @@ const Roubine = () => {
 
   const [phoneHovered, setPhoneHovered] = useState(0);
 
+  const arrowAnimationController = useAnimationControls();
+
   return (
     <motion.div whileInView={{ opacity: 1 }} className='roubine'>
       <div className='roubine-prototype-and-header-container'>
@@ -101,7 +103,7 @@ const Roubine = () => {
             />
           </div>
         </div>
-        <AnimatePresence>
+        <AnimatePresence exitBeforeEnter>
           {!expanded ? (
             <ExpansionWrapper
               key={0}
@@ -120,6 +122,7 @@ const Roubine = () => {
                     setHovered={setNotExpandedHovered}
                     expanded={expanded}
                     setExpanded={setExpanded}
+                    arrowAnimationController={arrowAnimationController}
                   />
                 </motion.div>
                 <motion.div

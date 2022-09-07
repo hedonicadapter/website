@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import { minglerStack, minglerTimelineEvents, whileTap } from '../Globals';
 import { Skills } from './Skills';
 import Timeline from './Timeline';
@@ -100,6 +100,11 @@ const MinglerTitle = ({
   );
 };
 
+const firstMinglerPrototype =
+  'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2Fclill097ZPLRtPuTU4cfUo%2FSharehub-4%3Fpage-id%3D0%253A1%26node-id%3D0%253A1%26viewport%3D49%252C308%252C0.06%26scaling%3Dscale-down-width%26starting-point-node-id%3D339%253A213&hide-ui=1';
+const productionReplica =
+  'https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FJA02Xgw9evpcsj6PnSjkCY%2FUntitled%3Fnode-id%3D1%253A145%26scaling%3Dscale-down-width%26page-id%3D0%253A1%26starting-point-node-id%3D1%253A145&hide-ui=1';
+
 const Mingler = () => {
   const [expanded, setExpanded] = useState(false);
   const [notExpandedHovered, setNotExpandedHovered] = useState(false);
@@ -110,6 +115,25 @@ const Mingler = () => {
   >(true);
 
   const [hasBeenViewed, setHasBeenViewed] = useState(false);
+
+  const [expansionAnimationFinished, setExpansionAnimationFinished] =
+    useState(false);
+  const arrowAnimationController = useAnimationControls();
+
+  useEffect(() => {
+    if (!expansionAnimationFinished) return;
+
+    arrowAnimationController.start({
+      width: 'auto',
+      x: 0,
+      transition: {
+        delay: 0,
+        duration: 1,
+        ease: [0.1, 0.68, 0, 0.99],
+        originX: 1,
+      },
+    });
+  }, [expansionAnimationFinished]);
 
   const timelineItemClickHandler = (index: number) => {
     const timelineItemAlreadyOpen = index === timelineItemClicked;
@@ -145,32 +169,15 @@ const Mingler = () => {
             <Skills tooltips skills={minglerStack} vertical={false} />
           </motion.div>
         </div>
-        <div
-          className='no-select'
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr',
-            justifyItems: 'center',
-          }}
-        >
-          <img
-            src={frame}
-            style={{
-              gridRowStart: 1,
-              gridColumnStart: 1,
-              zIndex: -1,
-              pointerEvents: 'none',
-              width: '100%',
-            }}
-          />
+        <div className='no-select' style={{}}>
           <motion.div
             style={{
-              zIndex: 0,
-              borderRadius: 18,
-              gridRowStart: 1,
-              gridColumnStart: 1,
-              marginTop: 2,
-              width: '93%',
+              zIndex: 10,
+              // borderRadius: 18,
+              // gridRowStart: 1,
+              // gridColumnStart: 1,
+              // marginTop: 2,
+              // width: '93%',
             }}
             initial={{ opacity: 0 }}
             whileInView={{
@@ -179,20 +186,59 @@ const Mingler = () => {
             }}
             viewport={{ once: true }}
           >
-            <div className='figma-prototype-container '>
-              <iframe
-                height='100%'
-                src='https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2Fclill097ZPLRtPuTU4cfUo%2FSharehub-4%3Fpage-id%3D0%253A1%26node-id%3D0%253A1%26viewport%3D49%252C308%252C0.06%26scaling%3Dscale-down-width%26starting-point-node-id%3D339%253A213&hide-ui=1'
-                allowFullScreen
-              ></iframe>
-            </div>
+            <motion.div className='figma-prototype-container '>
+              <AnimatePresence>
+                <motion.div
+                  key={0}
+                  animate={
+                    timelineHovered !== minglerTimelineEvents.length - 1
+                      ? { opacity: 1 }
+                      : { opacity: 0 }
+                  }
+                  initial={{ opacity: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  <h5>
+                    <i>PROTOTYPE</i>✨ try me
+                  </h5>
+                  <iframe
+                    height='100%'
+                    src={firstMinglerPrototype}
+                    allowFullScreen
+                  />
+                  <div className='figma-prototype-bg' />
+                </motion.div>
+                <motion.div
+                  key={1}
+                  animate={
+                    timelineHovered === minglerTimelineEvents.length - 1
+                      ? { opacity: 1 }
+                      : { opacity: 0 }
+                  }
+                  initial={{ opacity: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  <iframe
+                    height='100%'
+                    src={productionReplica}
+                    allowFullScreen
+                  />
+                  <div className='figma-prototype-bg' />
+                </motion.div>
+              </AnimatePresence>
+            </motion.div>
           </motion.div>
         </div>
       </div>
 
       <AnimatePresence exitBeforeEnter>
         {!expanded ? (
-          <ExpansionWrapper key={0}>
+          <ExpansionWrapper
+            key={0}
+            setExpansionAnimationFinished={setExpansionAnimationFinished}
+          >
             <motion.div
               onHoverStart={() => setNotExpandedHovered(true)}
               onHoverEnd={() => setNotExpandedHovered(false)}
@@ -204,14 +250,15 @@ const Mingler = () => {
                 setHovered={setNotExpandedHovered}
                 expanded={expanded}
                 setExpanded={setExpanded}
+                arrowAnimationController={arrowAnimationController}
               />
             </motion.div>
           </ExpansionWrapper>
         ) : (
           <ExpansionWrapper key={1}>
             <>
-              <div className='row small-arrow-and-links-container'>
-                <div style={{ marginTop: 10, width: 110 }}>
+              <motion.div className='row small-arrow-and-links-container'>
+                <div style={{ marginLeft: 38, marginTop: 10, width: 110 }}>
                   <SmallArrow
                     expandOnClick={true}
                     hovered={notExpandedHovered}
@@ -220,12 +267,12 @@ const Mingler = () => {
                   />
                 </div>
                 <Links align='right' links={minglerLinks} />
-              </div>
-
+              </motion.div>
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.35, duration: 0.75 }}
+                exit={{ opacity: 0 }}
+                transition={{ delay: 0.35, duration: 0.75 }} //not this
               >
                 <AnimatePresence>
                   {timelineItemClicked !== false && (

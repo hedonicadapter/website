@@ -116,8 +116,8 @@ const Timeline = ({
     show: {
       opacity: 1,
       transition: {
-        duration: 1.25,
-        staggerChildren: 0.15,
+        duration: 0.15,
+        staggerChildren: 0.1,
       },
     },
   };
@@ -126,12 +126,12 @@ const Timeline = ({
     hide: {
       opacity: 0,
       scale: 0,
-      transition: { type: 'spring', mass: 0.7, duration: 0.15 },
+      transition: { type: 'spring', mass: 0.5, duration: 0.15 },
     },
     show: {
       opacity: 1,
       scale: 1,
-      transition: { type: 'spring', mass: 0.7, duration: 0.15 },
+      transition: { type: 'spring', mass: 0.5, duration: 0.15 },
     },
   };
 

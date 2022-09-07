@@ -16,6 +16,7 @@ const Links = ({ align, links }: LinksProps) => (
         transition={{ duration: 0.1 }}
         href={linkObject.url}
         target='_blank'
+        rel='noreferrer'
         onClick={(e) => e.stopPropagation()}
       >
         {linkObject.title}
