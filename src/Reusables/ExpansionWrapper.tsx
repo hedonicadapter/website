@@ -2,33 +2,29 @@ import { motion } from 'framer-motion';
 import { useEffect } from 'react';
 
 type ExpansionWrapperProps = {
-  key: number;
+  expanded?: boolean;
   className?: string;
   setExpansionAnimationFinished?: (bool: boolean) => void;
   children: JSX.Element;
 };
 
 const ExpansionWrapper = ({
-  key,
+  expanded,
   className,
   setExpansionAnimationFinished,
   children,
 }: ExpansionWrapperProps) => {
-  useEffect(() => {
-    setExpansionAnimationFinished && setExpansionAnimationFinished(false);
-  }, []);
-
   return (
     <motion.div
-      key={key}
       className={className}
-      initial={{ opacity: 0, x: 100 }}
-      animate={{ opacity: 1, x: 0, transition: { delay: 0.3 } }}
-      exit={{ opacity: 0, x: -100, transition: { duration: 0.1 } }}
-      transition={{ duration: 0.1 }}
-      onAnimationComplete={() =>
-        setExpansionAnimationFinished && setExpansionAnimationFinished(true)
-      }
+      initial={{ x: expanded ? -1000 : 1000 }}
+      animate={{ x: 0 }}
+      exit={{ x: expanded ? -1000 : 1000 }}
+      transition={{ delay: 0.3, duration: 0.5 }}
+      onAnimationComplete={() => {
+        console.log('animation complete');
+        setExpansionAnimationFinished && setExpansionAnimationFinished(true);
+      }}
     >
       {children}
     </motion.div>

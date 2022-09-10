@@ -30,7 +30,7 @@ const SmallArrow = ({
       animate={
         animationController ? animationController : { width: 'auto', x: 0 }
       }
-      exit={{ width: 0, x: leftToRight ? -100 : 100 }}
+      // exit={{ width: 0, x: leftToRight ? -100 : 100 }}
       transition={{
         // delay: 0.95,
         duration: 0.5,

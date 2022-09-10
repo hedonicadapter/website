@@ -135,6 +135,10 @@ const Mingler = () => {
     });
   }, [expansionAnimationFinished]);
 
+  useEffect(() => {
+    setExpansionAnimationFinished(false);
+  }, [expanded]);
+
   const timelineItemClickHandler = (index: number) => {
     const timelineItemAlreadyOpen = index === timelineItemClicked;
 
@@ -236,6 +240,7 @@ const Mingler = () => {
       <AnimatePresence exitBeforeEnter>
         {!expanded ? (
           <ExpansionWrapper
+            expanded={false}
             key={0}
             setExpansionAnimationFinished={setExpansionAnimationFinished}
           >
@@ -255,7 +260,11 @@ const Mingler = () => {
             </motion.div>
           </ExpansionWrapper>
         ) : (
-          <ExpansionWrapper key={1}>
+          <ExpansionWrapper
+            expanded={true}
+            key={1}
+            setExpansionAnimationFinished={setExpansionAnimationFinished}
+          >
             <>
               <motion.div className='row small-arrow-and-links-container'>
                 <div style={{ marginLeft: 38, marginTop: 10, width: 110 }}>
@@ -264,6 +273,7 @@ const Mingler = () => {
                     hovered={notExpandedHovered}
                     expanded={expanded}
                     setExpanded={setExpanded}
+                    animationController={arrowAnimationController}
                   />
                 </div>
                 <Links align='right' links={minglerLinks} />
