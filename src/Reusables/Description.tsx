@@ -1,8 +1,10 @@
-import { AnimationControls, motion } from 'framer-motion';
+import { AnimationControls, motion, useAnimationControls } from 'framer-motion';
 import Links from './Links';
 import '../styles/Description.css';
 import { arrowTransition } from '../Globals';
 import SmallArrow from './SmallArrow';
+import ExpansionWrapper from './ExpansionWrapper';
+import { useEffect } from 'react';
 
 type DescriptionProps = {
   descriptionText: string;
@@ -15,7 +17,7 @@ type DescriptionProps = {
   setHovered: (bool: boolean) => void;
   expanded: boolean;
   setExpanded: (bool: boolean) => void;
-  arrowAnimationController: AnimationControls;
+  animationController?: AnimationControls;
 };
 
 const Description = ({
@@ -26,47 +28,74 @@ const Description = ({
   setHovered,
   expanded,
   setExpanded,
-  arrowAnimationController,
+  animationController,
 }: DescriptionProps) => {
+  const arrowOnClickHandler = async () => {
+    if (!animationController) return;
+
+    animationController.start({
+      width: 0,
+      transition: {
+        delay: 0.2,
+        duration: 0.25,
+        ease: [0.1, 0.98, 0, 0.99],
+        origin: 1,
+      },
+    });
+
+    setExpanded(true);
+  };
+
   return (
-    <div
-      onClick={() => {
-        setExpanded(true);
-        setHovered(false);
-      }}
-      className={
-        !arrowUnderneath
-          ? 'row description-and-arrow'
-          : 'column description-and-arrow-underneath'
-      }
+    <motion.div
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
     >
-      <div>
-        <motion.h2
-          key={expanded ? 1 : 0}
-          transition={{ duration: 0.1 }}
-          className='description no-select'
-        >
-          {descriptionText}
-        </motion.h2>
-        <Links align='left' links={links} />
-      </div>
-
       <div
-        style={{
-          width: '70%',
+        onClick={() => {
+          arrowOnClickHandler();
+          setHovered(false);
         }}
+        className={
+          !arrowUnderneath
+            ? 'row description-and-arrow'
+            : 'column description-and-arrow-underneath'
+        }
       >
-        <SmallArrow
-          leftToRight={true}
-          expandOnClick={false}
-          hovered={hovered}
-          expanded={!expanded}
-          setExpanded={setExpanded}
-          animationController={arrowAnimationController}
-        />
-      </div>
+        <motion.div
+          initial={'hide'}
+          animate={expanded ? 'hide' : 'show'}
+          exit={'hide'}
+          variants={{
+            show: { opacity: 1 },
+            hide: { opacity: 0 },
+          }}
+          transition={{ duration: 0.15 }}
+        >
+          <h2 className='description no-select'>{descriptionText}</h2>
+          <Links align='left' links={links} />
+        </motion.div>
+        <motion.div
+          initial={'hide'}
+          animate={expanded ? 'hide' : 'show'}
+          exit={'hide'}
+          variants={{
+            show: { opacity: 1, transition: { delay: 0, duration: 0.25 } },
+            hide: { opacity: 0, transition: { delay: 0.4, duration: 0.25 } },
+          }}
+          style={{
+            width: '70%',
+          }}
+        >
+          <SmallArrow
+            leftToRight={true}
+            hovered={hovered}
+            expanded={!expanded}
+            animationController={animationController}
+          />
+        </motion.div>
 
-      {/* <motion.div animate={hovered ? { x: 10 } : { x: 0 }}>
+        {/* <motion.div animate={hovered ? { x: 10 } : { x: 0 }}>
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: 'auto' }}
@@ -87,7 +116,8 @@ const Description = ({
           />
         </motion.div>
       </motion.div> */}
-    </div>
+      </div>
+    </motion.div>
   );
 };
 

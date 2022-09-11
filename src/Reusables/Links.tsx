@@ -12,6 +12,8 @@ const Links = ({ align, links }: LinksProps) => (
     {links.map((linkObject, index: number) => (
       <motion.a
         key={index}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, transition: { delay: 0.05 * index } }}
         whileHover={{ color: 'white', textDecoration: 'underline' }}
         transition={{ duration: 0.1 }}
         href={linkObject.url}

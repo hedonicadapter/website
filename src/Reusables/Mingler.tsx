@@ -116,28 +116,7 @@ const Mingler = () => {
 
   const [hasBeenViewed, setHasBeenViewed] = useState(false);
 
-  const [expansionAnimationFinished, setExpansionAnimationFinished] =
-    useState(false);
-  const arrowAnimationController = useAnimationControls();
-
-  useEffect(() => {
-    if (!expansionAnimationFinished) return;
-
-    arrowAnimationController.start({
-      width: 'auto',
-      x: 0,
-      transition: {
-        delay: 0,
-        duration: 1,
-        ease: [0.1, 0.68, 0, 0.99],
-        originX: 1,
-      },
-    });
-  }, [expansionAnimationFinished]);
-
-  useEffect(() => {
-    setExpansionAnimationFinished(false);
-  }, [expanded]);
+  const animationController = useAnimationControls();
 
   const timelineItemClickHandler = (index: number) => {
     const timelineItemAlreadyOpen = index === timelineItemClicked;
@@ -149,6 +128,21 @@ const Mingler = () => {
       return setTimelineItemClicked(false);
 
     setTimelineItemClicked(index);
+  };
+
+  const arrowOnClickHandler = async () => {
+    if (!animationController) return;
+
+    animationController.start({
+      width: 0,
+      transition: {
+        duration: 0.5,
+        ease: [0.1, 0.98, 0, 0.99],
+        origin: 1,
+      },
+    });
+
+    setExpanded(false);
   };
 
   return (
@@ -239,41 +233,32 @@ const Mingler = () => {
 
       <AnimatePresence exitBeforeEnter>
         {!expanded ? (
-          <ExpansionWrapper
-            expanded={false}
-            key={0}
-            setExpansionAnimationFinished={setExpansionAnimationFinished}
-          >
-            <motion.div
-              onHoverStart={() => setNotExpandedHovered(true)}
-              onHoverEnd={() => setNotExpandedHovered(false)}
-            >
-              <Description
-                links={minglerLinks}
-                descriptionText='Chat and share your digital life with friends.'
-                hovered={notExpandedHovered}
-                setHovered={setNotExpandedHovered}
-                expanded={expanded}
-                setExpanded={setExpanded}
-                arrowAnimationController={arrowAnimationController}
-              />
-            </motion.div>
+          <ExpansionWrapper key={0}>
+            <Description
+              links={minglerLinks}
+              descriptionText='Chat and share your digital life with friends.'
+              hovered={notExpandedHovered}
+              setHovered={setNotExpandedHovered}
+              expanded={expanded}
+              setExpanded={setExpanded}
+              animationController={animationController}
+            />
           </ExpansionWrapper>
         ) : (
-          <ExpansionWrapper
-            expanded={true}
-            key={1}
-            setExpansionAnimationFinished={setExpansionAnimationFinished}
-          >
+          <ExpansionWrapper key={1}>
             <>
-              <motion.div className='row small-arrow-and-links-container'>
-                <div style={{ marginLeft: 38, marginTop: 10, width: 110 }}>
+              <motion.div
+                exit={{ opacity: 0, transition: { duration: 0.25 } }}
+                className='row small-arrow-and-links-container'
+              >
+                <div
+                  onClick={() => arrowOnClickHandler()}
+                  style={{ marginLeft: 38, marginTop: 10, width: 110 }}
+                >
                   <SmallArrow
-                    expandOnClick={true}
                     hovered={notExpandedHovered}
                     expanded={expanded}
-                    setExpanded={setExpanded}
-                    animationController={arrowAnimationController}
+                    animationController={animationController}
                   />
                 </div>
                 <Links align='right' links={minglerLinks} />
@@ -281,8 +266,11 @@ const Mingler = () => {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ delay: 0.35, duration: 0.75 }} //not this
+                exit={{
+                  opacity: 0,
+                  transition: { duration: 0.65 },
+                }}
+                transition={{ delay: 0.25, duration: 0.55 }}
               >
                 <AnimatePresence>
                   {timelineItemClicked !== false && (
@@ -302,13 +290,20 @@ const Mingler = () => {
                   )}
                 </AnimatePresence>
               </motion.div>
-              <Timeline
-                timelineEvents={minglerTimelineEvents}
-                hovered={timelineHovered}
-                setHovered={setHovered}
-                timelineItemClicked={timelineItemClicked}
-                timelineItemClickHandler={timelineItemClickHandler}
-              />
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.15 }}
+              >
+                <Timeline
+                  timelineEvents={minglerTimelineEvents}
+                  hovered={timelineHovered}
+                  setHovered={setHovered}
+                  timelineItemClicked={timelineItemClicked}
+                  timelineItemClickHandler={timelineItemClickHandler}
+                />
+              </motion.div>
               {/* <motion.a
                 initial={{ opacity: 0 }}
                 animate={{
