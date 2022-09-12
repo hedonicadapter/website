@@ -14,9 +14,8 @@
 }
 
 .description {
-  font-family: 'CormorantGaramond-light';
   font-weight: 100;
-  font-size: 1.6em;
+  font-size: 1.8em;
 
   margin: 0;
   margin-bottom: 14px;
@@ -33,7 +32,7 @@
 }
 
 .arrow {
-  transform-origin: left center;
+  /* transform-origin: left center; */
   margin-bottom: 15px;
   margin-right: 1.9vw;
   padding-left: 4px;
@@ -61,7 +60,7 @@
 .arrow-underneath {
   margin-top: 22px;
   padding-right: 30%;
-  transform-origin: left center;
+  /* transform-origin: left center; */
 }
 
 .arrow-line-underneath {

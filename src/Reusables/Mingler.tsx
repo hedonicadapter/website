@@ -138,7 +138,7 @@ const Mingler = () => {
       transition: {
         duration: 0.5,
         ease: [0.1, 0.98, 0, 0.99],
-        origin: 1,
+        // origin: 1,
       },
     });
 

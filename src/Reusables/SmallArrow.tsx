@@ -24,10 +24,10 @@ const SmallArrow = ({
           delay: 0.25,
           duration: 0.5,
           ease: [0.1, 0.98, 0, 0.99],
-          origin: 1,
+          // origin: 1,
         },
       });
-  }, [expanded]);
+  }, [expanded, animationController]);
 
   return (
     <motion.div
@@ -45,18 +45,11 @@ const SmallArrow = ({
           opacity: 1,
         }}
         animate={animationController && animationController}
-        // animate={!expanded ? 'hide' : 'show'}
-        // variants={{
-        //   show: { width: 'auto', x: 0 },
-        //   hide: {
-        //     width: 0,
-        //   },
-        // }}
         transition={{
           delay: 0.15,
           duration: 1.85,
           ease: [0.1, 0.98, 0, 0.99],
-          origin: 1,
+          // origin: 1,
         }}
         className='small-arrow-container'
       >

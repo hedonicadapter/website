@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import { Skills } from './Skills';
 import { roubineStack } from '../Globals';
 import { Card } from './Card';
@@ -7,12 +7,16 @@ import '../styles/Roubine.css';
 
 import iphonex from '../assets/iphonex.png';
 import roubineDemo from '../assets/roubineDemo.mp4';
+import phoneFramesLeftToRight from '../assets/framesLeftToRight.webp';
+import phoneFramesRightToLeft from '../assets/framesRightToLeft.webp';
+import phoneFrameLeft from '../assets/frameLeft.webp';
+import phoneFrameRight from '../assets/frameRight.webp';
 import Description from './Description';
 import SmallArrow from './SmallArrow';
 import ExpansionWrapper from './ExpansionWrapper';
 
-type PhoneProps = { hovered?: boolean };
-const Phone = ({ hovered = true }: PhoneProps) => {
+type PhoneProps = { hovered?: boolean; direction?: string };
+const Phone = ({ hovered = true, direction }: PhoneProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Play/pause depending on hovered
@@ -30,6 +34,7 @@ const Phone = ({ hovered = true }: PhoneProps) => {
         display: 'grid',
         gridTemplateColumns: '1fr',
         justifyItems: 'center',
+        perspective: 700,
       }}
     >
       <img
@@ -38,10 +43,15 @@ const Phone = ({ hovered = true }: PhoneProps) => {
           gridColumnStart: 1,
           zIndex: 2,
           pointerEvents: 'none',
+          transform: !direction
+            ? ''
+            : direction === 'left'
+            ? 'rotateY(-20deg) rotateX(5deg)'
+            : 'rotateY(20deg) rotateX(5deg)',
         }}
         className='phone'
-        width='100%'
-        height='95%'
+        width='105%'
+        height='100%'
         src={iphonex}
       />
       <video
@@ -49,14 +59,18 @@ const Phone = ({ hovered = true }: PhoneProps) => {
         autoPlay={true}
         muted
         style={{
+          transform: !direction
+            ? ''
+            : direction === 'left'
+            ? 'rotateY(-20deg) rotateX(5deg)'
+            : 'rotateY(20deg) rotateX(5deg)',
           gridRowStart: 1,
           gridColumnStart: 1,
           marginTop: 14,
         }}
         src={roubineDemo}
-        width='100%'
-        height='88%'
-        controls
+        width='105%'
+        height='93%'
       />
     </div>
   );
@@ -66,7 +80,100 @@ const Roubine = () => {
   const [notExpandedHovered, setNotExpandedHovered] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
+  const [play, setPlay] = useState(true);
+  const [src, setSrc] = useState('');
+  const [loaded, setLoaded] = useState(false);
+
   const [phoneHovered, setPhoneHovered] = useState(0);
+
+  const animationController = useAnimationControls();
+  const animationControllerForHeaderArrow = useAnimationControls();
+
+  const phoneFrameRef = useRef<HTMLImageElement>(null);
+
+  const onLoad = () => setLoaded(true);
+
+  useEffect(() => {
+    if (phoneFrameRef.current && phoneFrameRef.current.complete) {
+      onLoad();
+    }
+  });
+
+  const arrowOnClickHandler = async () => {
+    animationController.start({
+      width: 0,
+      transition: {
+        duration: 0.5,
+        ease: [0.1, 0.98, 0, 0.99],
+        // origin: 1,
+      },
+    });
+
+    setExpanded(false);
+  };
+
+  useEffect(() => {
+    setPlay(true);
+  }, [expanded]);
+
+  useEffect(() => {
+    if (!loaded) return;
+
+    console.log(
+      play
+        ? expanded
+          ? 'phoneFramesLeftToRight'
+          : 'phoneFramesRightToLeft'
+        : expanded
+        ? 'phoneFrameRight'
+        : 'phoneFrameLeft'
+    );
+
+    if (play) {
+      if (expanded) {
+        if (src !== phoneFramesLeftToRight) {
+          setSrc(phoneFramesLeftToRight);
+          setLoaded(false);
+        }
+      } else if (!expanded) {
+        if (src !== phoneFramesRightToLeft) {
+          setSrc(phoneFramesRightToLeft);
+          setLoaded(false);
+        }
+      }
+    } else {
+      if (expanded) {
+        if (src !== phoneFrameRight) {
+          setSrc(phoneFrameRight);
+          setLoaded(false);
+        }
+      } else if (!expanded) {
+        if (src !== phoneFrameLeft) {
+          setSrc(phoneFrameLeft);
+          setLoaded(false);
+        }
+      }
+    }
+
+    // setSrc(
+    //   play
+    //     ? expanded
+    //       ? phoneFramesLeftToRight
+    //       : phoneFramesRightToLeft
+    //     : expanded
+    //     ? phoneFrameRight
+    //     : phoneFrameLeft
+    // );
+    // setLoaded(false);
+  }, [loaded, play, expanded]);
+
+  useEffect(() => {
+    if (!play) return;
+
+    const playFrameTimeout = setTimeout(() => setPlay(false), 770);
+
+    return () => clearTimeout(playFrameTimeout);
+  }, [play]);
 
   return (
     <motion.div whileInView={{ opacity: 1 }} className='roubine'>
@@ -92,17 +199,132 @@ const Roubine = () => {
               </a>
             </motion.div>
           </div>
-          <div style={{ width: 110 }}>
-            <SmallArrow hovered={notExpandedHovered} expanded={expanded} />
-          </div>
+          <AnimatePresence>
+            {expanded && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                style={{ width: 90 }}
+                onClick={() => arrowOnClickHandler()}
+              >
+                <SmallArrow
+                  hovered={notExpandedHovered}
+                  expanded={expanded}
+                  animationController={animationControllerForHeaderArrow}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
+        <div style={{ position: 'relative' }}>
+          <motion.div
+            // initial={'hide'}
+            // animate={expanded ? 'hide' : 'show'}
+            // exit={'hide'}
+            // variants={{
+            //   show: { opacity: 1 },
+            //   hide: { opacity: 0 },
+            // }}
+            transition={{ duration: 0.15 }}
+            onHoverStart={() => setNotExpandedHovered(true)}
+            onHoverEnd={() => setNotExpandedHovered(false)}
+            onClick={() => setExpanded(true)}
+            className='phone-container'
+          >
+            <motion.img
+              // autoPlay={true}
+              // muted
+              // style={{
+              //   gridRowStart: 1,
+              //   gridColumnStart: 1,
+              //   marginTop: 14,
+              // }}
+              alt='a phone showing a Roubine app demo'
+              initial={'faceLeft'}
+              animate={expanded ? 'faceRight' : 'faceLeft'}
+              exit={'faceLeft'}
+              variants={{
+                faceLeft: {
+                  rotate: 3,
+                  // scale: 1,
+                  x: 0,
+                  y: 0,
+                  width: 'auto',
+                },
+                faceRight: {
+                  rotate: -6,
+                  // scale: 1,
+                  x: '-21vw',
+                  y: 130,
+                  width: 300,
+                },
+              }}
+              transition={{ duration: 0.77 }}
+              onLoad={onLoad}
+              ref={phoneFrameRef}
+              src={src}
+              width='70%'
+            />
+          </motion.div>
+          <AnimatePresence>
+            {expanded && (
+              <div
+                style={{
+                  width: '18vw',
+                  marginRight: 80,
+                  marginTop: 180,
+                  position: 'absolute',
+                  top: 0,
+                  right: 0,
+                }}
+              >
+                <Card
+                  inverted
+                  title='Create good routines with psychology'
+                  text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu nisi a nunc maximus consequat. Nullam lobortis, nibh nec maximus congue, sem risus interdum nunc, non egestas est leo sed tellus. '
+                />
+              </div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        <AnimatePresence>
+          {expanded && (
+            <div className='row'>
+              <Card
+                inverted
+                title='Create good routines with psychology'
+                text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu nisi a nunc maximus consequat. Nullam lobortis, nibh nec maximus congue, sem risus interdum nunc, non egestas est leo sed tellus. '
+              />
+              <motion.div
+                // initial={'hide'}
+                // animate={expanded ? 'hide' : 'show'}
+                // exit={'hide'}
+                // variants={{
+                //   show: { opacity: 1 },
+                //   hide: { opacity: 0 },
+                // }}
+                transition={{ duration: 0.15 }}
+                onHoverStart={() => setNotExpandedHovered(true)}
+                onHoverEnd={() => setNotExpandedHovered(false)}
+                onClick={() => setExpanded(true)}
+                className='phone-container'
+              >
+                <motion.img
+                  alt='a phone showing a Roubine app demo'
+                  transition={{ duration: 0.77 }}
+                  src={phoneFrameLeft}
+                  width='40%'
+                />
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
         <AnimatePresence exitBeforeEnter>
-          {!expanded ? (
-            <ExpansionWrapper
-              key={0}
-              className='row description-and-phone-container'
-            >
-              <>
+          {!expanded && (
+            <ExpansionWrapper key={0}>
+              <div className='description-and-phone-container'>
                 <motion.div
                   onHoverStart={() => setNotExpandedHovered(true)}
                   onHoverEnd={() => setNotExpandedHovered(false)}
@@ -115,21 +337,49 @@ const Roubine = () => {
                     setHovered={setNotExpandedHovered}
                     expanded={expanded}
                     setExpanded={setExpanded}
+                    animationController={animationController}
                   />
                 </motion.div>
+              </div>
+            </ExpansionWrapper>
+          )}
+        </AnimatePresence>
+
+        {/* <AnimatePresence exitBeforeEnter>
+          {!expanded ? (
+            <ExpansionWrapper key={0}>
+              <div className='description-and-phone-container'>
                 <motion.div
                   onHoverStart={() => setNotExpandedHovered(true)}
                   onHoverEnd={() => setNotExpandedHovered(false)}
-                  onClick={() => setExpanded(true)}
-                  className='phone-container'
                 >
-                  <Phone />
+                  <Description
+                    links={[{ title: 'github', url: 'www.google.com' }]}
+                    descriptionText='Create good routines with psychology.'
+                    arrowUnderneath={true}
+                    hovered={notExpandedHovered}
+                    setHovered={setNotExpandedHovered}
+                    expanded={expanded}
+                    setExpanded={setExpanded}
+                    animationController={animationController}
+                  />
                 </motion.div>
-              </>
+              </div>
             </ExpansionWrapper>
-          ) : (
+          )
+          
+          : (
             <ExpansionWrapper key={1} className='phones'>
-              <>
+              <motion.div
+                initial={'hide'}
+                animate={expanded ? 'show' : 'show'}
+                exit={'hide'}
+                variants={{
+                  show: { opacity: 1 },
+                  hide: { opacity: 0 },
+                }}
+                transition={{ duration: 0.15, delay: 0.15 }}
+              >
                 <motion.div
                   className='row'
                   onMouseEnter={() => setPhoneHovered(0)}
@@ -153,22 +403,21 @@ const Roubine = () => {
                   }}
                   transition={{ ease: 'easeOut', duration: 0.2 }}
                   style={{
-                    gap: 20,
+                    gap: 30,
                     justifyItems: 'flex-start',
-                    marginRight: 0,
                     paddingRight: 40,
-                    marginLeft: 35,
+                    marginLeft: 55,
                   }}
                 >
                   <div>
-                    <Phone hovered={phoneHovered === 0} />
+                    <Phone hovered={phoneHovered === 0} direction='right' />
                   </div>
 
-                  <div style={{ width: '55vw', marginRight: 0 }}>
+                  <div style={{ width: '50vw', marginRight: 50 }}>
                     <Card
                       inverted
                       title='Create good routines with psychology'
-                      text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu nisi a nunc maximus consequat. Nullam lobortis, nibh nec maximus congue, sem risus interdum nunc, non egestas est leo sed tellus. Morbi consectetur leo quis velit commodo, sed feugiat quam eleifend.'
+                      text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu nisi a nunc maximus consequat. Nullam lobortis, nibh nec maximus congue, sem risus interdum nunc, non egestas est leo sed tellus. '
                     />
                   </div>
                 </motion.div>
@@ -195,17 +444,16 @@ const Roubine = () => {
                   transition={{ ease: 'easeOut', duration: 0.2 }}
                   className='row'
                   style={{
-                    gap: 25,
-                    marginLeft: 25,
-                    marginRight: 65,
-                    paddingLeft: 20,
+                    gap: 35,
+                    marginRight: 105,
+                    paddingLeft: 75,
                   }}
                 >
                   <div
                     style={{
                       textAlign: 'right',
                       width: '45vw',
-                      marginTop: -75,
+                      marginTop: -5,
                     }}
                   >
                     <Card
@@ -213,14 +461,14 @@ const Roubine = () => {
                       text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu nisi a nunc maximus consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
                     />
                   </div>
-                  <div style={{ marginTop: -225 }}>
-                    <Phone hovered={phoneHovered === 1} />
+                  <div style={{ marginTop: '-16vw' }}>
+                    <Phone hovered={phoneHovered === 1} direction='left' />
                   </div>
                 </motion.div>
-              </>
+              </motion.div>
             </ExpansionWrapper>
           )}
-        </AnimatePresence>
+        </AnimatePresence> */}
       </div>
     </motion.div>
   );

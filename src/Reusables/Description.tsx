@@ -17,7 +17,7 @@ type DescriptionProps = {
   setHovered: (bool: boolean) => void;
   expanded: boolean;
   setExpanded: (bool: boolean) => void;
-  animationController?: AnimationControls;
+  animationController: AnimationControls;
 };
 
 const Description = ({
@@ -30,16 +30,14 @@ const Description = ({
   setExpanded,
   animationController,
 }: DescriptionProps) => {
-  const arrowOnClickHandler = async () => {
-    if (!animationController) return;
-
+  const onClickHandler = async () => {
     animationController.start({
       width: 0,
       transition: {
         delay: 0.2,
         duration: 0.25,
         ease: [0.1, 0.98, 0, 0.99],
-        origin: 1,
+        // origin: 1,
       },
     });
 
@@ -53,7 +51,7 @@ const Description = ({
     >
       <div
         onClick={() => {
-          arrowOnClickHandler();
+          onClickHandler();
           setHovered(false);
         }}
         className={
@@ -81,7 +79,7 @@ const Description = ({
           exit={'hide'}
           variants={{
             show: { opacity: 1, transition: { delay: 0, duration: 0.25 } },
-            hide: { opacity: 0, transition: { delay: 0.4, duration: 0.25 } },
+            hide: { opacity: 0, transition: { delay: 0.15, duration: 0.25 } },
           }}
           style={{
             width: '70%',
@@ -94,28 +92,6 @@ const Description = ({
             animationController={animationController}
           />
         </motion.div>
-
-        {/* <motion.div animate={hovered ? { x: 10 } : { x: 0 }}>
-        <motion.div
-          initial={{ width: 0 }}
-          animate={{ width: 'auto' }}
-          exit={{ width: 0 }}
-          className='arrow-container'
-          transition={arrowTransition}
-        >
-          <div className={!arrowUnderneath ? 'arrow' : 'arrow-underneath'} />
-          <div
-            className={
-              !arrowUnderneath ? 'arrow-line' : 'arrow-line-underneath'
-            }
-          />
-          <motion.div
-            className={
-              !arrowUnderneath ? 'arrow-point' : 'arrow-point-underneath'
-            }
-          />
-        </motion.div>
-      </motion.div> */}
       </div>
     </motion.div>
   );

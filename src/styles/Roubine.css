@@ -2,6 +2,7 @@
   opacity: 0;
   margin-top: 35px;
   margin-bottom: 45px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .roubine a,
@@ -23,17 +24,19 @@ a:active {
 }
 
 .roubine-prototype-and-header-container {
+  position: relative;
 }
 
 .roubine-header-and-arrow-container {
   justify-content: space-between;
   align-items: center;
-  padding-right: 50px;
+  padding-right: 65px;
 }
 
 .roubine-header {
-  font-family: Arial, Helvetica, sans-serif;
-
+  font-family: Helvetica, sans-serif;
+  font-weight: 100;
+  z-index: 5;
   display: flex;
   color: var(--on-background);
   align-items: center;
@@ -43,7 +46,7 @@ a:active {
   margin-right: max(12px, 0.3vw);
 }
 .roubine-header h1 {
-  font-size: max(2.4em, 4vw);
+  font-size: max(2.4em, 5vw);
 }
 .roubine-header-skills {
 }
@@ -51,9 +54,19 @@ a:active {
 .description-and-phone-container {
   cursor: pointer;
   padding-right: 55px;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  margin-top: 100px;
 }
 .phone-container {
-  margin-top: -60px;
+  z-index: 5;
+  /* margin-right: 25px; */
+  margin-top: -160px;
+  direction: rtl;
+}
+.phone-container img {
+  z-index: 0;
 }
 
 .phone {

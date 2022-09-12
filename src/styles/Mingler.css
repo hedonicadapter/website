@@ -2,6 +2,7 @@
   opacity: 0;
   padding-top: 32px;
   margin-top: max(30px, 0.8vw);
+  font-family: 'CormorantGaramond-Light';
 }
 
 .mingler a,
@@ -100,6 +101,7 @@ a:active {
   display: flex;
   flex-direction: row;
   align-items: center;
+  z-index: 100;
 }
 .small-arrow {
   width: 100%;
