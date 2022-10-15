@@ -6,7 +6,7 @@ import { Card } from './Card';
 import '../styles/Roubine.css';
 
 import iphonex from '../assets/iphonex.png';
-import roubineDemo from '../assets/roubineDemo.mp4';
+import roubineDemo from '../assets/oldroubineDemo.mp4';
 import phoneFramesLeftToRight from '../assets/framesLeftToRight.webp';
 import phoneFramesRightToLeft from '../assets/framesRightToLeft.webp';
 import phoneFrameLeft from '../assets/frameLeft.webp';
@@ -14,9 +14,10 @@ import phoneFrameRight from '../assets/frameRight.webp';
 import Description from './Description';
 import SmallArrow from './SmallArrow';
 import ExpansionWrapper from './ExpansionWrapper';
+import Phone from './Phone';
 
 type PhoneProps = { hovered?: boolean; direction?: string };
-const Phone = ({ hovered = true, direction }: PhoneProps) => {
+const Phoner = ({ hovered = true, direction }: PhoneProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // Play/pause depending on hovered
@@ -218,6 +219,7 @@ const Roubine = () => {
           </AnimatePresence>
         </div>
         <div style={{ position: 'relative' }}>
+          <Phone />
           <motion.div
             // initial={'hide'}
             // animate={expanded ? 'hide' : 'show'}
@@ -410,7 +412,7 @@ const Roubine = () => {
                   }}
                 >
                   <div>
-                    <Phone hovered={phoneHovered === 0} direction='right' />
+                    <Phoner hovered={phoneHovered === 0} direction='right' />
                   </div>
 
                   <div style={{ width: '50vw', marginRight: 50 }}>
@@ -462,7 +464,7 @@ const Roubine = () => {
                     />
                   </div>
                   <div style={{ marginTop: '-16vw' }}>
-                    <Phone hovered={phoneHovered === 1} direction='left' />
+                    <Phoner hovered={phoneHovered === 1} direction='left' />
                   </div>
                 </motion.div>
               </motion.div>
