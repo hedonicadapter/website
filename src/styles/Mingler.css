@@ -1,7 +1,7 @@
 .mingler {
   opacity: 0;
-  padding-top: 32px;
-  margin-top: max(30px, 0.8vw);
+  padding-top: 96px;
+  margin-top: min(10px, 0.8vw);
   font-family: 'CormorantGaramond-Light';
 }
 

@@ -5,100 +5,19 @@ import { roubineStack } from '../Globals';
 import { Card } from './Card';
 import '../styles/Roubine.css';
 
-import iphonex from '../assets/iphonex.png';
-import roubineDemo from '../assets/oldroubineDemo.mp4';
-import phoneFramesLeftToRight from '../assets/framesLeftToRight.webp';
-import phoneFramesRightToLeft from '../assets/framesRightToLeft.webp';
-import phoneFrameLeft from '../assets/frameLeft.webp';
-import phoneFrameRight from '../assets/frameRight.webp';
 import Description from './Description';
 import SmallArrow from './SmallArrow';
 import ExpansionWrapper from './ExpansionWrapper';
 import Phone from './Phone';
 
-type PhoneProps = { hovered?: boolean; direction?: string };
-const Phoner = ({ hovered = true, direction }: PhoneProps) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  // Play/pause depending on hovered
-  useEffect(() => {
-    if (hovered) {
-      videoRef.current && videoRef.current.play();
-      return;
-    }
-    if (!hovered) videoRef.current && videoRef.current.pause();
-  }, [hovered]);
-
-  return (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr',
-        justifyItems: 'center',
-        perspective: 700,
-      }}
-    >
-      <img
-        style={{
-          gridRowStart: 1,
-          gridColumnStart: 1,
-          zIndex: 2,
-          pointerEvents: 'none',
-          transform: !direction
-            ? ''
-            : direction === 'left'
-            ? 'rotateY(-20deg) rotateX(5deg)'
-            : 'rotateY(20deg) rotateX(5deg)',
-        }}
-        className='phone'
-        width='105%'
-        height='100%'
-        src={iphonex}
-      />
-      <video
-        ref={videoRef}
-        autoPlay={true}
-        muted
-        style={{
-          transform: !direction
-            ? ''
-            : direction === 'left'
-            ? 'rotateY(-20deg) rotateX(5deg)'
-            : 'rotateY(20deg) rotateX(5deg)',
-          gridRowStart: 1,
-          gridColumnStart: 1,
-          marginTop: 14,
-        }}
-        src={roubineDemo}
-        width='105%'
-        height='93%'
-      />
-    </div>
-  );
-};
-
 const Roubine = () => {
   const [notExpandedHovered, setNotExpandedHovered] = useState(false);
   const [expanded, setExpanded] = useState(false);
-
-  const [play, setPlay] = useState(true);
-  const [src, setSrc] = useState('');
-  const [loaded, setLoaded] = useState(false);
 
   const [phoneHovered, setPhoneHovered] = useState(0);
 
   const animationController = useAnimationControls();
   const animationControllerForHeaderArrow = useAnimationControls();
-
-  const phoneFrameRef = useRef<HTMLImageElement>(null);
-
-  const onLoad = () => setLoaded(true);
-
-  useEffect(() => {
-    if (phoneFrameRef.current && phoneFrameRef.current.complete) {
-      onLoad();
-    }
-  });
 
   const arrowOnClickHandler = async () => {
     animationController.start({
@@ -112,69 +31,6 @@ const Roubine = () => {
 
     setExpanded(false);
   };
-
-  useEffect(() => {
-    setPlay(true);
-  }, [expanded]);
-
-  useEffect(() => {
-    if (!loaded) return;
-
-    console.log(
-      play
-        ? expanded
-          ? 'phoneFramesLeftToRight'
-          : 'phoneFramesRightToLeft'
-        : expanded
-        ? 'phoneFrameRight'
-        : 'phoneFrameLeft'
-    );
-
-    if (play) {
-      if (expanded) {
-        if (src !== phoneFramesLeftToRight) {
-          setSrc(phoneFramesLeftToRight);
-          setLoaded(false);
-        }
-      } else if (!expanded) {
-        if (src !== phoneFramesRightToLeft) {
-          setSrc(phoneFramesRightToLeft);
-          setLoaded(false);
-        }
-      }
-    } else {
-      if (expanded) {
-        if (src !== phoneFrameRight) {
-          setSrc(phoneFrameRight);
-          setLoaded(false);
-        }
-      } else if (!expanded) {
-        if (src !== phoneFrameLeft) {
-          setSrc(phoneFrameLeft);
-          setLoaded(false);
-        }
-      }
-    }
-
-    // setSrc(
-    //   play
-    //     ? expanded
-    //       ? phoneFramesLeftToRight
-    //       : phoneFramesRightToLeft
-    //     : expanded
-    //     ? phoneFrameRight
-    //     : phoneFrameLeft
-    // );
-    // setLoaded(false);
-  }, [loaded, play, expanded]);
-
-  useEffect(() => {
-    if (!play) return;
-
-    const playFrameTimeout = setTimeout(() => setPlay(false), 770);
-
-    return () => clearTimeout(playFrameTimeout);
-  }, [play]);
 
   return (
     <motion.div whileInView={{ opacity: 1 }} className='roubine'>
@@ -206,7 +62,7 @@ const Roubine = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                style={{ width: 90 }}
+                style={{ width: 85 }}
                 onClick={() => arrowOnClickHandler()}
               >
                 <SmallArrow
@@ -218,56 +74,16 @@ const Roubine = () => {
             )}
           </AnimatePresence>
         </div>
-        <div style={{ position: 'relative' }}>
-          <Phone />
+        <div>
           <motion.div
-            // initial={'hide'}
-            // animate={expanded ? 'hide' : 'show'}
-            // exit={'hide'}
-            // variants={{
-            //   show: { opacity: 1 },
-            //   hide: { opacity: 0 },
-            // }}
-            transition={{ duration: 0.15 }}
+            // animate={expanded ? { x: -100 } : { x: 0 }}
+            // transition={{ duration: 0.25 }}
             onHoverStart={() => setNotExpandedHovered(true)}
             onHoverEnd={() => setNotExpandedHovered(false)}
             onClick={() => setExpanded(true)}
             className='phone-container'
           >
-            <motion.img
-              // autoPlay={true}
-              // muted
-              // style={{
-              //   gridRowStart: 1,
-              //   gridColumnStart: 1,
-              //   marginTop: 14,
-              // }}
-              alt='a phone showing a Roubine app demo'
-              initial={'faceLeft'}
-              animate={expanded ? 'faceRight' : 'faceLeft'}
-              exit={'faceLeft'}
-              variants={{
-                faceLeft: {
-                  rotate: 3,
-                  // scale: 1,
-                  x: 0,
-                  y: 0,
-                  width: 'auto',
-                },
-                faceRight: {
-                  rotate: -6,
-                  // scale: 1,
-                  x: '-21vw',
-                  y: 130,
-                  width: 300,
-                },
-              }}
-              transition={{ duration: 0.77 }}
-              onLoad={onLoad}
-              ref={phoneFrameRef}
-              src={src}
-              width='70%'
-            />
+            <Phone expanded={expanded} />
           </motion.div>
           <AnimatePresence>
             {expanded && (
@@ -313,12 +129,7 @@ const Roubine = () => {
                 onClick={() => setExpanded(true)}
                 className='phone-container'
               >
-                <motion.img
-                  alt='a phone showing a Roubine app demo'
-                  transition={{ duration: 0.77 }}
-                  src={phoneFrameLeft}
-                  width='40%'
-                />
+                <Phone expanded={expanded} />
               </motion.div>
             </div>
           )}

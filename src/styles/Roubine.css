@@ -34,7 +34,6 @@ a:active {
 }
 
 .roubine-header {
-  font-family: Helvetica, sans-serif;
   font-weight: 100;
   z-index: 5;
   display: flex;
@@ -56,17 +55,18 @@ a:active {
   padding-right: 55px;
   position: absolute;
   top: 0;
-  z-index: -1;
   margin-top: 100px;
 }
 .phone-container {
-  z-index: 5;
-  /* margin-right: 25px; */
-  margin-top: -160px;
-  direction: rtl;
-}
-.phone-container img {
-  z-index: 0;
+  cursor: pointer;
+  /* height: 400px; */
+  /* margin-right: 0;
+  margin-left: auto; */
+  /* width: 100%; */
+  height: 38vw;
+  /* z-index: 5; */
+  margin-top: -140px;
+  /* direction: rtl; */
 }
 
 .phone {

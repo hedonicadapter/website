@@ -10,7 +10,7 @@
 .card-outside-title {
   margin-top: 0;
   color: var(--on-background);
-  font-size: 99%;
+  font-size: 1.4em;
 }
 
 .title-container {
@@ -25,6 +25,7 @@
   margin-block: 6px;
 }
 .card-content p {
+  line-height: 20px;
   padding-bottom: 8px;
 }
 

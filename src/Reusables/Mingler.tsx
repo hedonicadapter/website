@@ -42,8 +42,8 @@ const MinglerTitle = ({
   const titles = [
     <div
       style={{
-        fontSize: 'max(2.4em, 5vw)',
-        marginBottom: 'min(-1.25vw, -20px)',
+        fontSize: 'max(2.4em, 7vw)',
+        marginBottom: 'min(-1.78vw, -20px)',
       }}
     >
       Mingler
