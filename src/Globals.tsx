@@ -8,8 +8,11 @@ const recent = 0.86;
 const old = 0.6;
 const oldest = 0.38;
 
+export const linkedInLink = 'https://www.linkedin.com/in/sam-herman-950a50a7';
+export const githubLink = 'https://github.com/YungMilky';
+
 export const ReactIcon = () => (
-  <RiReactjsLine style={{ marginInline: -5, marginTop: -1 }} size={23} />
+  <RiReactjsLine style={{ marginTop: -1, marginRight: -4 }} size={23} />
 );
 
 export const TypeScriptIcon = () => (
@@ -69,13 +72,17 @@ export const languages = [
   },
   { icon: <SiMongodb size={21} />, title: 'MongoDB', rating: 'high' },
   {
-    icon: <HiDatabase size={23} />,
+    icon: <TypeScriptIcon />,
+    title: 'TypeScript',
+  },
+  {
+    icon: <HiDatabase size={22} />,
     title: 'SQL',
     rating: 'low',
     opacity: old,
   },
   {
-    icon: <SiJava size={24} />,
+    icon: <SiJava size={22} />,
     title: 'Java',
     rating: 'mid',
     opacity: old,
@@ -89,15 +96,19 @@ export const languages = [
   {
     icon: (
       <span
+        className='language-icon'
         style={{
-          transform: 'scale(0.8, 0.9) translateY(-56%)',
-          top: '56%',
+          // transform: 'scale(0.8, 0.9) translateY(-56%)',
+          // top: '56%',
+          // right: '50%',
           fontSize: '0.8rem',
           fontWeight: 'bold',
           position: 'relative',
           lineHeight: '0.6rem',
-          marginBottom: -11,
-          paddingBottom: -10,
+          // marginBottom: -11,
+          // paddingBottom: -10,
+          paddingTop: 3,
+          fontFamily: 'Inter-Regular',
         }}
       >
         .NET

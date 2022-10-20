@@ -9,12 +9,13 @@
   padding-block: 8px;
 
   font-size: 1.3em;
+
   color: var(--on-surface);
 }
 
 .contact-slide-container {
-  margin-inline: 5vw;
-  margin-top: 15vh;
+  background-color: #fffff2;
+  height: 100vh;
 }
 
 .contact-slide-container .row {

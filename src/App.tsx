@@ -119,21 +119,17 @@ const Slider = ({ expanded }: SliderProps) => {
       <motion.div
         className='row'
         style={{
-          transition: '0.3s ease',
-          WebkitTransition: '0.3s ease',
+          transition: '0.2s linear',
+          WebkitTransition: '0.2s linear',
 
           transform:
             expanded === 0
               ? 'translateX(0%)'
-              : expanded === 1
-              ? 'translateX(max(-40vw, -780px))' // same size as slide-wrapper
-              : expanded === 2
-              ? 'translateX(max(-80vw, -1560px))' // double
-              : 'translateX(0%)',
+              : 'translateX(max(-40vw, -780px))', // same size as slide-wrapper
         }}
       >
         <ProjectsSlide />
-        <AboutSlide />
+        <AboutSlide contactSlide={expanded === 2} />
         <ContactSlide />
         <Background />
       </motion.div>

@@ -79,6 +79,15 @@
     url(../assets/fonts/Inter-ExtraLight.ttf) format('truetype');
 }
 
+::-moz-selection {
+  background-color: var(--off-white);
+  color: black;
+}
+::selection {
+  background-color: var(--off-white);
+  color: black;
+}
+
 * {
   scroll-behavior: smooth;
 }
@@ -138,7 +147,6 @@ header {
   gap: 20px;
 
   font-size: 1em;
-  font-family: 'CormorantGaramond-Light';
 }
 .links a {
   color: var(--on-surface-medium);
@@ -163,8 +171,8 @@ header {
   margin-top: 35vh;
   color: var(--on-background);
   font-size: 1.4rem;
-  letter-spacing: -0.2rem;
-  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: -0.08rem;
+  font-family: 'Inter-Thin', Arial, Helvetica, sans-serif;
   cursor: pointer;
   padding: 3rem;
 }
@@ -276,4 +284,15 @@ ul {
   bottom: -20px;
   border: 10px solid white;
   border-radius: 50%;
+}
+
+.language-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  width: 20px;
+  height: 20px;
+  margin: auto;
+  z-index: 100;
 }

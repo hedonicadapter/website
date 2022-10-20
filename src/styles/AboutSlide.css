@@ -1,0 +1,80 @@
+.about-container {
+  background-color: #fffff2;
+  height: 100vh;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+
+  font-family: 'CormorantGaramond-Light';
+  padding-left: 60px;
+}
+
+.about-container a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.about-header {
+  padding-top: 15px;
+}
+
+.about-container h1 {
+  padding-right: 275px;
+  color: black;
+}
+.me {
+  pointer-events: none;
+  user-select: none;
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 25%;
+}
+
+.peepoTalks {
+  padding-right: 150px;
+  /* margin-left: 40px; */
+  margin-top: 10px;
+  gap: 10px;
+  font-weight: bold;
+}
+.peepoTalks div {
+  width: 15vw;
+}
+
+.more {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  /* border: 2px solid blue; */
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+
+  font-family: 'Inter-Medium';
+  font-size: max(2.2vw, 2em);
+  z-index: 10;
+  /* outline: 1px solid red; */
+}
+
+.more-text {
+  width: 300px;
+  text-align: right;
+}
+.more-icons {
+  height: 46px;
+  display: flex;
+  flex-direction: row;
+  gap: 9px;
+}
+.more-icon-phone {
+  margin-left: -4px;
+}
+.more-icon {
+  margin-top: 9px;
+}
+.about-container p {
+  padding-bottom: 40px;
+}
