@@ -59,6 +59,11 @@
     url(../assets/fonts/Inter-Regular.ttf) format('truetype');
 }
 @font-face {
+  font-family: 'Inter-Medium';
+  src: local('Inter-Medium'),
+    url(../assets/fonts/Inter-Medium.ttf) format('truetype');
+}
+@font-face {
   font-family: 'Inter-Thin';
   src: local('Inter-Thin'),
     url(../assets/fonts/Inter-Thin.ttf) format('truetype');
@@ -67,6 +72,11 @@
   font-family: 'Inter-Light';
   src: local('Inter-Light'),
     url(../assets/fonts/Inter-Light.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inter-ExtraLight';
+  src: local('Inter-ExtraLight'),
+    url(../assets/fonts/Inter-ExtraLight.ttf) format('truetype');
 }
 
 * {

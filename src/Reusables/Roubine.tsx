@@ -10,6 +10,79 @@ import SmallArrow from './SmallArrow';
 import ExpansionWrapper from './ExpansionWrapper';
 import Phone from './Phone';
 
+const HoverWrapper = ({
+  hovered,
+  setHovered,
+  children,
+}: {
+  hovered: Boolean;
+  setHovered: () => void;
+  children: JSX.Element;
+}) => (
+  <motion.div
+    className='row'
+    onMouseEnter={() => setHovered()}
+    initial={'hide'}
+    animate={hovered ? 'show' : 'hide'}
+    variants={{
+      show: {
+        scale: 1,
+        opacity: 1,
+        filter: 'blur(0) grayscale(0%)',
+      },
+      hide: {
+        scale: 0.99,
+        opacity: 0.86,
+        filter: 'blur(2px) grayscale(20%)',
+      },
+    }}
+    transition={{ duration: 0.15 }}
+  >
+    {children}
+  </motion.div>
+);
+
+const RoubineCard = ({ secondPhone = false }: { secondPhone?: Boolean }) => (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1, transition: { delay: 0.35 } }}
+    exit={{ opacity: 0, transition: { delay: 0 } }}
+    transition={{ duration: 0.15 }}
+    style={{
+      borderRadius: 22,
+      border: '1px solid rgba(62,62,62,0.22)',
+      width: '100%',
+      height: '10vw',
+      paddingBlock: 24,
+      paddingInline: 30,
+      backgroundColor: '#212121',
+      color: 'var(--off-white)',
+      fontSize: '1.25em',
+      fontFamily: 'Inter-Light',
+      overflowY: 'scroll',
+      WebkitBoxShadow: secondPhone
+        ? '7px 20px 23px -16px rgba(0,0,0,0.26)'
+        : '-7px 20px 23px -16px rgba(0,0,0,0.26)',
+      boxShadow: secondPhone
+        ? '7px 20px 23px -16px rgba(0,0,0,0.26)'
+        : '-7px 20px 23px -16px rgba(0,0,0,0.26)',
+    }}
+  >
+    <p style={{ marginBottom: 14 }}>Create better routines with psychology</p>
+    <ul
+      style={{
+        listStyle: 'disc inside',
+        flexDirection: 'column',
+        fontSize: '0.9em',
+      }}
+    >
+      <li style={{ marginBlock: 8 }}>don't be a busta</li>
+      <li style={{ marginBlock: 8 }}>secure the bag</li>
+      <li style={{ marginBlock: 8 }}>check gmail</li>
+    </ul>
+  </motion.div>
+);
+
 const Roubine = () => {
   const [notExpandedHovered, setNotExpandedHovered] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -31,6 +104,11 @@ const Roubine = () => {
 
     setExpanded(false);
   };
+
+  useEffect(() => {
+    //so that if you close expansion when the second phone is hovered, the filters dont persist
+    if (!expanded) setPhoneHovered(0);
+  }, [expanded]);
 
   return (
     <motion.div whileInView={{ opacity: 1 }} className='roubine'>
@@ -74,66 +152,62 @@ const Roubine = () => {
             )}
           </AnimatePresence>
         </div>
-        <div>
-          <motion.div
-            // animate={expanded ? { x: -100 } : { x: 0 }}
-            // transition={{ duration: 0.25 }}
-            onHoverStart={() => setNotExpandedHovered(true)}
-            onHoverEnd={() => setNotExpandedHovered(false)}
-            onClick={() => setExpanded(true)}
-            className='phone-container'
+        <div onClick={() => setExpanded(!expanded)}>
+          <HoverWrapper
+            hovered={phoneHovered === 0}
+            setHovered={() => setPhoneHovered(0)}
           >
-            <Phone expanded={expanded} />
-          </motion.div>
-          <AnimatePresence>
-            {expanded && (
-              <div
-                style={{
-                  width: '18vw',
-                  marginRight: 80,
-                  marginTop: 180,
-                  position: 'absolute',
-                  top: 0,
-                  right: 0,
-                }}
-              >
-                <Card
-                  inverted
-                  title='Create good routines with psychology'
-                  text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu nisi a nunc maximus consequat. Nullam lobortis, nibh nec maximus congue, sem risus interdum nunc, non egestas est leo sed tellus. '
-                />
-              </div>
-            )}
-          </AnimatePresence>
-        </div>
-
-        <AnimatePresence>
-          {expanded && (
-            <div className='row'>
-              <Card
-                inverted
-                title='Create good routines with psychology'
-                text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu nisi a nunc maximus consequat. Nullam lobortis, nibh nec maximus congue, sem risus interdum nunc, non egestas est leo sed tellus. '
-              />
+            <>
               <motion.div
-                // initial={'hide'}
-                // animate={expanded ? 'hide' : 'show'}
-                // exit={'hide'}
-                // variants={{
-                //   show: { opacity: 1 },
-                //   hide: { opacity: 0 },
-                // }}
-                transition={{ duration: 0.15 }}
                 onHoverStart={() => setNotExpandedHovered(true)}
                 onHoverEnd={() => setNotExpandedHovered(false)}
-                onClick={() => setExpanded(true)}
-                className='phone-container'
+                className='first-phone-container'
               >
                 <Phone expanded={expanded} />
               </motion.div>
-            </div>
-          )}
-        </AnimatePresence>
+              <AnimatePresence>
+                {expanded && (
+                  <div className='first-card-container'>
+                    <RoubineCard />
+                  </div>
+                )}
+              </AnimatePresence>
+            </>
+          </HoverWrapper>
+        </div>
+
+        <motion.div
+          animate={expanded ? 'show' : 'hide'}
+          variants={{
+            show: {
+              opacity: 1,
+              x: 0,
+              transition: { duration: 0.35, delay: 0.15 },
+            },
+            hide: { opacity: 0, x: 40, transition: { duration: 0.25 } },
+          }}
+          onClick={() => setExpanded(false)}
+          style={{ cursor: expanded ? 'pointer' : 'auto' }}
+        >
+          <HoverWrapper
+            hovered={phoneHovered === 1}
+            setHovered={() => expanded && setPhoneHovered(1)}
+          >
+            <>
+              <div className='second-card-container'>
+                <RoubineCard secondPhone={true} />
+              </div>
+              <motion.div
+                onHoverStart={() => setNotExpandedHovered(true)}
+                onHoverEnd={() => setNotExpandedHovered(false)}
+                className='second-phone-container'
+              >
+                <Phone expanded={false} secondPhone={true} />
+              </motion.div>
+            </>
+          </HoverWrapper>
+        </motion.div>
+
         <AnimatePresence exitBeforeEnter>
           {!expanded && (
             <ExpansionWrapper key={0}>
@@ -157,131 +231,6 @@ const Roubine = () => {
             </ExpansionWrapper>
           )}
         </AnimatePresence>
-
-        {/* <AnimatePresence exitBeforeEnter>
-          {!expanded ? (
-            <ExpansionWrapper key={0}>
-              <div className='description-and-phone-container'>
-                <motion.div
-                  onHoverStart={() => setNotExpandedHovered(true)}
-                  onHoverEnd={() => setNotExpandedHovered(false)}
-                >
-                  <Description
-                    links={[{ title: 'github', url: 'www.google.com' }]}
-                    descriptionText='Create good routines with psychology.'
-                    arrowUnderneath={true}
-                    hovered={notExpandedHovered}
-                    setHovered={setNotExpandedHovered}
-                    expanded={expanded}
-                    setExpanded={setExpanded}
-                    animationController={animationController}
-                  />
-                </motion.div>
-              </div>
-            </ExpansionWrapper>
-          )
-          
-          : (
-            <ExpansionWrapper key={1} className='phones'>
-              <motion.div
-                initial={'hide'}
-                animate={expanded ? 'show' : 'show'}
-                exit={'hide'}
-                variants={{
-                  show: { opacity: 1 },
-                  hide: { opacity: 0 },
-                }}
-                transition={{ duration: 0.15, delay: 0.15 }}
-              >
-                <motion.div
-                  className='row'
-                  onMouseEnter={() => setPhoneHovered(0)}
-                  initial={'show'}
-                  animate={phoneHovered ? 'hide' : 'show'}
-                  variants={{
-                    show: {
-                      scale: 1,
-                      x: 5,
-                      y: 0,
-                      opacity: 1,
-                      filter: 'blur(0)',
-                    },
-                    hide: {
-                      scale: 0.95,
-                      x: -0,
-                      y: -10,
-                      opacity: 0.6,
-                      filter: 'blur(2px)',
-                    },
-                  }}
-                  transition={{ ease: 'easeOut', duration: 0.2 }}
-                  style={{
-                    gap: 30,
-                    justifyItems: 'flex-start',
-                    paddingRight: 40,
-                    marginLeft: 55,
-                  }}
-                >
-                  <div>
-                    <Phoner hovered={phoneHovered === 0} direction='right' />
-                  </div>
-
-                  <div style={{ width: '50vw', marginRight: 50 }}>
-                    <Card
-                      inverted
-                      title='Create good routines with psychology'
-                      text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu nisi a nunc maximus consequat. Nullam lobortis, nibh nec maximus congue, sem risus interdum nunc, non egestas est leo sed tellus. '
-                    />
-                  </div>
-                </motion.div>
-                <motion.div
-                  onMouseEnter={() => setPhoneHovered(1)}
-                  initial={'hide'}
-                  animate={phoneHovered ? 'show' : 'hide'}
-                  variants={{
-                    show: {
-                      scale: 1,
-                      x: -5,
-                      y: 20,
-                      opacity: 1,
-                      filter: 'blur(0)',
-                    },
-                    hide: {
-                      scale: 0.95,
-                      x: 0,
-                      y: 0,
-                      opacity: 0.6,
-                      filter: 'blur(2px)',
-                    },
-                  }}
-                  transition={{ ease: 'easeOut', duration: 0.2 }}
-                  className='row'
-                  style={{
-                    gap: 35,
-                    marginRight: 105,
-                    paddingLeft: 75,
-                  }}
-                >
-                  <div
-                    style={{
-                      textAlign: 'right',
-                      width: '45vw',
-                      marginTop: -5,
-                    }}
-                  >
-                    <Card
-                      title='Create good routines with psychology'
-                      text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu nisi a nunc maximus consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-                    />
-                  </div>
-                  <div style={{ marginTop: '-16vw' }}>
-                    <Phoner hovered={phoneHovered === 1} direction='left' />
-                  </div>
-                </motion.div>
-              </motion.div>
-            </ExpansionWrapper>
-          )}
-        </AnimatePresence> */}
       </div>
     </motion.div>
   );

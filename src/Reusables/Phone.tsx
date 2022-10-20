@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { Suspense, useState, useRef, useEffect } from 'react';
+import { SetStateAction, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import {
   Bounds,
@@ -12,7 +12,6 @@ import { GLTF } from 'three-stdlib';
 import { useSpring, animated, easings } from '@react-spring/three';
 
 import url from '../assets/roubineDemo.webm';
-import { Mesh } from 'three';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -43,7 +42,13 @@ type GLTFResult = GLTF & {
   };
 };
 
-export default function Phone({ expanded }: { expanded: Boolean }) {
+export default function Phone({
+  expanded,
+  secondPhone = false,
+}: {
+  expanded: Boolean;
+  secondPhone?: Boolean;
+}) {
   // const { nodes, materials } = useGLTF('/phone.glb');
   const { nodes, materials } = useGLTF('/new.glb');
 
@@ -51,6 +56,7 @@ export default function Phone({ expanded }: { expanded: Boolean }) {
   useGLTF.preload('/new.glb');
   return (
     <Canvas
+      style={{ zIndex: 100 }}
       dpr={[1, 2]}
       camera={{ fov: 5, position: [-0.4, 4, 100] }}
       resize={{ scroll: false }}
@@ -58,28 +64,62 @@ export default function Phone({ expanded }: { expanded: Boolean }) {
       {/* <ambientLight intensity={0.5} /> */}
       {/* <directionalLight position={[3, 5, 6]} intensity={1} /> */}
       {/* <spotLight position={[1, 1, -20]} intensity={2} /> */}
-      <OrbitControls makeDefault />
       <Environment preset='lobby' />
       <Suspense fallback={null}>
         {/* <Model nodes={nodes} materials={materials} expanded={expanded} /> */}
-        <New nodes={nodes} materials={materials} />
+        <New
+          nodes={nodes}
+          materials={materials}
+          expanded={expanded}
+          secondPhone={secondPhone}
+        />
       </Suspense>
     </Canvas>
   );
 }
 
-function New({ nodes, materials }: { nodes: any; materials: any }) {
+function New({
+  nodes,
+  materials,
+  expanded,
+  secondPhone,
+}: {
+  nodes: any;
+  materials: any;
+  expanded: Boolean;
+  secondPhone: Boolean;
+}) {
+  const { scale, rotation, position } = useSpring({
+    scale: secondPhone ? 0.87 : expanded ? 0.94 : 1.1,
+    rotation: secondPhone
+      ? [-0.52, -0.4, -0.12]
+      : expanded
+      ? [-0.52, 0.4, 0.12]
+      : [-0.42, -0.4, -0.1],
+    position: secondPhone
+      ? [0, -0.9, 0]
+      : expanded
+      ? [-1.18, -3.2, 0]
+      : [1.7, -2.9, 0],
+    config: { duration: 500, easing: easings.easeInOutQuad },
+  });
+
   return (
-    <group
-      position={[0, -3, 0]}
-      scale={0.08}
+    <animated.group
+      // position={[2, -3.59, 0]}
+      scale={0.062}
+      position={position as any}
       // position={[0, -0.15, 0]}
-      rotation={[-0.52, 0.4, 0.12]}
       // scale={0.004}
       dispose={null}
     >
-      <Bounds margin={1.85}>
-        <group name='Sketchfab_model' position={[0, -2.59, 2.42]}>
+      <Bounds margin={0}>
+        <animated.group
+          rotation={rotation as any}
+          scale={scale as any}
+          name='Sketchfab_model'
+          // position={[0, -2.59, 2.42]}
+        >
           <group name='IP12PROfbx' rotation={[Math.PI / 2, 0, 0]}>
             <group
               name='iPhone__12_Pro'
@@ -399,9 +439,9 @@ function New({ nodes, materials }: { nodes: any; materials: any }) {
               />
             </group>
           </group>
-        </group>
+        </animated.group>
       </Bounds>
-    </group>
+    </animated.group>
   );
 }
 
@@ -425,168 +465,5 @@ function VideoMaterial({ url }: { url: string }) {
         alphaTest={0.5}
       />
     </mesh>
-  );
-}
-
-// : JSX.IntrinsicElements["group"]
-function Model({
-  nodes,
-  materials,
-  expanded,
-}: {
-  nodes: any;
-  materials: any;
-  expanded: Boolean;
-}) {
-  const phoneRef = useRef<Mesh>(null!);
-
-  const { scale, rotation, position } = useSpring({
-    scale: expanded ? 1 : 1.1,
-    rotation: expanded ? [0.15, 0.8, -0.3] : [0, 0, 0],
-    position: expanded ? [1.6, -0.2, 0] : [0, 0, 0],
-    config: { duration: 500, easing: easings.easeInOutQuad },
-  });
-
-  return (
-    <group
-      position={[1.7, 0, 0]}
-      rotation={[-0.11, 2.8, 0.07]}
-      scale={[2.8, 3.15, 2.8]}
-      dispose={null}
-    >
-      <Bounds margin={0.85}>
-        <animated.mesh
-          name='Phone'
-          rotation={rotation as any}
-          scale={scale as any}
-          position={position as any}
-          material-color='#211A1D'
-          ref={phoneRef}
-          castShadow
-          receiveShadow
-          geometry={nodes.Phone.geometry}
-          material={materials.body}
-        >
-          {/* <mesh
-            name="Cam_module"
-            castShadow
-            receiveShadow
-            geometry={nodes.Cam_module.geometry}
-            material={materials.logo}
-            position={[-0.27, 0.71, 0.07]}
-            scale={1.19}
-          /> */}
-          <mesh
-            name='Circle'
-            castShadow
-            receiveShadow
-            geometry={nodes.Circle.geometry}
-            material={materials.logo}
-            position={[0, 0.03, 0.07]}
-            rotation={[Math.PI / 2, 0, 0]}
-            scale={0.15}
-          />
-          <mesh
-            name='flash'
-            castShadow
-            receiveShadow
-            geometry={nodes.flash.geometry}
-            material={materials.flash}
-            position={[-0.15, 0.85, 0.1]}
-            scale={0.37}
-          />
-          <group name='lens' position={[-0.35, 0.79, 0.09]} scale={1.47}>
-            <mesh
-              name='Cylinder'
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder.geometry}
-              material={materials.logo}
-            />
-            <mesh
-              name='Cylinder_1'
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder_1.geometry}
-              material={materials['inner lens']}
-            />
-            <mesh
-              name='Cylinder_2'
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder_2.geometry}
-              material={materials['focal lens']}
-            />
-          </group>
-          <group name='lens001' position={[-0.35, 0.62, 0.09]} scale={1.47}>
-            <mesh
-              name='Cylinder007'
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder007.geometry}
-              material={materials.logo}
-            />
-            <mesh
-              name='Cylinder007_1'
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder007_1.geometry}
-              material={materials['inner lens']}
-            />
-            <mesh
-              name='Cylinder007_2'
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder007_2.geometry}
-              material={materials['focal lens']}
-            />
-          </group>
-          <group name='lens002' position={[-0.19, 0.71, 0.09]} scale={1.47}>
-            <mesh
-              name='Cylinder008'
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder008.geometry}
-              material={materials.logo}
-            />
-            <mesh
-              name='Cylinder008_1'
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder008_1.geometry}
-              material={materials['inner lens']}
-            />
-            <mesh
-              name='Cylinder008_2'
-              castShadow
-              receiveShadow
-              geometry={nodes.Cylinder008_2.geometry}
-              material={materials['focal lens']}
-            />
-          </group>
-          <mesh
-            name='Power_switch'
-            castShadow
-            receiveShadow
-            geometry={nodes.Power_switch.geometry}
-            material={materials.body}
-            position={[-0.53, 0.23, 0]}
-            scale={[1, 1.99, 1]}
-          />
-
-          <VideoMaterial url={url} />
-
-          <mesh
-            name='Volume_rocker'
-            castShadow
-            receiveShadow
-            geometry={nodes.Volume_rocker.geometry}
-            material={materials.body}
-            position={[0.53, 0.43, 0]}
-            scale={[1, 1.4, 1]}
-          />
-        </animated.mesh>
-      </Bounds>
-    </group>
   );
 }

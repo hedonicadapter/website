@@ -11,6 +11,8 @@
   padding-left: 30px;
   padding-right: 10px;
   width: 18vw;
+  font-weight: 100;
+  font-family: 'Inter-ExtraLight';
 }
 
 .description {
