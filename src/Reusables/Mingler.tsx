@@ -114,8 +114,6 @@ const Mingler = () => {
     number | boolean
   >(true);
 
-  const [hasBeenViewed, setHasBeenViewed] = useState(false);
-
   const animationController = useAnimationControls();
 
   const timelineItemClickHandler = (index: number) => {
@@ -285,8 +283,6 @@ const Mingler = () => {
                     >
                       <Textbox
                         timelineEvents={minglerTimelineEvents}
-                        hasBeenViewed={hasBeenViewed}
-                        setHasBeenViewed={setHasBeenViewed}
                         hovered={timelineHovered}
                       />
                     </motion.div>

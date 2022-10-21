@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { SetStateAction, Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useThree } from '@react-three/fiber';
 import {
   Bounds,
   Environment,
@@ -92,8 +92,10 @@ function Model({
   expanded: Boolean;
   secondPhone: Boolean;
 }) {
+  const { viewport } = useThree();
+
   const { scale, rotation, position } = useSpring({
-    scale: secondPhone ? 0.96 : expanded ? 0.82 : 1,
+    scale: secondPhone ? 0.075 : expanded ? 0.074 : 0.09,
     rotation: secondPhone
       ? [-0.52, -0.4, -0.12]
       : expanded
@@ -110,7 +112,8 @@ function Model({
   return (
     <animated.group
       // position={[2, -3.59, 0]}
-      scale={0.09}
+      // scale={0.09}
+      scale={viewport.width / 11}
       position={position as any}
       // position={[0, -0.15, 0]}
       // scale={0.004}

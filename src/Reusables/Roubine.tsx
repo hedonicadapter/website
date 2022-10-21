@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
+import { isMobile } from 'react-device-detect';
 import { Skills } from './Skills';
 import { roubineStack } from '../Globals';
 import '../styles/Roubine.css';
@@ -24,7 +25,7 @@ const HoverWrapper = ({
     className='row'
     onMouseEnter={() => setHovered()}
     initial={'hide'}
-    animate={hovered ? 'show' : 'hide'}
+    animate={isMobile ? 'show' : hovered ? 'show' : 'hide'}
     variants={{
       show: {
         scale: 1,

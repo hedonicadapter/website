@@ -74,6 +74,7 @@ const IconWrapper = React.memo(
     <motion.div
       whileHover={{ scale: 1.1 }}
       onMouseEnter={() => setContactText(text)}
+      transition={{ duration: 0.1 }}
     >
       <a
         target={text === 'phone' ? '' : '_blank'}
@@ -222,7 +223,7 @@ export const AboutSlide = React.memo(
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.15 }}
+                    transition={{ duration: 0.1 }}
                     key={contactText}
                     className='more-text'
                   >
@@ -232,7 +233,7 @@ export const AboutSlide = React.memo(
                       </a>
                     ) : contactText === 'github' ? (
                       <a href={githubLink} rel='noreferrer' target='_blank'>
-                        Yung Milky
+                        hedonicadapter
                       </a>
                     ) : contactText === 'phone' ? (
                       <a href='tel:+46 736 26 02 31'>+46 736 26 02 31</a>

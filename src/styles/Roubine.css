@@ -113,18 +113,21 @@ a:active {
 .first-phone-container {
   height: 32vw;
   cursor: pointer;
-  margin-top: -120px;
+  /* margin-top: -120px; */
+  margin-top: -6.5vw;
 }
 .second-phone-container {
   height: 28vw;
   /* margin-left: -95px; */
-  margin-top: -136px;
+  /* margin-top: -136px; */
+  margin-top: -7.6vw;
 }
 
 .first-card-container {
   width: 15.2vw;
   cursor: pointer;
-  margin-top: 42px;
+  /* margin-top: 42px; */
+  margin-top: 2.2vw;
   position: absolute;
   top: 0;
   right: 58%;
@@ -132,7 +135,8 @@ a:active {
 }
 .second-card-container {
   width: 13.2vw;
-  margin-top: 42px;
+  /* margin-top: 42px; */
+  margin-top: 2.2vw;
   position: absolute;
   top: 10%;
   /* right: 68%; */
