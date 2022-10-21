@@ -147,9 +147,12 @@ const Mingler = () => {
 
   return (
     <motion.div
-      whileInView={{
-        opacity: 1,
-      }}
+      initial={{ opacity: 0.15, filter: 'blur(2px) grayscale(70%)' }}
+      exit={{ opacity: 0.15, filter: 'blur(2px) grayscale(70%)' }}
+      whileInView={{ opacity: 1, filter: 'blur(0px) grayscale(0%)' }}
+      viewport={{ amount: 0.5 }}
+      onViewportLeave={() => setExpanded(false)}
+      transition={{ duration: 0.15 }}
       className='mingler'
     >
       <div className='mingler-prototype-and-header-container'>

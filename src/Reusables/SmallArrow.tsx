@@ -54,13 +54,27 @@ const SmallArrow = ({
         className='small-arrow-container'
       >
         <div className='small-arrow'>
-          <div className='small-arrow-line' />
+          <div
+            className='small-arrow-line'
+            style={leftToRight ? { height: 3 } : { height: 2 }}
+          />
           <div
             className='small-arrow-point'
             style={
               leftToRight
-                ? { borderWidth: '2px 2px 0 0', float: 'right' }
-                : { borderWidth: '0 0 2px 2px' }
+                ? {
+                    borderWidth: '3px 3px 0 0',
+                    float: 'right',
+                    marginTop: -11,
+                    height: 17,
+                    width: 17,
+                  }
+                : {
+                    borderWidth: '0 0 2px 2px',
+                    marginTop: -6,
+                    height: 8,
+                    width: 8,
+                  }
             }
           />
         </div>

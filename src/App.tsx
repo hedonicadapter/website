@@ -119,8 +119,8 @@ const Slider = ({ expanded }: SliderProps) => {
       <motion.div
         className='row'
         style={{
-          transition: '0.2s linear',
-          WebkitTransition: '0.2s linear',
+          transition: '0.4s ease-in-out',
+          WebkitTransition: '0.4s ease-in-out',
 
           transform:
             expanded === 0
@@ -222,7 +222,7 @@ function App() {
           <motion.div
             animate={controls}
             initial={{ x: -180, scale: 0.8, opacity: 0 }}
-            transition={{ duration: 0.32 }}
+            transition={{ duration: 0.45 }}
             className='header-menu-content'
             onMouseEnter={() => setSliderContainerHovered(true)}
             onMouseLeave={() => setSliderContainerHovered(false)}

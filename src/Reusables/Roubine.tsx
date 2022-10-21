@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import { Skills } from './Skills';
 import { roubineStack } from '../Globals';
-import { Card } from './Card';
 import '../styles/Roubine.css';
+import card1 from '../assets/card1.png';
+import card2 from '../assets/card2.png';
 
 import Description from './Description';
 import SmallArrow from './SmallArrow';
@@ -42,44 +43,28 @@ const HoverWrapper = ({
   </motion.div>
 );
 
-const RoubineCard = ({ secondPhone = false }: { secondPhone?: Boolean }) => (
+const RoubineCard = ({
+  title,
+  body,
+  secondPhone = false,
+}: {
+  title: string;
+  body: string | JSX.Element;
+  secondPhone?: Boolean;
+}) => (
   <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1, transition: { delay: 0.35 } }}
     exit={{ opacity: 0, transition: { delay: 0 } }}
     transition={{ duration: 0.15 }}
-    style={{
-      borderRadius: 22,
-      border: '1px solid rgba(62,62,62,0.22)',
-      width: '100%',
-      height: '10vw',
-      paddingBlock: 24,
-      paddingInline: 30,
-      backgroundColor: '#212121',
-      color: 'var(--off-white)',
-      fontSize: '1.25em',
-      fontFamily: 'Inter-Light',
-      overflowY: 'scroll',
-      WebkitBoxShadow: secondPhone
-        ? '7px 20px 23px -16px rgba(0,0,0,0.26)'
-        : '-7px 20px 23px -16px rgba(0,0,0,0.26)',
-      boxShadow: secondPhone
-        ? '7px 20px 23px -16px rgba(0,0,0,0.26)'
-        : '-7px 20px 23px -16px rgba(0,0,0,0.26)',
-    }}
+    className={`roubine-card ${secondPhone ? ' second' : ' first'}`}
   >
-    <p style={{ marginBottom: 14 }}>Create better routines with psychology</p>
-    <ul
-      style={{
-        listStyle: 'disc inside',
-        flexDirection: 'column',
-        fontSize: '0.9em',
-      }}
-    >
-      <li style={{ marginBlock: 8 }}>don't be a busta</li>
-      <li style={{ marginBlock: 8 }}>secure the bag</li>
-      <li style={{ marginBlock: 8 }}>check gmail</li>
-    </ul>
+    <p style={{ marginBottom: 14 }}>{title}</p>
+    {body}
+    <img
+      src={secondPhone ? card2 : card1}
+      alt='Graphic of a mascot called Ruby from Roubine'
+    />
   </motion.div>
 );
 
@@ -111,7 +96,15 @@ const Roubine = () => {
   }, [expanded]);
 
   return (
-    <motion.div whileInView={{ opacity: 1 }} className='roubine'>
+    <motion.div
+      initial={{ opacity: 0.15, filter: 'blur(2px) grayscale(70%)' }}
+      exit={{ opacity: 0.15, filter: 'blur(2px) grayscale(70%)' }}
+      whileInView={{ opacity: 1, filter: 'blur(0px) grayscale(0%)' }}
+      viewport={{ amount: 0.5 }}
+      onViewportLeave={() => setExpanded(false)}
+      transition={{ duration: 0.15 }}
+      className='roubine'
+    >
       <div className='roubine-prototype-and-header-container'>
         <div className='row roubine-header-and-arrow-container'>
           <div className='roubine-header'>
@@ -168,7 +161,22 @@ const Roubine = () => {
               <AnimatePresence>
                 {expanded && (
                   <div className='first-card-container'>
-                    <RoubineCard />
+                    <RoubineCard
+                      title='Create better routines with psychology'
+                      body={
+                        <ul
+                          style={{
+                            listStyle: 'disc inside',
+                            flexDirection: 'column',
+                            fontSize: '0.9em',
+                          }}
+                        >
+                          <li style={{ marginBlock: 8 }}>don't be a busta</li>
+                          <li style={{ marginBlock: 8 }}>secure the bag</li>
+                          <li style={{ marginBlock: 8 }}>check gmail</li>
+                        </ul>
+                      }
+                    />
                   </div>
                 )}
               </AnimatePresence>
@@ -195,7 +203,11 @@ const Roubine = () => {
           >
             <>
               <div className='second-card-container'>
-                <RoubineCard secondPhone={true} />
+                <RoubineCard
+                  secondPhone={true}
+                  title='Ehehehe'
+                  body='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere malesuada sem, et pretium libero venenatis. '
+                />
               </div>
               <motion.div
                 onHoverStart={() => setNotExpandedHovered(true)}
@@ -218,7 +230,13 @@ const Roubine = () => {
                 >
                   <Description
                     links={[{ title: 'github', url: 'www.google.com' }]}
-                    descriptionText='Create good routines with psychology.'
+                    descriptionText={
+                      <>
+                        Create
+                        <mark className='description-mark'>better</mark>
+                        routines with psychology.
+                      </>
+                    }
                     arrowUnderneath={true}
                     hovered={notExpandedHovered}
                     setHovered={setNotExpandedHovered}

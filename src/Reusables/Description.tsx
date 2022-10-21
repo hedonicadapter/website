@@ -4,10 +4,10 @@ import '../styles/Description.css';
 import { arrowTransition } from '../Globals';
 import SmallArrow from './SmallArrow';
 import ExpansionWrapper from './ExpansionWrapper';
-import { useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 
 type DescriptionProps = {
-  descriptionText: string;
+  descriptionText: string | ReactNode | null;
   arrowUnderneath?: boolean;
   links: Array<{
     title: string;
@@ -70,7 +70,12 @@ const Description = ({
           }}
           transition={{ duration: 0.15 }}
         >
-          <h2 className='description no-select'>{descriptionText}</h2>
+          <h2
+            className='description no-select'
+            style={{ fontSize: !arrowUnderneath ? '2.1em' : '' }}
+          >
+            {descriptionText}
+          </h2>
           <Links align='left' links={links} />
         </motion.div>
         <motion.div
@@ -83,6 +88,7 @@ const Description = ({
           }}
           style={{
             width: '70%',
+            paddingTop: arrowUnderneath ? 8 : 0,
           }}
         >
           <SmallArrow

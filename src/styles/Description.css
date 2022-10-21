@@ -3,6 +3,7 @@
   justify-content: flex-start;
   align-items: center;
   padding-inline: 30px;
+
   padding-top: 15px;
 }
 .description-and-arrow-underneath {
@@ -12,7 +13,7 @@
   padding-right: 10px;
   width: 18vw;
   font-weight: 100;
-  font-family: 'Inter-ExtraLight';
+  font-family: 'Inter-Thin';
 }
 
 .description {

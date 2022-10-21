@@ -53,7 +53,7 @@
   align-items: center;
   gap: 12px;
 
-  font-family: 'Inter-Medium';
+  font-family: 'Cormorant SC';
   font-size: max(2.2vw, 2em);
   z-index: 10;
   /* outline: 1px solid red; */

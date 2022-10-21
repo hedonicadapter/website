@@ -15,25 +15,29 @@ export const ReactIcon = () => (
   <RiReactjsLine style={{ marginTop: -1, marginRight: -4 }} size={23} />
 );
 
-export const TypeScriptIcon = () => (
+export const TypeScriptIcon = ({ drip }: { drip: string }) => (
   <span
     className='no-select'
     style={{
       // transform: 'scale(1, 0.9) translateY(-22%)',
-      color: 'rgba(14, 14, 14, 1)',
+      color:
+        drip === 'light' ? 'rgba(14, 14, 14, 1)' : 'rgba(255, 255, 255, 1)',
       fontSize: '0.7em',
       fontWeight: 'bold',
-      backgroundColor: 'rgba(255, 255, 255, 0.87)',
+      fontFamily: 'Inter-Medium',
+      backgroundColor:
+        drip === 'light' ? 'rgba(255, 255, 255, 0.87)' : 'rgba(14, 14, 14,1)',
       borderRadius: 1,
 
       paddingBottom: 1,
-      paddingLeft: 3,
+      paddingLeft: 4,
       paddingRight: 1,
-      paddingTop: 3,
+      paddingTop: 4,
 
-      marginTop: 2,
-      marginRight: 2,
+      marginTop: 1,
+      marginRight: 1,
       marginLeft: -1,
+      marginBottom: -1,
     }}
   >
     TS
@@ -47,7 +51,7 @@ export const minglerStack = [
   },
   { icon: <SiMongodb size={21} />, title: 'MongoDB' },
   {
-    icon: <TypeScriptIcon />,
+    icon: <TypeScriptIcon drip='light' />,
     title: 'TypeScript',
   },
   {
@@ -72,7 +76,7 @@ export const languages = [
   },
   { icon: <SiMongodb size={21} />, title: 'MongoDB', rating: 'high' },
   {
-    icon: <TypeScriptIcon />,
+    icon: <TypeScriptIcon drip='dark' />,
     title: 'TypeScript',
   },
   {
