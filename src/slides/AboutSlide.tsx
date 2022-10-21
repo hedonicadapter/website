@@ -33,9 +33,10 @@ const AnimationWrapper = ({
           originY: 1,
           originX: 0,
           opacity: 1,
+          x: 0,
           filter: 'blur(0px) grayscale(0%)',
           transition: {
-            duration: isMe ? 0.85 : 0.65,
+            duration: isMe ? 0.4 : 0.45,
           },
         },
         blur: {
@@ -45,7 +46,7 @@ const AnimationWrapper = ({
           scale: 0.9,
           opacity: 0.7,
           filter: 'blur(3px) grayscale(100%)',
-          transition: { duration: isMe ? 0.45 : 0.65 },
+          transition: { duration: isMe ? 0.45 : 0.55 },
         },
       }}
       initial={'show'}
@@ -199,11 +200,15 @@ export const AboutSlide = React.memo(
           <AnimatePresence>
             {contactSlide && (
               <motion.div
-                initial={{ opacity: 0, x: 500 }}
+                initial={{ opacity: 0, x: 40 }}
                 animate={{
                   opacity: 1,
                   x: '-50%',
-                  transition: { duration: 0.45, delay: 0.2 },
+                  transition: {
+                    duration: 0.6,
+                    delay: 0.1,
+                    ease: 'anticipate',
+                  },
                 }}
                 exit={{
                   opacity: 0,
@@ -271,14 +276,14 @@ export const AboutSlide = React.memo(
           <motion.div
             className='row'
             style={{
-              gap: 17,
+              gap: 10,
               // position: 'absolute',
 
               // marginTop: 290,
               // marginLeft: -50,
               zIndex: 200,
               marginTop: 'auto',
-              marginBottom: 20,
+              marginBottom: 15,
             }}
           >
             {languages.map((lang) => (
