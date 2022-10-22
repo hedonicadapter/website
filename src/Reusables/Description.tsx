@@ -16,7 +16,6 @@ type DescriptionProps = {
   hovered: boolean;
   setHovered: (bool: boolean) => void;
   expanded: boolean;
-  setExpanded: (bool: boolean) => void;
   animationController: AnimationControls;
 };
 
@@ -27,23 +26,8 @@ const Description = ({
   hovered,
   setHovered,
   expanded,
-  setExpanded,
   animationController,
 }: DescriptionProps) => {
-  const onClickHandler = async () => {
-    animationController.start({
-      width: 0,
-      transition: {
-        delay: 0.2,
-        duration: 0.25,
-        ease: [0.1, 0.98, 0, 0.99],
-        // origin: 1,
-      },
-    });
-
-    setExpanded(true);
-  };
-
   return (
     <motion.div
       onHoverStart={() => setHovered(true)}
@@ -51,7 +35,6 @@ const Description = ({
     >
       <div
         onClick={() => {
-          onClickHandler();
           setHovered(false);
         }}
         className={

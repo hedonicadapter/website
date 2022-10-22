@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import { isMobile } from 'react-device-detect';
 import { Skills } from './Skills';
@@ -8,7 +8,7 @@ import card1 from '../assets/card1.png';
 import card2 from '../assets/card2.png';
 
 import Description from './Description';
-import SmallArrow from './SmallArrow';
+import SmallArrow, { arrowOnClickHandler } from './SmallArrow';
 import ExpansionWrapper from './ExpansionWrapper';
 import Phone from './Phone';
 
@@ -76,20 +76,8 @@ const Roubine = () => {
   const [phoneHovered, setPhoneHovered] = useState(0);
 
   const animationController = useAnimationControls();
-  const animationControllerForHeaderArrow = useAnimationControls();
-
-  const arrowOnClickHandler = async () => {
-    animationController.start({
-      width: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.1, 0.98, 0, 0.99],
-        // origin: 1,
-      },
-    });
-
-    setExpanded(false);
-  };
+  // Separate controller so the big arrow doesn't grow right before fading out just because the small arrow grows
+  const smallArrowAnimationController = useAnimationControls();
 
   useEffect(() => {
     //so that if you close expansion when the second phone is hovered, the filters dont persist
@@ -102,7 +90,10 @@ const Roubine = () => {
       exit={{ opacity: 0.15, filter: 'blur(2px) grayscale(70%)' }}
       whileInView={{ opacity: 1, filter: 'blur(0px) grayscale(0%)' }}
       viewport={{ amount: 0.5 }}
-      onViewportLeave={() => setExpanded(false)}
+      onViewportLeave={() =>
+        expanded &&
+        arrowOnClickHandler(false, setExpanded, smallArrowAnimationController)
+      }
       transition={{ duration: 0.15 }}
       className='roubine'
     >
@@ -121,7 +112,13 @@ const Roubine = () => {
                 className='no-select'
                 onClick={(evt) => {
                   evt.stopPropagation();
-                  setExpanded(!expanded);
+                  arrowOnClickHandler(
+                    !expanded,
+                    setExpanded,
+                    expanded
+                      ? smallArrowAnimationController
+                      : animationController
+                  );
                 }}
               >
                 <h1>Roubine</h1>
@@ -135,18 +132,32 @@ const Roubine = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 style={{ width: 85 }}
-                onClick={() => arrowOnClickHandler()}
+                onClick={() =>
+                  arrowOnClickHandler(
+                    false,
+                    setExpanded,
+                    smallArrowAnimationController
+                  )
+                }
               >
                 <SmallArrow
                   hovered={notExpandedHovered}
                   expanded={expanded}
-                  animationController={animationControllerForHeaderArrow}
+                  animationController={smallArrowAnimationController}
                 />
               </motion.div>
             )}
           </AnimatePresence>
         </div>
-        <div onClick={() => setExpanded(!expanded)}>
+        <div
+          onClick={() =>
+            arrowOnClickHandler(
+              false,
+              setExpanded,
+              expanded ? smallArrowAnimationController : animationController
+            )
+          }
+        >
           <HoverWrapper
             hovered={phoneHovered === 0}
             setHovered={() => setPhoneHovered(0)}
@@ -195,7 +206,13 @@ const Roubine = () => {
             },
             hide: { opacity: 0, x: 40, transition: { duration: 0.25 } },
           }}
-          onClick={() => setExpanded(false)}
+          onClick={() =>
+            arrowOnClickHandler(
+              false,
+              setExpanded,
+              expanded ? smallArrowAnimationController : animationController
+            )
+          }
           style={{ cursor: expanded ? 'pointer' : 'auto' }}
         >
           <HoverWrapper
@@ -228,6 +245,9 @@ const Roubine = () => {
                 <motion.div
                   onHoverStart={() => setNotExpandedHovered(true)}
                   onHoverEnd={() => setNotExpandedHovered(false)}
+                  onClick={() =>
+                    arrowOnClickHandler(true, setExpanded, animationController)
+                  }
                 >
                   <Description
                     links={[{ title: 'github', url: 'www.google.com' }]}
@@ -242,7 +262,6 @@ const Roubine = () => {
                     hovered={notExpandedHovered}
                     setHovered={setNotExpandedHovered}
                     expanded={expanded}
-                    setExpanded={setExpanded}
                     animationController={animationController}
                   />
                 </motion.div>

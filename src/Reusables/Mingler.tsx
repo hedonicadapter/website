@@ -8,7 +8,7 @@ import '../styles/Mingler.css';
 import frame from '../assets/frame.png';
 import Description from './Description';
 import Links from './Links';
-import SmallArrow from './SmallArrow';
+import SmallArrow, { arrowOnClickHandler } from './SmallArrow';
 import ExpansionWrapper from './ExpansionWrapper';
 
 const minglerLinks = [
@@ -128,28 +128,15 @@ const Mingler = () => {
     setTimelineItemClicked(index);
   };
 
-  const arrowOnClickHandler = async () => {
-    if (!animationController) return;
-
-    animationController.start({
-      width: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.1, 0.98, 0, 0.99],
-        // origin: 1,
-      },
-    });
-
-    setExpanded(false);
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0.15, filter: 'blur(2px) grayscale(70%)' }}
       exit={{ opacity: 0.15, filter: 'blur(2px) grayscale(70%)' }}
       whileInView={{ opacity: 1, filter: 'blur(0px) grayscale(0%)' }}
       viewport={{ amount: 0.5 }}
-      onViewportLeave={() => setExpanded(false)}
+      onViewportLeave={() =>
+        expanded && arrowOnClickHandler(false, setExpanded, animationController)
+      }
       transition={{ duration: 0.15 }}
       className='mingler'
     >
@@ -157,7 +144,9 @@ const Mingler = () => {
         <div className='mingler-header'>
           <MinglerTitle
             setHovered={setNotExpandedHovered}
-            setExpanded={() => setExpanded(!expanded)}
+            setExpanded={() =>
+              arrowOnClickHandler(!expanded, setExpanded, animationController)
+            }
           />
 
           <motion.div
@@ -235,15 +224,20 @@ const Mingler = () => {
       <AnimatePresence exitBeforeEnter>
         {!expanded ? (
           <ExpansionWrapper key={0}>
-            <Description
-              links={minglerLinks}
-              descriptionText='Chat and share your digital life with friends.'
-              hovered={notExpandedHovered}
-              setHovered={setNotExpandedHovered}
-              expanded={expanded}
-              setExpanded={setExpanded}
-              animationController={animationController}
-            />
+            <motion.div
+              onClick={() =>
+                arrowOnClickHandler(true, setExpanded, animationController)
+              }
+            >
+              <Description
+                links={minglerLinks}
+                descriptionText='Chat and share your digital life with friends.'
+                hovered={notExpandedHovered}
+                setHovered={setNotExpandedHovered}
+                expanded={expanded}
+                animationController={animationController}
+              />
+            </motion.div>
           </ExpansionWrapper>
         ) : (
           <ExpansionWrapper key={1}>
@@ -253,7 +247,9 @@ const Mingler = () => {
                 className='row small-arrow-and-links-container'
               >
                 <div
-                  onClick={() => arrowOnClickHandler()}
+                  onClick={() =>
+                    arrowOnClickHandler(false, setExpanded, animationController)
+                  }
                   style={{ marginLeft: 38, marginTop: 10, width: 110 }}
                 >
                   <SmallArrow

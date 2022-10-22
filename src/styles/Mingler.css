@@ -96,7 +96,6 @@ a:active {
 }
 .small-arrow-container {
   height: 40px;
-  /* position: relative; */
   display: flex;
   flex-direction: row;
   align-items: center;

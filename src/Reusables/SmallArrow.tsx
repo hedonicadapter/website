@@ -1,5 +1,26 @@
 import { AnimationControls, motion } from 'framer-motion';
-import { useEffect } from 'react';
+import { SetStateAction, useEffect } from 'react';
+
+export const arrowOnClickHandler = async (
+  expand: SetStateAction<boolean>,
+  setExpanded: (val: SetStateAction<boolean>) => void,
+  animationController: AnimationControls
+) => {
+  await animationController.start({
+    width: 0,
+    transition: {
+      duration: 0.25,
+      ease: [0.1, 0.98, 0, 0.99],
+      delay: expand ? 0 : 0.2,
+    },
+  });
+  animationController.start({
+    opacity: 0,
+    transition: { duration: 0.2 },
+  });
+
+  setExpanded(expand);
+};
 
 type SmallArrowProps = {
   leftToRight?: boolean;
@@ -15,18 +36,17 @@ const SmallArrow = ({
   animationController,
 }: SmallArrowProps) => {
   useEffect(() => {
-    expanded &&
-      animationController &&
-      animationController.start({
-        width: 'auto',
-        opacity: 1,
-        transition: {
-          delay: 0.25,
-          duration: 0.5,
-          ease: [0.1, 0.98, 0, 0.99],
-          // origin: 1,
-        },
-      });
+    if (!expanded || !animationController) return;
+
+    animationController.start({
+      width: 'auto',
+      opacity: 1,
+      transition: {
+        delay: 0.25,
+        duration: 0.5,
+        ease: [0.1, 0.98, 0, 0.99],
+      },
+    });
   }, [expanded, animationController]);
 
   return (
@@ -49,7 +69,6 @@ const SmallArrow = ({
           delay: 0.15,
           duration: 1.85,
           ease: [0.1, 0.98, 0, 0.99],
-          // origin: 1,
         }}
         className='small-arrow-container'
       >
