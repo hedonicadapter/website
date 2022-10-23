@@ -60,8 +60,8 @@ const RoubineCard = ({
     transition={{ duration: 0.15 }}
     className={`roubine-card ${secondPhone ? ' second' : ' first'}`}
   >
-    <p style={{ marginBottom: 14 }}>{title}</p>
-    {body}
+    <h3>{title}</h3>
+    <p>{body}</p>
     <img
       src={secondPhone ? card2 : card1}
       alt='Graphic of a mascot called Ruby from Roubine'
@@ -183,9 +183,9 @@ const Roubine = () => {
                             fontSize: '0.9em',
                           }}
                         >
-                          <li style={{ marginBlock: 8 }}>don't be a busta</li>
-                          <li style={{ marginBlock: 8 }}>secure the bag</li>
-                          <li style={{ marginBlock: 8 }}>check gmail</li>
+                          <li>don't be a busta</li>
+                          <li>secure the bag</li>
+                          <li>check gmail</li>
                         </ul>
                       }
                     />
