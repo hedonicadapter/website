@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import { isMobile } from 'react-device-detect';
 import { Skills } from './Skills';
@@ -250,7 +250,12 @@ const Roubine = () => {
                   }
                 >
                   <Description
-                    links={[{ title: 'github', url: 'www.google.com' }]}
+                    links={[
+                      {
+                        title: 'github',
+                        url: 'https://github.com/hedonicadapter/Roubinous',
+                      },
+                    ]}
                     descriptionText={
                       <>
                         Create

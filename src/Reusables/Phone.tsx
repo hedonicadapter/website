@@ -1,13 +1,7 @@
 import * as THREE from 'three';
-import { SetStateAction, Suspense } from 'react';
+import { Suspense } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
-import {
-  Bounds,
-  Environment,
-  OrbitControls,
-  useGLTF,
-  useVideoTexture,
-} from '@react-three/drei';
+import { Environment, useGLTF, useVideoTexture } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { useSpring, animated, easings } from '@react-spring/three';
 
@@ -49,10 +43,8 @@ export default function Phone({
   expanded: Boolean;
   secondPhone?: Boolean;
 }) {
-  // const { nodes, materials } = useGLTF('/phone.glb');
   const { nodes, materials } = useGLTF('/new.glb');
 
-  // useGLTF.preload('/phone.glb');
   useGLTF.preload('/new.glb');
   return (
     <Canvas

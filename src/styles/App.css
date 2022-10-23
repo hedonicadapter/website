@@ -39,16 +39,6 @@
 }
 
 @font-face {
-  font-family: 'DMSerifText-Regular';
-  src: local('DMSerifText-Regular'),
-    url(../assets/fonts/DMSerifText-Regular.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'DMSerifText-Italic';
-  src: local('DMSerifText-Italic'),
-    url(../assets/fonts/DMSerifText-Italic.ttf) format('truetype');
-}
-@font-face {
   font-family: 'CormorantGaramond-Light';
   src: local('CormorantGaramond-Light'),
     url(../assets/fonts/CormorantGaramond-Light.ttf) format('truetype');

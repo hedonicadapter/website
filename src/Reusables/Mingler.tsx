@@ -1,18 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
-import { minglerStack, minglerTimelineEvents, whileTap } from '../Globals';
+import { minglerStack, minglerTimelineEvents } from '../Globals';
 import { Skills } from './Skills';
 import Timeline from './Timeline';
 import Textbox from './Textbox';
 import '../styles/Mingler.css';
-import frame from '../assets/frame.png';
 import Description from './Description';
 import Links from './Links';
 import SmallArrow, { arrowOnClickHandler } from './SmallArrow';
 import ExpansionWrapper from './ExpansionWrapper';
 
 const minglerLinks = [
-  { title: 'github', url: 'www.google.com' },
+  { title: 'github', url: 'https://github.com/hedonicadapter/Mingler' },
   { title: 'download', url: 'www.google.com' },
 ];
 
@@ -23,55 +22,6 @@ const MinglerTitle = ({
   setHovered: (bool: boolean) => void;
   setExpanded: () => void;
 }) => {
-  const [titleIndex, setTitleIndex] = useState(0);
-  const [shownOnce, setShownOnce] = useState(false);
-
-  type SubTitleProps = { subtitle: string; style?: { fontSize: string } };
-  const Subtitle = ({ subtitle, style }: SubTitleProps) => (
-    <div
-      style={{
-        fontSize: 'max(1.2em, 1.9vw)',
-        marginBottom: -6,
-        ...style,
-      }}
-    >
-      {subtitle}
-    </div>
-  );
-
-  const titles = [
-    <div
-      style={{
-        fontSize: 'max(2.4em, 7vw)',
-        marginBottom: 'min(-1.78vw, -20px)',
-      }}
-    >
-      Mingler
-    </div>,
-    <Subtitle subtitle='Share activities' />,
-    <Subtitle subtitle='Talk to friends' />,
-  ];
-
-  useEffect(() => {
-    if (shownOnce) return;
-
-    if (titleIndex === titles.length - 1) {
-      setShownOnce(true);
-    }
-
-    const timeout = setTimeout(
-      () => {
-        setTitleIndex((prevState) => {
-          if (prevState === titles.length - 1) return 0;
-          return prevState + 1;
-        });
-      },
-      titleIndex === 0 ? 3500 : 2000
-    );
-
-    return () => clearTimeout(timeout);
-  }, [titleIndex]);
-
   return (
     <motion.a
       onHoverStart={() => setHovered(true)}
@@ -84,18 +34,16 @@ const MinglerTitle = ({
       }}
       className='no-select'
     >
-      <motion.h1 transition={{ duration: 0.15 }}>
-        <AnimatePresence exitBeforeEnter>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            key={titleIndex}
-          >
-            {titles[titleIndex]}
-          </motion.div>
-        </AnimatePresence>
-      </motion.h1>
+      <h1>
+        <div
+          style={{
+            fontSize: 'max(2.4em, 7vw)',
+            marginBottom: 'min(-1.78vw, -20px)',
+          }}
+        >
+          Mingler
+        </div>
+      </h1>
     </motion.a>
   );
 };
@@ -191,6 +139,7 @@ const Mingler = () => {
                     <i>PROTOTYPE</i>✨ try me
                   </h5>
                   <iframe
+                    title='First interactive protototype created for Mingler'
                     height='100%'
                     src={firstMinglerPrototype}
                     allowFullScreen
@@ -209,6 +158,7 @@ const Mingler = () => {
                   transition={{ duration: 0.25 }}
                 >
                   <iframe
+                    title='Interactive figma replica of the final version of Mingler'
                     height='100%'
                     src={productionReplica}
                     allowFullScreen
