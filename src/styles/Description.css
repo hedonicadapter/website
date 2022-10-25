@@ -10,8 +10,8 @@
   cursor: pointer;
   justify-content: flex-start;
   padding-left: 30px;
-  padding-right: 10px;
-  width: 18vw;
+  /* padding-right: 10px; */
+  width: 19vw;
   font-weight: 100;
   font-family: 'Inter-Thin';
 }

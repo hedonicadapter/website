@@ -6,7 +6,8 @@
   top: 0;
 
   font-family: 'CormorantGaramond-Light';
-  padding-left: 60px;
+  /* padding-left: 60px; */
+  padding-left: clamp(10px, 4vw, 60px);
 }
 
 .about-container a {
@@ -16,6 +17,7 @@
 
 .about-header {
   padding-top: 15px;
+  padding-bottom: 5px;
 }
 
 .about-container h1 {

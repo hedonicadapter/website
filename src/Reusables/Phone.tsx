@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import { Environment, useGLTF, useVideoTexture } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
@@ -39,11 +39,17 @@ type GLTFResult = GLTF & {
 export default function Phone({
   expanded,
   secondPhone = false,
+  play,
 }: {
-  expanded: Boolean;
-  secondPhone?: Boolean;
+  expanded: boolean;
+  secondPhone?: boolean;
+  play: boolean;
 }) {
   const { nodes, materials } = useGLTF('/new.glb');
+
+  useEffect(() => {
+    console.log({ play });
+  }, [play]);
 
   useGLTF.preload('/new.glb');
   return (
@@ -61,12 +67,12 @@ export default function Phone({
       <Environment preset='apartment' />
       {/* studio or apartment or warehouse */}
       <Suspense fallback={null}>
-        {/* <Model nodes={nodes} materials={materials} expanded={expanded} /> */}
         <Model
           nodes={nodes}
           materials={materials}
           expanded={expanded}
           secondPhone={secondPhone}
+          play={play}
         />
       </Suspense>
     </Canvas>
@@ -78,11 +84,13 @@ function Model({
   materials,
   expanded,
   secondPhone,
+  play,
 }: {
   nodes: any;
   materials: any;
-  expanded: Boolean;
-  secondPhone: Boolean;
+  expanded: boolean;
+  secondPhone: boolean;
+  play: boolean;
 }) {
   const { viewport } = useThree();
 
@@ -103,20 +111,14 @@ function Model({
 
   return (
     <animated.group
-      // position={[2, -3.59, 0]}
-      // scale={0.09}
       scale={viewport.width / 11}
       position={position as any}
-      // position={[0, -0.15, 0]}
-      // scale={0.004}
       dispose={null}
     >
-      {/* <Bounds margin={0}> */}
       <animated.group
         rotation={rotation as any}
         scale={scale as any}
         name='Sketchfab_model'
-        // position={[0, -2.59, 2.42]}
       >
         <group name='IP12PROfbx' rotation={[Math.PI / 2, 0, 0]}>
           <group
@@ -328,7 +330,7 @@ function Model({
               material-color={0x000000}
               // material={materials.Wallpaper}
             >
-              <VideoMaterial url={url} />
+              <VideoMaterial url={url} play={play} />
             </mesh>
             <mesh
               name='Apple_Logo_Logo_0'
@@ -438,15 +440,17 @@ function Model({
           </group>
         </group>
       </animated.group>
-      {/* </Bounds> */}
     </animated.group>
   );
 }
 
-function VideoMaterial({ url }: { url: string }) {
-  const texture = useVideoTexture(url, {});
-  // texture.wrapS = THREE.RepeatWrapping;
-  // texture.repeat.x = -1;
+function VideoMaterial({ url, play }: { url: string; play: boolean }) {
+  const texture = useVideoTexture(url, { loop: true, preload: 'metadata' });
+
+  useEffect(() => {
+    play ? texture.source.data.play() : texture.source.data.pause();
+  }, [play, texture.source.data]);
+
   return (
     <mesh
       name='Busta'

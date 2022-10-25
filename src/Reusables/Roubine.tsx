@@ -72,6 +72,8 @@ const RoubineCard = ({
 const Roubine = () => {
   const [notExpandedHovered, setNotExpandedHovered] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [firstPhonePlay, setFirstPhonePlay] = useState(false);
+  const [secondPhonePlay, setSecondPhonePlay] = useState(false);
 
   const [phoneHovered, setPhoneHovered] = useState(0);
 
@@ -84,16 +86,42 @@ const Roubine = () => {
     if (!expanded) setPhoneHovered(0);
   }, [expanded]);
 
+  useEffect(() => {
+    if (phoneHovered) {
+      // phoneHovered === 1 === true === second phone is hovered
+      setFirstPhonePlay(false);
+      setSecondPhonePlay(true);
+    } else {
+      // phoneHovered === 0 === false === first phone is hovered
+      setFirstPhonePlay(true);
+      setSecondPhonePlay(false);
+    }
+  }, [phoneHovered]);
+
+  useEffect(() => {
+    console.log({ firstPhonePlay });
+    console.log({ secondPhonePlay });
+  }, [firstPhonePlay, secondPhonePlay]);
+
   return (
     <motion.div
       initial={{ opacity: 0.15, filter: 'blur(2px) grayscale(70%)' }}
       exit={{ opacity: 0.15, filter: 'blur(2px) grayscale(70%)' }}
       whileInView={{ opacity: 1, filter: 'blur(0px) grayscale(0%)' }}
       viewport={{ amount: 0.5 }}
-      onViewportLeave={() =>
+      onViewportLeave={() => {
         expanded &&
-        arrowOnClickHandler(false, setExpanded, smallArrowAnimationController)
-      }
+          arrowOnClickHandler(
+            false,
+            setExpanded,
+            smallArrowAnimationController
+          );
+        setFirstPhonePlay(false);
+        setSecondPhonePlay(false);
+      }}
+      onViewportEnter={() => {
+        setFirstPhonePlay(true);
+      }}
       transition={{ duration: 0.15 }}
       className='roubine'
     >
@@ -152,7 +180,7 @@ const Roubine = () => {
         <div
           onClick={() =>
             arrowOnClickHandler(
-              false,
+              !expanded,
               setExpanded,
               expanded ? smallArrowAnimationController : animationController
             )
@@ -168,7 +196,7 @@ const Roubine = () => {
                 onHoverEnd={() => setNotExpandedHovered(false)}
                 className='first-phone-container'
               >
-                <Phone expanded={expanded} />
+                <Phone expanded={expanded} play={firstPhonePlay} />
               </motion.div>
               <AnimatePresence>
                 {expanded && (
@@ -232,7 +260,11 @@ const Roubine = () => {
                 onHoverEnd={() => setNotExpandedHovered(false)}
                 className='second-phone-container'
               >
-                <Phone expanded={false} secondPhone={true} />
+                <Phone
+                  expanded={false}
+                  secondPhone={true}
+                  play={secondPhonePlay}
+                />
               </motion.div>
             </>
           </HoverWrapper>

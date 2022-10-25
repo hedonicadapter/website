@@ -8,8 +8,8 @@ const recent = 0.86;
 const old = 0.6;
 const oldest = 0.38;
 
-export const linkedInLink = 'https://www.linkedin.com/in/sam-herman-950a50a7';
-export const githubLink = 'https://github.com/YungMilky';
+export const linkedInLink = 'https://www.linkedin.com/in/sam-herman/';
+export const githubLink = 'https://github.com/hedonicadapter';
 
 export const ReactIcon = () => (
   <RiReactjsLine style={{ marginTop: -1, marginRight: -4 }} size={23} />

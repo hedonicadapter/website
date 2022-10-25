@@ -125,15 +125,32 @@ export const AboutSlide = React.memo(
                       // fontSize: 80 / ((index + 1) * 0.8),
                       fontSize:
                         index === 0
-                          ? 90
+                          ? 'max(6vw, 2.5em)'
                           : index === 1
-                          ? 55
+                          ? 'max(4vw, 1.8em)'
                           : index === 2
-                          ? 45
+                          ? 'max(3vw, 1.4em)'
                           : 0,
+                      // fontSize:
+                      //   index === 0
+                      //     ? 90
+                      //     : index === 1
+                      //     ? 55
+                      //     : index === 2
+                      //     ? 45
+                      //     : 0,
+                      lineHeight:
+                        index === 0
+                          ? 'max(5.5vw, 40px)'
+                          : index === 1
+                          ? 'max(4vw, 35px)'
+                          : index === 2
+                          ? 'max(2.5vw, 20px)'
+                          : '1vw',
                       padding: 0,
                       margin: 0,
-                      paddingBlock: 1 / ((index + 1) * 1.8),
+
+                      // paddingBlock: 1 / ((index + 1) * 6),
                     }}
                   >
                     {value}
