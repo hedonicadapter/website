@@ -39,7 +39,7 @@ const MenuItem = ({
           initial={{ opacity: 0, x: direction === 'left' ? 80 : -80 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: direction === 'left' ? -80 : 80 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.35 }}
           whileHover={{ opacity: 0.9, transition: { duration: 0.1 } }}
           whileTap={{ opacity: 0.7, transition: { duration: 0.1 } }}
           className='header-menu-item no-select'
