@@ -9,8 +9,9 @@
 .timeline-dot-container {
   font-family: 'CormorantGaramond-Light';
 
-  width: 35px;
-  /* margin-inline: -20px; */
+  /* width: 35px; */
+  width: clamp(20px, 2.2vw, 42px);
+
   align-items: center;
   color: var(--on-surface);
 }
@@ -29,7 +30,8 @@
   left: 0;
   right: 0;
   margin: 0 auto;
-  width: 290px;
+  /* width: 290px; */
+  width: clamp(158px, 20vw, 384px);
   position: absolute;
   margin-top: 37px;
 }

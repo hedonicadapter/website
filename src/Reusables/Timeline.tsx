@@ -97,6 +97,30 @@ const Dots = ({ timelineEvent, hovered, clicked, firstOrLast }: DotsProps) => {
   );
 };
 
+const dotsContainerVariants = {
+  hide: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      duration: 0.15,
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const dotVariants = {
+  hide: {
+    opacity: 0,
+    scale: 0,
+    transition: { type: 'spring', mass: 0.5, duration: 0.15 },
+  },
+  show: {
+    opacity: 1,
+    scale: 1,
+    transition: { type: 'spring', mass: 0.5, duration: 0.15 },
+  },
+};
+
 type TimelineProps = {
   timelineEvents: TimelineEvent[];
   hovered: number;
@@ -111,30 +135,6 @@ const Timeline = ({
   timelineItemClicked,
   timelineItemClickHandler,
 }: TimelineProps) => {
-  const dotsContainerVariants = {
-    hide: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        duration: 0.15,
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const dotVariants = {
-    hide: {
-      opacity: 0,
-      scale: 0,
-      transition: { type: 'spring', mass: 0.5, duration: 0.15 },
-    },
-    show: {
-      opacity: 1,
-      scale: 1,
-      transition: { type: 'spring', mass: 0.5, duration: 0.15 },
-    },
-  };
-
   return (
     <motion.div
       variants={dotsContainerVariants}

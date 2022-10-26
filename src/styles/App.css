@@ -161,44 +161,18 @@ header {
 
 .header-menu-item {
   z-index: 2;
-  margin-top: 35vh;
+  margin-top: 44vh;
   color: var(--on-background);
   font-size: 1.4rem;
   letter-spacing: -0.08rem;
   font-family: 'Inter-Thin', Arial, Helvetica, sans-serif;
   cursor: pointer;
-  padding: 3rem;
-}
-
-.header-menu-content-space-maker {
-  width: 40vw;
-  max-width: 780px;
-  min-width: 312px;
-  height: 100vh;
-  display: flex;
+  /* padding: 3rem; */
+  padding-inline: 1.6em;
 }
 
 .testone {
   background-color: var(--surface);
-}
-.test {
-  /* background-color: var(--surface); */
-  /* mix-blend-mode: normal; */
-  /* mix-blend-mode: multiply; */
-  /* mix-blend-mode: screen; */
-  /* mix-blend-mode: overlay; */
-  /* mix-blend-mode: darken; */
-  /* mix-blend-mode: lighten; */
-  /* mix-blend-mode: color-dodge; */
-  /* mix-blend-mode: color-burn; */
-  /* mix-blend-mode: hard-light; */
-  /* mix-blend-mode: soft-light; */
-  /* mix-blend-mode: difference; */
-  /* mix-blend-mode: exclusion; */
-  /* mix-blend-mode: hue; */
-  /* mix-blend-mode: saturation; */
-  /* mix-blend-mode: color; */
-  /* mix-blend-mode: luminosity; */
 }
 
 .header-menu-content {
@@ -214,6 +188,14 @@ header {
   box-sizing: border-box; /* Opera/IE 8+ */
 
   overflow-x: hidden;
+}
+
+.header-menu-content-space-maker {
+  width: 40vw;
+  max-width: 780px;
+  min-width: 312px;
+  height: 100vh;
+  display: flex;
 }
 
 ::-webkit-scrollbar {

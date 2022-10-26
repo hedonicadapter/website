@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
+  AnimatePresence,
   AnimateSharedLayout,
   motion,
   useAnimationControls,
@@ -16,6 +17,7 @@ const menuItems = ['projects', 'about', 'contact'];
 type MenuItemProps = {
   text: string;
   expanded: number;
+  direction: string;
   handleMenuItemOnclick: (menuItem: number) => void;
   children: JSX.Element;
 };
@@ -23,20 +25,21 @@ type MenuItemProps = {
 const MenuItem = ({
   text,
   expanded,
+  direction,
   handleMenuItemOnclick,
   children,
 }: MenuItemProps) => {
   let expandedItem = menuItems.indexOf(text);
 
   return (
-    <>
+    <AnimatePresence exitBeforeEnter>
       {expanded !== expandedItem && (
         <motion.a
           layout='position'
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.25 }}
+          initial={{ opacity: 0, x: direction === 'left' ? 80 : -80 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: direction === 'left' ? -80 : 80 }}
+          transition={{ duration: 0.5 }}
           whileHover={{ opacity: 0.9, transition: { duration: 0.1 } }}
           whileTap={{ opacity: 0.7, transition: { duration: 0.1 } }}
           className='header-menu-item no-select'
@@ -48,15 +51,12 @@ const MenuItem = ({
       {expanded === expandedItem && (
         <motion.div
           layout='position'
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
           onClick={() => handleMenuItemOnclick(expandedItem)}
         >
           {children}
         </motion.div>
       )}
-    </>
+    </AnimatePresence>
   );
 };
 
@@ -125,6 +125,7 @@ const Slider = ({ expanded }: SliderProps) => {
             expanded === 0
               ? 'translateX(0%)'
               : 'translateX(max(-40vw, -780px))', // same size as slide-wrapper
+          // : 'translateX(max(-40vw, -780px))', // same size as slide-wrapper
         }}
       >
         <ProjectsSlide />
@@ -138,6 +139,7 @@ const Slider = ({ expanded }: SliderProps) => {
 
 function App() {
   const [expanded, setExpanded] = useState(0);
+  const [previousExpanded, setPreviousExpanded] = useState(0);
   const [scroll, setScroll] = useState(0);
   const [sliderContainerHovered, setSliderContainerHovered] = useState(false);
 
@@ -192,12 +194,18 @@ function App() {
   // }, [expanded]);
 
   const handleMenuItemOnclick = (menuItem: number) => {
-    if (menuItem === 0) controls.start({ x: -180 });
-    else if (menuItem === 1) controls.start({ x: 10 });
-    else if (menuItem === 2) controls.start({ x: 188 });
+    if (menuItem === 0) controls.start({ x: -150 });
+    else if (menuItem === 1) controls.start({ x: 0 });
+    else if (menuItem === 2) controls.start({ x: 158 });
+    // if (menuItem === 0) controls.start({ x: -180 });
+    // else if (menuItem === 1) controls.start({ x: 10 });
+    // else if (menuItem === 2) controls.start({ x: 188 });
 
     // if (expanded === menuItem) return setExpanded(-1);
-    setExpanded(menuItem);
+    setExpanded((prevState) => {
+      setPreviousExpanded(prevState);
+      return menuItem;
+    });
   };
 
   return (
@@ -207,6 +215,7 @@ function App() {
           {menuItems.map((item) => (
             <MenuItem
               expanded={expanded}
+              direction={previousExpanded < expanded ? 'left' : 'right'}
               key={item}
               text={item}
               handleMenuItemOnclick={handleMenuItemOnclick}
