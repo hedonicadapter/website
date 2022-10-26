@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import placeHolderguy from '../assets/placeholderGuy.png';
-import { Card } from '../Reusables/Card';
+import placeHolderguy from '../assets/placeholderGuy.webp';
 import { SlideWrapper } from '../Reusables/SlideWrapper';
-import { Skills } from '../Reusables/Skills';
 import { githubLink, languages, linkedInLink } from '../Globals';
 import '../styles/AboutSlide.css';
 import { BsGithub, BsLinkedin, BsPhoneFill } from 'react-icons/bs';
+import { SiMaildotru } from 'react-icons/si';
 
 const paragraphs = [
   `Mauris tempus nulla a purus vulputate cursus. Vestibulum at eros condimentum, dictum dui sit amet, porta augue. Lorem ipsum dolor sit amet. Mauris tempus nulla a purus vulputate cursus. Vestibulum at eros condimentum, dictum dui sit amet, porta augue. Lorem ipsum dolor sit amet. Mauris tempus nulla a purus vulputate cursus. Vestibulum at eros condimentum, dictum dui sit amet, porta augue. Lorem ipsum dolor sit amet.`,
@@ -122,7 +121,6 @@ export const AboutSlide = React.memo(
                     viewport={{ once: true }}
                     transition={{ duration: 0.15 }}
                     style={{
-                      // fontSize: 80 / ((index + 1) * 0.8),
                       fontSize:
                         index === 0
                           ? 'max(6vw, 2.5em)'
@@ -131,14 +129,6 @@ export const AboutSlide = React.memo(
                           : index === 2
                           ? 'max(3vw, 1.4em)'
                           : 0,
-                      // fontSize:
-                      //   index === 0
-                      //     ? 90
-                      //     : index === 1
-                      //     ? 55
-                      //     : index === 2
-                      //     ? 45
-                      //     : 0,
                       lineHeight:
                         index === 0
                           ? 'max(5.5vw, 40px)'
@@ -149,8 +139,6 @@ export const AboutSlide = React.memo(
                           : '1vw',
                       padding: 0,
                       margin: 0,
-
-                      // paddingBlock: 1 / ((index + 1) * 6),
                     }}
                   >
                     {value}
@@ -160,7 +148,7 @@ export const AboutSlide = React.memo(
               <div className='row peepoTalks'>
                 {paragraphs.map((item, index) => (
                   <motion.div
-                    style={{ marginTop: index - index * 40 }}
+                    style={{ marginTop: index - index * 42 }}
                     initial={{ opacity: 0 }}
                     whileInView={{
                       opacity: 1,
@@ -210,8 +198,10 @@ export const AboutSlide = React.memo(
               <img
                 alt='Sam Herman'
                 src={placeHolderguy}
-                width='780'
-                height='690'
+                // width='780'
+                // height='690'
+                width='100%'
+                // height='100%'
               />
             </AnimationWrapper>
           </div>
@@ -254,6 +244,10 @@ export const AboutSlide = React.memo(
                       </a>
                     ) : contactText === 'phone' ? (
                       <a href='tel:+46 736 26 02 31'>+46 736 26 02 31</a>
+                    ) : contactText === 'e-mail' ? (
+                      <a href='mailto:mailservice.samherman@gmail.com'>
+                        mailservice.samherman@gmail.com
+                      </a>
                     ) : (
                       contactText
                     )}
@@ -271,8 +265,9 @@ export const AboutSlide = React.memo(
                     text='github'
                     setContactText={setContactText}
                     link={githubLink}
+                    cssClass='more-icon-github'
                   >
-                    <BsGithub size={30} className='more-icon' />
+                    <BsGithub size={31} className='more-icon' />
                   </IconWrapper>
                   <IconWrapper
                     text='phone'
@@ -281,6 +276,14 @@ export const AboutSlide = React.memo(
                     cssClass='more-icon-phone'
                   >
                     <BsPhoneFill size={29} className='more-icon' />
+                  </IconWrapper>
+                  <IconWrapper
+                    text='e-mail'
+                    setContactText={setContactText}
+                    link='mailservice.samherman@gmail.com'
+                    cssClass='more-icon-e-mail'
+                  >
+                    <SiMaildotru size={29} className='more-icon' />
                   </IconWrapper>
                 </div>
               </motion.div>
@@ -291,23 +294,25 @@ export const AboutSlide = React.memo(
           condimentum, dictum dui sit amet, porta augue. Lorem ipsum dolor sit
           amet.
         </p> */}
-          <motion.div
-            className='row'
-            style={{
-              gap: 10,
-              // position: 'absolute',
+          <div style={{ marginTop: 'auto', marginBottom: 15 }}>
+            <AnimationWrapper contactSlide={contactSlide}>
+              <motion.div
+                className='row'
+                style={{
+                  gap: 10,
+                  // position: 'absolute',
 
-              // marginTop: 290,
-              // marginLeft: -50,
-              zIndex: 200,
-              marginTop: 'auto',
-              marginBottom: 15,
-            }}
-          >
-            {languages.map((lang) => (
-              <motion.div>{lang.icon}</motion.div>
-            ))}
-          </motion.div>
+                  // marginTop: 290,
+                  // marginLeft: -50,
+                  zIndex: 200,
+                }}
+              >
+                {languages.map((lang) => (
+                  <motion.div>{lang.icon}</motion.div>
+                ))}
+              </motion.div>
+            </AnimationWrapper>
+          </div>
           <svg
             id='svg'
             xmlns='http://www.w3.org/2000/svg'

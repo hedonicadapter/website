@@ -30,7 +30,18 @@
   position: absolute;
   z-index: 1;
   bottom: 0;
-  left: 25%;
+  /* left: 25%; */
+  left: -10%;
+  right: 50%;
+}
+.me img {
+  /* width: clamp(410px, 40.2vw, 760px); */
+  object-fit: contain;
+  object-position: bottom;
+  /* height: 72%; */
+  width: 72vw;
+
+  height: 72vh;
 }
 
 .peepoTalks {
@@ -56,23 +67,32 @@
   gap: 12px;
 
   font-family: 'Cormorant SC';
-  font-size: max(2.2vw, 2em);
+  font-size: max(1vw, 1.5em);
   z-index: 10;
   /* outline: 1px solid red; */
 }
 
 .more-text {
-  width: 300px;
+  width: 15vw;
   text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .more-icons {
-  height: 46px;
+  /* height: 48px; */
   display: flex;
   flex-direction: row;
   gap: 9px;
+  align-items: center;
+}
+.more-icon-github {
 }
 .more-icon-phone {
   margin-left: -4px;
+}
+.more-icon-e-mail {
+  margin-left: -5px;
 }
 .more-icon {
   margin-top: 9px;

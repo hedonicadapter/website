@@ -4,8 +4,8 @@ import { isMobile } from 'react-device-detect';
 import { Skills } from './Skills';
 import { roubineStack } from '../Globals';
 import '../styles/Roubine.css';
-import card1 from '../assets/card1.png';
-import card2 from '../assets/card2.png';
+import card1 from '../assets/card1.webp';
+import card2 from '../assets/card2.webp';
 
 import Description from './Description';
 import SmallArrow, { arrowOnClickHandler } from './SmallArrow';

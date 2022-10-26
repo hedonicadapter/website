@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
-  AnimatePresence,
   AnimateSharedLayout,
   motion,
   useAnimationControls,
@@ -179,13 +178,13 @@ function App() {
     });
   }, [scroll, sliderContainerRef]);
 
-  useEffect(() => {
-    controls.start({
-      scale: 1,
-      opacity: 1,
-      transition: { ease: 'circOut', duration: 0.5 },
-    });
-  }, []);
+  // useEffect(() => {
+  //   controls.start({
+  //     scale: 1,
+  //     opacity: 1,
+  //     transition: { ease: 'circOut', duration: 0.5 },
+  //   });
+  // }, []);
 
   // useEffect(() => {
   //   if (expanded === -1 || expanded === null)
@@ -221,7 +220,8 @@ function App() {
 
           <motion.div
             animate={controls}
-            initial={{ x: -180, scale: 0.8, opacity: 0 }}
+            // initial={{ x: -180, scale: 0.8, opacity: 0 }}
+            initial={{ x: -180 }}
             transition={{ duration: 0.45 }}
             className='header-menu-content'
             onMouseEnter={() => setSliderContainerHovered(true)}

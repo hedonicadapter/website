@@ -22,7 +22,7 @@ export const TypeScriptIcon = ({ drip }: { drip: string }) => (
       // transform: 'scale(1, 0.9) translateY(-22%)',
       color:
         drip === 'light' ? 'rgba(14, 14, 14, 1)' : 'rgba(255, 255, 255, 1)',
-      fontSize: '0.7em',
+      fontSize: '0.68em',
       fontWeight: 'bold',
       fontFamily: 'Inter-Medium',
       backgroundColor:
@@ -31,7 +31,7 @@ export const TypeScriptIcon = ({ drip }: { drip: string }) => (
 
       paddingBottom: 1,
       paddingLeft: 4,
-      paddingRight: 1,
+      paddingRight: 2,
       paddingTop: 4,
 
       marginTop: 1,

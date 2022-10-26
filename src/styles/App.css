@@ -39,31 +39,37 @@
 }
 
 @font-face {
+  font-display: swap;
   font-family: 'CormorantGaramond-Light';
   src: local('CormorantGaramond-Light'),
     url(../assets/fonts/CormorantGaramond-Light.ttf) format('truetype');
 }
 @font-face {
+  font-display: swap;
   font-family: 'Inter-Regular';
   src: local('Inter-Regular'),
     url(../assets/fonts/Inter-Regular.ttf) format('truetype');
 }
 @font-face {
+  font-display: swap;
   font-family: 'Inter-Medium';
   src: local('Inter-Medium'),
     url(../assets/fonts/Inter-Medium.ttf) format('truetype');
 }
 @font-face {
+  font-display: swap;
   font-family: 'Inter-Thin';
   src: local('Inter-Thin'),
     url(../assets/fonts/Inter-Thin.ttf) format('truetype');
 }
 @font-face {
+  font-display: swap;
   font-family: 'Inter-Light';
   src: local('Inter-Light'),
     url(../assets/fonts/Inter-Light.ttf) format('truetype');
 }
 @font-face {
+  font-display: swap;
   font-family: 'Inter-ExtraLight';
   src: local('Inter-ExtraLight'),
     url(../assets/fonts/Inter-ExtraLight.ttf) format('truetype');
