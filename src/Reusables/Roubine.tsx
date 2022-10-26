@@ -89,6 +89,8 @@ const Roubine = () => {
   }, [expanded]);
 
   useEffect(() => {
+    if (isMobile) return;
+
     if (phoneHovered) {
       // phoneHovered === 1 === true === second phone is hovered
       setFirstPhonePlay(false);
@@ -101,9 +103,11 @@ const Roubine = () => {
   }, [phoneHovered]);
 
   useEffect(() => {
-    console.log({ firstPhonePlay });
-    console.log({ secondPhonePlay });
-  }, [firstPhonePlay, secondPhonePlay]);
+    if (isMobile) {
+      setFirstPhonePlay(true);
+      setSecondPhonePlay(true);
+    }
+  }, []);
 
   return (
     <motion.div
