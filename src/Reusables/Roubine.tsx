@@ -6,6 +6,8 @@ import { roubineStack } from '../Globals';
 import '../styles/Roubine.css';
 import card1 from '../assets/card1.webp';
 import card2 from '../assets/card2.webp';
+import video1 from '../assets/roubineDemo.webm';
+import video2 from '../assets/Untitled.webm';
 
 import Description from './Description';
 import SmallArrow, { arrowOnClickHandler } from './SmallArrow';
@@ -196,7 +198,11 @@ const Roubine = () => {
                 onHoverEnd={() => setNotExpandedHovered(false)}
                 className='first-phone-container'
               >
-                <Phone expanded={expanded} play={firstPhonePlay} />
+                <Phone
+                  expanded={expanded}
+                  play={firstPhonePlay}
+                  video={video1}
+                />
               </motion.div>
               <AnimatePresence>
                 {expanded && (
@@ -264,6 +270,7 @@ const Roubine = () => {
                   expanded={false}
                   secondPhone={true}
                   play={secondPhonePlay}
+                  video={video2}
                 />
               </motion.div>
             </>

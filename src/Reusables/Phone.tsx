@@ -5,8 +5,6 @@ import { Environment, useGLTF, useVideoTexture } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import { useSpring, animated, easings } from '@react-spring/three';
 
-import url from '../assets/roubineDemo.webm';
-
 type GLTFResult = GLTF & {
   nodes: {
     Phone: THREE.Mesh;
@@ -40,10 +38,12 @@ export default function Phone({
   expanded,
   secondPhone = false,
   play,
+  video,
 }: {
   expanded: boolean;
   secondPhone?: boolean;
   play: boolean;
+  video: string;
 }) {
   const { nodes, materials } = useGLTF('/new.glb');
 
@@ -73,6 +73,7 @@ export default function Phone({
           expanded={expanded}
           secondPhone={secondPhone}
           play={play}
+          video={video}
         />
       </Suspense>
     </Canvas>
@@ -85,12 +86,14 @@ function Model({
   expanded,
   secondPhone,
   play,
+  video,
 }: {
   nodes: any;
   materials: any;
   expanded: boolean;
   secondPhone: boolean;
   play: boolean;
+  video: string;
 }) {
   const { viewport } = useThree();
 
@@ -330,7 +333,7 @@ function Model({
               material-color={0x000000}
               // material={materials.Wallpaper}
             >
-              <VideoMaterial url={url} play={play} />
+              <VideoMaterial video={video} play={play} />
             </mesh>
             <mesh
               name='Apple_Logo_Logo_0'
@@ -444,8 +447,8 @@ function Model({
   );
 }
 
-function VideoMaterial({ url, play }: { url: string; play: boolean }) {
-  const texture = useVideoTexture(url, { loop: true, preload: 'metadata' });
+function VideoMaterial({ video, play }: { video: string; play: boolean }) {
+  const texture = useVideoTexture(video, { loop: true, preload: 'metadata' });
 
   useEffect(() => {
     play ? texture.source.data.play() : texture.source.data.pause();

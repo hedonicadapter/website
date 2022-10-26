@@ -66,6 +66,7 @@ a:active {
 .figma-prototype-container iframe {
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0);
+  background-color: black;
   position: absolute;
   top: 0;
   left: 0;
