@@ -124,65 +124,70 @@ const Mingler = () => {
             }}
             viewport={{ once: true }}
           >
-            <motion.div className='figma-prototype-container '>
-              <AnimatePresence>
-                <motion.div
-                  key={0}
-                  animate={!expanded ? { opacity: 1 } : { opacity: 0 }}
-                  initial={{ opacity: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.25 }}
-                >
-                  <div className='figma-prototype-bg'>
-                    <video src={minglerDemo} autoPlay muted loop />
-                  </div>
-                </motion.div>
+            <div className='figma-prototype-container '>
+              <motion.div
+                key={0}
+                animate={
+                  !expanded
+                    ? {
+                        opacity: 1,
+                        transition: { delay: 0.35, duration: 0.35 },
+                      }
+                    : { opacity: 0 }
+                }
+                transition={{ duration: 0.25 }}
+              >
+                <div className='figma-prototype-bg'>
+                  <video src={minglerDemo} autoPlay muted loop />
+                </div>
+              </motion.div>
 
-                <motion.div
-                  key={1}
-                  animate={
-                    expanded &&
-                    timelineHovered !== minglerTimelineEvents.length - 1
-                      ? { opacity: 1 }
-                      : { opacity: 0 }
-                  }
-                  initial={{ opacity: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.25 }}
-                >
-                  <h5>
-                    <i>PROTOTYPE</i>✨ try me
-                  </h5>
-                  <iframe
-                    title='First interactive protototype created for Mingler'
-                    height='100%'
-                    src={firstMinglerPrototype}
-                    allowFullScreen
-                  />
-                  <div className='figma-prototype-bg' />
-                </motion.div>
-                <motion.div
-                  key={2}
-                  animate={
-                    expanded &&
-                    timelineHovered === minglerTimelineEvents.length - 1
-                      ? { opacity: 1 }
-                      : { opacity: 0 }
-                  }
-                  initial={{ opacity: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.25 }}
-                >
-                  <iframe
-                    title='Interactive figma replica of the final version of Mingler'
-                    height='100%'
-                    src={productionReplica}
-                    allowFullScreen
-                  />
-                  <div className='figma-prototype-bg' />
-                </motion.div>
-              </AnimatePresence>
-            </motion.div>
+              <motion.div
+                key={1}
+                animate={
+                  expanded &&
+                  timelineHovered !== minglerTimelineEvents.length - 1
+                    ? {
+                        opacity: 1,
+                        transition: { delay: 0.35, duration: 0.35 },
+                      }
+                    : { opacity: 0 }
+                }
+                transition={{ duration: 0.25 }}
+              >
+                {/* <h5>
+                  <i>PROTOTYPE</i>✨ try me
+                </h5> */}
+                <iframe
+                  title='First interactive protototype created for Mingler'
+                  height='100%'
+                  src={firstMinglerPrototype}
+                  allowFullScreen
+                />
+                <div className='figma-prototype-bg' />
+              </motion.div>
+              <motion.div
+                key={2}
+                animate={
+                  expanded &&
+                  timelineHovered === minglerTimelineEvents.length - 1
+                    ? {
+                        opacity: 1,
+                        transition: { delay: 0.35, duration: 0.35 },
+                      }
+                    : { opacity: 0 }
+                }
+                transition={{ duration: 0.25 }}
+              >
+                <iframe
+                  title='Interactive figma replica of the final version of Mingler'
+                  height='100%'
+                  src={productionReplica}
+                  allowFullScreen
+                />
+                <div className='figma-prototype-bg' />
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>
