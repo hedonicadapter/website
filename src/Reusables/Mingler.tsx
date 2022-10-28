@@ -14,7 +14,10 @@ import minglerDemo from '../assets/minglerDemo.webm';
 
 const minglerLinks = [
   { title: 'github', url: 'https://github.com/hedonicadapter/Mingler' },
-  { title: 'download', url: 'www.google.com' },
+  {
+    title: 'download',
+    url: 'https://github.com/hedonicadapter/Mingler/releases/download/v1.0.0-alpha/Mingler.Setup.1.0.0-alpha.exe',
+  },
 ];
 
 const MinglerTitle = ({
