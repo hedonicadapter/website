@@ -16,7 +16,7 @@ const minglerLinks = [
   { title: 'github', url: 'https://github.com/hedonicadapter/Mingler' },
   {
     title: 'download',
-    url: 'https://github.com/hedonicadapter/Mingler/releases/download/v1.0.0-alpha/Mingler.Setup.1.0.0-alpha.exe',
+    url: 'https://github.com/hedonicadapter/Mingler/releases/download/v1.0.0-alpha/Mingler.v1.0.0-alpha.zip',
   },
 ];
 
