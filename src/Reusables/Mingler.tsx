@@ -10,6 +10,8 @@ import Links from './Links';
 import SmallArrow, { arrowOnClickHandler } from './SmallArrow';
 import ExpansionWrapper from './ExpansionWrapper';
 
+import minglerDemo from '../assets/minglerDemo.webm';
+
 const minglerLinks = [
   { title: 'github', url: 'https://github.com/hedonicadapter/Mingler' },
   { title: 'download', url: 'www.google.com' },
@@ -126,7 +128,20 @@ const Mingler = () => {
               <AnimatePresence>
                 <motion.div
                   key={0}
+                  animate={!expanded ? { opacity: 1 } : { opacity: 0 }}
+                  initial={{ opacity: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  <div className='figma-prototype-bg'>
+                    <video src={minglerDemo} autoPlay muted loop />
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  key={1}
                   animate={
+                    expanded &&
                     timelineHovered !== minglerTimelineEvents.length - 1
                       ? { opacity: 1 }
                       : { opacity: 0 }
@@ -147,8 +162,9 @@ const Mingler = () => {
                   <div className='figma-prototype-bg' />
                 </motion.div>
                 <motion.div
-                  key={1}
+                  key={2}
                   animate={
+                    expanded &&
                     timelineHovered === minglerTimelineEvents.length - 1
                       ? { opacity: 1 }
                       : { opacity: 0 }

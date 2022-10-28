@@ -118,14 +118,13 @@ const Slider = ({ expanded }: SliderProps) => {
       <motion.div
         className='row'
         style={{
-          transition: '0.4s ease-in-out',
-          WebkitTransition: '0.4s ease-in-out',
+          transition: '0.4s ease',
+          WebkitTransition: '0.4s ease',
 
           transform:
             expanded === 0
               ? 'translateX(0%)'
               : 'translateX(max(-40vw, -780px))', // same size as slide-wrapper
-          // : 'translateX(max(-40vw, -780px))', // same size as slide-wrapper
         }}
       >
         <ProjectsSlide />
@@ -194,9 +193,9 @@ function App() {
   // }, [expanded]);
 
   const handleMenuItemOnclick = (menuItem: number) => {
-    if (menuItem === 0) controls.start({ x: -150 });
+    if (menuItem === 0) controls.start({ x: -160 });
     else if (menuItem === 1) controls.start({ x: 0 });
-    else if (menuItem === 2) controls.start({ x: 158 });
+    else if (menuItem === 2) controls.start({ x: 168 });
     // if (menuItem === 0) controls.start({ x: -180 });
     // else if (menuItem === 1) controls.start({ x: 10 });
     // else if (menuItem === 2) controls.start({ x: 188 });
@@ -229,9 +228,8 @@ function App() {
 
           <motion.div
             animate={controls}
-            // initial={{ x: -180, scale: 0.8, opacity: 0 }}
-            initial={{ x: -180 }}
-            transition={{ duration: 0.45 }}
+            initial={{ x: -160 }}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
             className='header-menu-content'
             onMouseEnter={() => setSliderContainerHovered(true)}
             onMouseLeave={() => setSliderContainerHovered(false)}
