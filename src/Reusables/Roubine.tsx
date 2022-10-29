@@ -6,8 +6,8 @@ import { roubineStack } from '../Globals';
 import '../styles/Roubine.css';
 import card1 from '../assets/card1.webp';
 import card2 from '../assets/card2.webp';
-import video1 from '../assets/roubineDemo.webm';
-import video2 from '../assets/Untitled.webm';
+import video1 from '../assets/roubineDemo1.webm';
+import video2 from '../assets/roubineDemo2.webm';
 
 import Description from './Description';
 import SmallArrow, { arrowOnClickHandler } from './SmallArrow';
@@ -74,8 +74,10 @@ const RoubineCard = ({
 const Roubine = () => {
   const [notExpandedHovered, setNotExpandedHovered] = useState(false);
   const [expanded, setExpanded] = useState(false);
+
   const [firstPhonePlay, setFirstPhonePlay] = useState(false);
   const [secondPhonePlay, setSecondPhonePlay] = useState(false);
+  const [enteredViewPort, setEnteredViewPort] = useState(false);
 
   const [phoneHovered, setPhoneHovered] = useState(0);
 
@@ -89,25 +91,24 @@ const Roubine = () => {
   }, [expanded]);
 
   useEffect(() => {
-    if (isMobile) return;
-
-    if (phoneHovered) {
-      // phoneHovered === 1 === true === second phone is hovered
+    if (!enteredViewPort) {
       setFirstPhonePlay(false);
-      setSecondPhonePlay(true);
-    } else {
-      // phoneHovered === 0 === false === first phone is hovered
-      setFirstPhonePlay(true);
       setSecondPhonePlay(false);
+    } else {
+      if (isMobile) {
+        setFirstPhonePlay(true);
+        expanded ? setSecondPhonePlay(true) : setSecondPhonePlay(false);
+      } else if (phoneHovered) {
+        // phoneHovered === 1 === true === second phone is hovered
+        setFirstPhonePlay(false);
+        setSecondPhonePlay(true);
+      } else {
+        // phoneHovered === 0 === false === first phone is hovered
+        setFirstPhonePlay(true);
+        setSecondPhonePlay(false);
+      }
     }
-  }, [phoneHovered]);
-
-  useEffect(() => {
-    if (isMobile) {
-      setFirstPhonePlay(true);
-      setSecondPhonePlay(true);
-    }
-  }, []);
+  }, [enteredViewPort, phoneHovered, expanded]);
 
   return (
     <motion.div
@@ -122,11 +123,11 @@ const Roubine = () => {
             setExpanded,
             smallArrowAnimationController
           );
-        setFirstPhonePlay(false);
-        setSecondPhonePlay(false);
+
+        setEnteredViewPort(false);
       }}
       onViewportEnter={() => {
-        setFirstPhonePlay(true);
+        setEnteredViewPort(true);
       }}
       transition={{ duration: 0.15 }}
       className='roubine'
@@ -261,8 +262,8 @@ const Roubine = () => {
               <div className='second-card-container'>
                 <RoubineCard
                   secondPhone={true}
-                  title='Ehehehe'
-                  body='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere malesuada sem, et pretium libero venenatis. '
+                  title='Hopeful first timers'
+                  body='High ambitions, no complete development experience, and a short deadline. I was honestly a little disappointed at the end, but now I realize we did really well.'
                 />
               </div>
               <motion.div

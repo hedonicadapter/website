@@ -89,7 +89,7 @@ a:active {
   margin-bottom: min(0.66vw, 13px);
 }
 .roubine-card p {
-  font-size: max(1.1vw, 0.9em);
+  font-size: max(0.98vw, 0.8em);
 }
 .roubine-card .first {
   -webkit-box-shadow: -7px 20px 23px -16px rgba(0, 0, 0, 0.26);
@@ -144,6 +144,7 @@ a:active {
 .first-card-container li {
   /* margin-block: 8px; */
   margin-block: 0.42vw;
+  font-size: max(1.1vw, 0.9em);
 }
 .second-card-container {
   width: 13.2vw;

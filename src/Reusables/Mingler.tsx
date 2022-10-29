@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import { minglerStack, minglerTimelineEvents } from '../Globals';
 import { Skills } from './Skills';
@@ -67,6 +67,8 @@ const Mingler = () => {
     number | boolean
   >(true);
 
+  const minglerVideoRef = useRef<HTMLVideoElement>(null);
+
   const animationController = useAnimationControls();
 
   const timelineItemClickHandler = (index: number) => {
@@ -110,7 +112,7 @@ const Mingler = () => {
             <Skills tooltips skills={minglerStack} vertical={false} />
           </motion.div>
         </div>
-        <div className='no-select' style={{}}>
+        <div className='no-select'>
           <motion.div
             style={{
               zIndex: 10,
@@ -140,8 +142,24 @@ const Mingler = () => {
                 }
                 transition={{ duration: 0.25 }}
               >
-                <div className='figma-prototype-bg'>
-                  <video src={minglerDemo} autoPlay muted loop />
+                <div
+                  className='figma-prototype-bg clicker'
+                  onMouseDown={() =>
+                    minglerVideoRef.current && minglerVideoRef.current.pause()
+                  }
+                  onMouseUp={() =>
+                    minglerVideoRef.current && minglerVideoRef.current.play()
+                  }
+                  // style={{ zIndex: 200, pointerEvents: 'all' }}
+                  onClick={() => console.log('hello')}
+                >
+                  <video
+                    ref={minglerVideoRef}
+                    src={minglerDemo}
+                    autoPlay
+                    muted
+                    loop
+                  />
                 </div>
               </motion.div>
 

@@ -47,10 +47,6 @@ export default function Phone({
 }) {
   const { nodes, materials } = useGLTF('/new.glb');
 
-  useEffect(() => {
-    console.log({ play });
-  }, [play]);
-
   useGLTF.preload('/new.glb');
   return (
     <Canvas
