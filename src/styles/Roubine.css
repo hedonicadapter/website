@@ -72,7 +72,7 @@ a:active {
   border-radius: 22px;
   border: 1px solid rgba(62, 62, 62, 0.22);
   width: 100%;
-  /* height: clamp(100px, 10vw, 354px); */
+  /* height: clamp(100px, 20vw, 354px); */
   padding-block: min(1.4vw, 24px);
   padding-inline: min(1.55vw, 30px);
   background-color: #212121;
@@ -83,13 +83,14 @@ a:active {
   position: relative;
 }
 .roubine-card h3 {
-  font-size: clamp(1.15em, 1.6vw, 1.4em);
+  /* font-size: clamp(1.15em, 1.6vw, 1.4em); */
+  font-size: 1.4em;
   margin: 0;
   padding: 0;
   margin-bottom: clamp(2px, 0.66vw, 6px);
 }
 .roubine-card p {
-  font-size: max(0.98vw, 0.8em);
+  font-size: clamp(1em, 0.98vw, 2em);
 }
 .roubine-card .first {
   -webkit-box-shadow: -7px 20px 23px -16px rgba(0, 0, 0, 0.26);
@@ -136,7 +137,8 @@ a:active {
 .first-card-container {
   width: clamp(260px, 15.2vw, 305px);
   cursor: pointer;
-  margin-top: 2.2vw;
+  /* margin-top: 2.2vw; */
+  margin-top: clamp(40px, 2.2vw, 100px);
   position: absolute;
   top: 0;
   left: 42%;
@@ -144,14 +146,17 @@ a:active {
 .first-card-container li {
   /* margin-block: 8px; */
   margin-block: min(0.42vw, 5px);
-  font-size: clamp(0.9em, 1.7vw, 1.4em);
+  /* font-size: clamp(0.9em, 1.7vw, 1.4em); */
+  font-size: 21px;
 }
 .second-card-container {
   width: clamp(220px, 13.2vw, 350px);
-  margin-top: 2.2vw;
+  /* margin-top: clamp(10px, 8.2vw, 60px); */
   position: absolute;
 
-  top: 1.8vw;
+  bottom: 80px;
+  /* top: 70px; */
+  /* margin-top: 5vw; */
   left: 14.2%;
   text-align: right;
 }
