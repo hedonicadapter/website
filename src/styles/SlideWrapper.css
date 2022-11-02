@@ -1,9 +1,21 @@
 .slide-wrapper {
-  width: calc(40vw);
-  max-width: 780px;
-  min-width: 312px;
+  width: max(40vw, 630px);
+  /* max-width: 780px; */
+  /* min-width: 312px; */
   margin: 0 auto;
 
   display: flex;
   flex-direction: column;
+}
+
+@media only screen and (max-width: 768px) {
+  .slide-wrapper {
+    width: calc(100vw);
+    /* max-width: 780px; */
+    /* min-width: 312px; */
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+  }
 }

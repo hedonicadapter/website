@@ -157,7 +157,7 @@ const Timeline = ({
             variants={dotVariants}
             style={{ cursor: 'pointer' }}
             onHoverStart={() => setHovered(index)}
-            onClick={() => timelineItemClickHandler(index)}
+            onClick={() => setHovered(index)}
           >
             <Dots
               timelineEvent={timelineEvent}

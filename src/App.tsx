@@ -11,6 +11,7 @@ import { ProjectsSlide } from './slides/ProjectsSlide';
 import { AboutSlide } from './slides/AboutSlide';
 import { ContactSlide } from './slides/ContactSlide';
 import Background from './Reusables/Background';
+import useWindowDimensions from './helpers/useWindowDimensions';
 
 const menuItems = ['projects', 'about', 'contact'];
 
@@ -20,6 +21,7 @@ type MenuItemProps = {
   direction: string;
   handleMenuItemOnclick: (menuItem: number) => void;
   children: JSX.Element;
+  slide: boolean;
 };
 
 const MenuItem = ({
@@ -28,27 +30,37 @@ const MenuItem = ({
   direction,
   handleMenuItemOnclick,
   children,
+  slide,
 }: MenuItemProps) => {
   let expandedItem = menuItems.indexOf(text);
 
   return (
     <AnimatePresence exitBeforeEnter>
-      {expanded !== expandedItem && (
+      {(!slide || expanded !== expandedItem) && (
         <motion.a
           layout='position'
-          initial={{ opacity: 0, x: direction === 'left' ? 80 : -80 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: direction === 'left' ? -80 : 80 }}
-          transition={{ duration: 0.35 }}
+          initial={{
+            opacity: 0,
+            x: slide ? (direction === 'left' ? 80 : -80) : 0,
+          }}
+          animate={{
+            opacity: !slide && expanded !== expandedItem ? 0.2 : 1,
+            x: 0,
+          }}
+          exit={{
+            opacity: 0,
+            x: slide ? (direction === 'left' ? -80 : 80) : 0,
+          }}
+          transition={{ duration: slide ? 0.35 : 0.15 }}
           whileHover={{ opacity: 0.9, transition: { duration: 0.1 } }}
-          whileTap={{ opacity: 0.7, transition: { duration: 0.1 } }}
+          whileTap={{ opacity: 0.5, transition: { duration: 0.1 } }}
           className='header-menu-item no-select'
           onClick={() => handleMenuItemOnclick(expandedItem)}
         >
           {text}
         </motion.a>
       )}
-      {expanded === expandedItem && (
+      {slide && expanded === expandedItem && (
         <motion.div
           layout='position'
           onClick={() => handleMenuItemOnclick(expandedItem)}
@@ -116,15 +128,17 @@ const Slider = ({ expanded }: SliderProps) => {
   return (
     <div>
       <motion.div
-        className='row'
+        className={`row ${
+          expanded === 0 ? 'slide-transformer0' : 'slide-transformer1'
+        }`}
         style={{
           transition: '0.4s ease',
           WebkitTransition: '0.4s ease',
 
-          transform:
-            expanded === 0
-              ? 'translateX(0%)'
-              : 'translateX(max(-40vw, -780px))', // same size as slide-wrapper
+          // transform:
+          //   expanded === 0
+          //     ? 'translateX(0%)'
+          //     : 'translateX(max(-40vw, -780px))', // same size as slide-wrapper
         }}
       >
         <ProjectsSlide />
@@ -141,9 +155,11 @@ function App() {
   const [previousExpanded, setPreviousExpanded] = useState(0);
   const [scroll, setScroll] = useState(0);
   const [sliderContainerHovered, setSliderContainerHovered] = useState(false);
+  const [x, setX] = useState(0);
 
   const sliderContainerRef = useRef<HTMLInputElement | null>(null);
   const controls = useAnimationControls();
+  const { width, tablet } = useWindowDimensions();
 
   useEffect(() => {
     const handleScroll = (event: WheelEvent) => {
@@ -173,6 +189,22 @@ function App() {
   }, [sliderContainerRef, sliderContainerHovered]);
 
   useEffect(() => {
+    if (tablet) {
+      setX(0);
+      // vw / viewport total width x 100
+      // setX((100 / width) * 100 - width);
+    } else {
+      setX(Math.max(0.074 * width, 100));
+    }
+  }, [width, tablet]);
+
+  useEffect(() => {
+    if (expanded === 0) controls.start({ x: -x });
+    else if (expanded === 1) controls.start({ x: 0 });
+    else if (expanded === 2) controls.start({ x: x });
+  }, [expanded, width, controls, x]);
+
+  useEffect(() => {
     sliderContainerRef?.current?.scroll({
       top: scroll,
       behavior: 'smooth',
@@ -193,12 +225,12 @@ function App() {
   // }, [expanded]);
 
   const handleMenuItemOnclick = (menuItem: number) => {
-    if (menuItem === 0) controls.start({ x: -160 });
-    else if (menuItem === 1) controls.start({ x: 0 });
-    else if (menuItem === 2) controls.start({ x: 168 });
-    // if (menuItem === 0) controls.start({ x: -180 });
-    // else if (menuItem === 1) controls.start({ x: 10 });
-    // else if (menuItem === 2) controls.start({ x: 188 });
+    // if (menuItem === 0) controls.start({ x: -x });
+    // else if (menuItem === 1) controls.start({ x: 0 });
+    // else if (menuItem === 2) controls.start({ x: x });
+    // if (menuItem === 0) controls.start({ x: -160 });
+    // else if (menuItem === 1) controls.start({ x: 0 });
+    // else if (menuItem === 2) controls.start({ x: 168 });
 
     // if (expanded === menuItem) return setExpanded(-1);
     setExpanded((prevState) => {
@@ -215,6 +247,7 @@ function App() {
             <MenuItem
               expanded={expanded}
               direction={previousExpanded < expanded ? 'left' : 'right'}
+              slide={!tablet}
               key={item}
               text={item}
               handleMenuItemOnclick={handleMenuItemOnclick}
@@ -228,7 +261,6 @@ function App() {
 
           <motion.div
             animate={controls}
-            initial={{ x: -160 }}
             transition={{ duration: 0.45, ease: 'easeOut' }}
             className='header-menu-content'
             onMouseEnter={() => setSliderContainerHovered(true)}

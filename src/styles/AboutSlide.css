@@ -101,3 +101,50 @@
 .about-container p {
   padding-bottom: 40px;
 }
+
+@media only screen and (max-width: 768px) {
+  .about-container {
+    background-color: #fffff2;
+    height: 93vh;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+
+    font-family: 'CormorantGaramond-Light';
+    /* padding-left: 60px; */
+    padding-left: clamp(10px, 4vw, 60px);
+  }
+
+  .peepoTalks {
+    padding-right: 80px;
+    /* margin-left: 40px; */
+    margin-top: 10px;
+    gap: 10px;
+    font-weight: bold;
+  }
+  .peepoTalks p {
+    font-size: x-large;
+  }
+  .peepoTalks div {
+    width: 100vw;
+  }
+
+  .more-text {
+    width: 40vw;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .me {
+    pointer-events: none;
+    user-select: none;
+    position: absolute;
+    z-index: 1;
+    bottom: 0;
+    /* left: 25%; */
+    left: 30%;
+    /* right: 80%; */
+  }
+}

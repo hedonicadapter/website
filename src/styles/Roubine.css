@@ -44,7 +44,7 @@ a:active {
   margin-right: max(42px, 0.3vw);
 }
 .roubine-header h1 {
-  font-size: max(2.4em, 5vw);
+  font-size: max(4.9em, 5vw);
 }
 .roubine-header-skills {
 }
@@ -55,7 +55,7 @@ a:active {
   position: absolute;
   top: 0;
   /* margin-top: 100px; */
-  margin-top: clamp(60px, 5.8vw, 102px);
+  margin-top: clamp(84px, 5.4vw, 128px);
 }
 
 .description-mark {
@@ -72,7 +72,7 @@ a:active {
   border-radius: 22px;
   border: 1px solid rgba(62, 62, 62, 0.22);
   width: 100%;
-  height: clamp(100px, 10vw, 354px);
+  /* height: clamp(100px, 10vw, 354px); */
   padding-block: min(1.4vw, 24px);
   padding-inline: min(1.55vw, 30px);
   background-color: #212121;
@@ -83,10 +83,10 @@ a:active {
   position: relative;
 }
 .roubine-card h3 {
-  font-size: max(1.3vw, 0.82em);
+  font-size: clamp(1.15em, 1.6vw, 1.4em);
   margin: 0;
   padding: 0;
-  margin-bottom: min(0.66vw, 13px);
+  margin-bottom: clamp(2px, 0.66vw, 6px);
 }
 .roubine-card p {
   font-size: max(0.98vw, 0.8em);
@@ -107,7 +107,7 @@ a:active {
   object-fit: contain;
   object-position: right;
   /* width: 70%; */
-  height: 9.2vw;
+  height: min(9.2vw, 100px);
   right: 0;
 }
 .second img {
@@ -123,18 +123,18 @@ a:active {
   z-index: 100;
 }
 .first-phone-container {
-  height: 32vw;
+  height: max(32vw, 502px);
   cursor: pointer;
-  margin-top: min(-20px, -6.5vw);
+  margin-top: min(-6.5vw, -96px);
 }
 
 .second-phone-container {
-  height: 28vw;
+  height: max(28vw, 429px);
   margin-top: -7.6vw;
 }
 
 .first-card-container {
-  width: 15.2vw;
+  width: clamp(260px, 15.2vw, 305px);
   cursor: pointer;
   margin-top: 2.2vw;
   position: absolute;
@@ -143,15 +143,124 @@ a:active {
 }
 .first-card-container li {
   /* margin-block: 8px; */
-  margin-block: 0.42vw;
-  font-size: max(1.1vw, 0.9em);
+  margin-block: min(0.42vw, 5px);
+  font-size: clamp(0.9em, 1.7vw, 1.4em);
 }
 .second-card-container {
-  width: 13.2vw;
+  width: clamp(220px, 13.2vw, 350px);
   margin-top: 2.2vw;
   position: absolute;
 
   top: 1.8vw;
   left: 14.2%;
   text-align: right;
+}
+
+.roubine .links a {
+  color: var(--on-surface-medium);
+  font-size: clamp(0.88em, 1.3vw, 1em);
+}
+
+@media only screen and (max-width: 640px) {
+  .roubine .react-icon {
+    width: max(3vw, 16px);
+    height: max(3vw, 16px);
+  }
+  .roubine .firebase-icon {
+    margin-top: -0.5vw;
+    width: max(3vw, 16px);
+    height: max(3vw, 16px);
+  }
+}
+@media only screen and (max-width: 768px) {
+  .roubine-header h1 {
+    font-size: max(2.5em, 12vw);
+  }
+
+  .description-and-phone-container {
+    cursor: pointer;
+    padding-right: 55px;
+    position: absolute;
+    top: 0;
+    /* margin-top: 100px; */
+    margin-top: max(50px, 13.2vw);
+  }
+
+  .first-phone-container,
+  .second-phone-container {
+    width: 100%;
+    z-index: 100;
+  }
+
+  .first-phone-container {
+    height: 80vw;
+    cursor: pointer;
+    /* margin-top: min(-6.5vw, -96px); */
+    margin-top: min(-20px, -15.6vw);
+  }
+
+  .second-phone-container {
+    height: 76vw;
+    margin-top: -28vw;
+  }
+
+  .first-card-container {
+    width: 38.2vw;
+    cursor: pointer;
+    margin-top: 5.2vw;
+    position: absolute;
+    top: 0;
+    left: 43%;
+  }
+  .first-card-container li {
+    margin-block: 0.52vw;
+    font-size: max(3.1vw, 0.9em);
+  }
+  .second-card-container {
+    /* width: 13.2vw; */
+    width: 34.2vw;
+    margin-top: 7.2vw;
+    position: absolute;
+
+    top: 1.8vw;
+    left: 16.2%;
+    text-align: right;
+  }
+  .roubine-card {
+    border-radius: 22px;
+    border: 1px solid rgba(62, 62, 62, 0.22);
+    width: 100%;
+    height: max(100px, 22vw);
+    padding-top: min(2.4vw, 24px);
+    padding-bottom: min(12vw, 16px);
+    padding-inline: min(2.75vw, 30px);
+    background-color: #212121;
+    color: var(--off-white);
+
+    font-family: 'Inter-Light';
+    overflow-y: scroll;
+    position: relative;
+  }
+  .roubine-card h3 {
+    font-size: max(3vw, 0.82em);
+    margin: 0;
+    padding: 0;
+    margin-bottom: 4px;
+  }
+  .roubine-card p {
+    font-size: max(0.98vw, 1.1em);
+  }
+  .first img {
+    object-fit: contain;
+    object-position: right;
+    height: 15.6vw;
+    right: 0;
+  }
+  .second img {
+    object-fit: contain;
+    object-position: left;
+    /* height: 4.2vw; */
+    height: 10.6vw;
+    left: 0;
+  }
 }

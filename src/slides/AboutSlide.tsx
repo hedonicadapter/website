@@ -7,6 +7,7 @@ import { githubLink, languages, linkedInLink } from '../Globals';
 import '../styles/AboutSlide.css';
 import { BsGithub, BsLinkedin, BsPhoneFill } from 'react-icons/bs';
 import { SiMaildotru } from 'react-icons/si';
+import useWindowDimensions from '../helpers/useWindowDimensions';
 
 const paragraphs = [
   `Mauris tempus nulla a purus vulputate cursus. Vestibulum at eros condimentum, dictum dui sit amet, porta augue. Lorem ipsum dolor sit amet. Mauris tempus nulla a purus vulputate cursus. Vestibulum at eros condimentum, dictum dui sit amet, porta augue. Lorem ipsum dolor sit amet. Mauris tempus nulla a purus vulputate cursus. Vestibulum at eros condimentum, dictum dui sit amet, porta augue. Lorem ipsum dolor sit amet.`,
@@ -91,6 +92,7 @@ export const AboutSlide = React.memo(
   ({ contactSlide }: { contactSlide: boolean }) => {
     const [languageHovered, setLanguageHovered] = useState(false);
     const [contactText, setContactText] = useState('more:');
+    const { tablet } = useWindowDimensions();
 
     useEffect(() => {
       contactSlide && setContactText('more:');
@@ -120,26 +122,49 @@ export const AboutSlide = React.memo(
                     }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.15 }}
-                    style={{
-                      fontSize:
-                        index === 0
-                          ? 'max(6vw, 2.5em)'
-                          : index === 1
-                          ? 'max(4vw, 1.8em)'
-                          : index === 2
-                          ? 'max(3vw, 1.4em)'
-                          : 0,
-                      lineHeight:
-                        index === 0
-                          ? 'max(5.5vw, 40px)'
-                          : index === 1
-                          ? 'max(4vw, 35px)'
-                          : index === 2
-                          ? 'max(2.5vw, 20px)'
-                          : '1vw',
-                      padding: 0,
-                      margin: 0,
-                    }}
+                    style={
+                      tablet
+                        ? {
+                            fontSize:
+                              index === 0
+                                ? 'max(15vw, 2.5em)'
+                                : index === 1
+                                ? 'max(9.5vw, 1.8em)'
+                                : index === 2
+                                ? 'max(6vw, 1.4em)'
+                                : 0,
+                            lineHeight:
+                              index === 0
+                                ? 'max(14.5vw, 40px)'
+                                : index === 1
+                                ? 'max(9.5vw, 35px)'
+                                : index === 2
+                                ? 'max(5vw, 20px)'
+                                : '1vw',
+                            padding: 0,
+                            margin: 0,
+                          }
+                        : {
+                            fontSize:
+                              index === 0
+                                ? 'max(6vw, 2.5em)'
+                                : index === 1
+                                ? 'max(4vw, 1.8em)'
+                                : index === 2
+                                ? 'max(3vw, 1.4em)'
+                                : 0,
+                            lineHeight:
+                              index === 0
+                                ? 'max(5.5vw, 40px)'
+                                : index === 1
+                                ? 'max(4vw, 35px)'
+                                : index === 2
+                                ? 'max(2.5vw, 20px)'
+                                : '1vw',
+                            padding: 0,
+                            margin: 0,
+                          }
+                    }
                   >
                     {value}
                   </motion.h1>

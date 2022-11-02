@@ -39,16 +39,7 @@ const MinglerTitle = ({
       }}
       className='no-select'
     >
-      <h1>
-        <div
-          style={{
-            fontSize: 'max(2.4em, 7vw)',
-            marginBottom: 'min(-1.78vw, -20px)',
-          }}
-        >
-          Mingler
-        </div>
-      </h1>
+      <h1>Mingler</h1>
     </motion.a>
   );
 };

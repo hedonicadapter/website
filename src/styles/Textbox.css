@@ -6,6 +6,7 @@
 
   font-family: 'CormorantGaramond-Light';
 }
+/* Subtitle */
 .text-box h2 {
   position: sticky;
   height: 27px;
@@ -20,13 +21,14 @@
   background-color: var(--background);
 
   font-weight: 100;
-  font-size: 1.1em;
+  font-size: clamp(0.9em, 5vw, 1.1em);
 }
+/* Text body */
 .text-box p {
   z-index: 2;
   padding-inline: 18px;
   margin-bottom: 10px;
   /* padding-top: 8px; */
   color: var(--on-surface);
-  font-size: 1.4em;
+  font-size: clamp(1em, 5.2vw, 1.38em);
 }

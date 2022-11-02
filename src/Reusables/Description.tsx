@@ -54,8 +54,16 @@ const Description = ({
           transition={{ duration: 0.15 }}
         >
           <h2
-            className='description no-select'
-            style={{ fontSize: !arrowUnderneath ? '2.1em' : '' }}
+            className={
+              !arrowUnderneath
+                ? 'no-select description'
+                : 'no-select description description-arrow-underneath'
+            }
+            style={{
+              fontSize: !arrowUnderneath
+                ? 'clamp(1.2em, 5vw, 2.1em)'
+                : 'clamp(1.04em, 4.3vw, 1.84em)',
+            }}
           >
             {descriptionText}
           </h2>

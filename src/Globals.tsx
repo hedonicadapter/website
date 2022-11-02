@@ -12,7 +12,11 @@ export const linkedInLink = 'https://www.linkedin.com/in/sam-herman/';
 export const githubLink = 'https://github.com/hedonicadapter';
 
 export const ReactIcon = () => (
-  <RiReactjsLine style={{ marginTop: -1, marginRight: -4 }} size={23} />
+  <RiReactjsLine
+    className='react-icon'
+    style={{ marginTop: -1, marginRight: -4 }}
+    size={23}
+  />
 );
 
 export const TypeScriptIcon = ({ drip }: { drip: string }) => (
@@ -65,7 +69,10 @@ export const roubineStack = [
     icon: <ReactIcon />,
     title: 'React Native',
   },
-  { icon: <SiFirebase size={21} />, title: 'Firestore' },
+  {
+    icon: <SiFirebase className='firebase-icon' size={21} />,
+    title: 'Firestore',
+  },
 ];
 
 export const languages = [
