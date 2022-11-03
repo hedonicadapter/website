@@ -43,6 +43,7 @@ const AnimationWrapper = ({
           originY: 1,
           x: isMe ? -300 : -100,
           originX: 0,
+          y: isMe ? 6 : 0, //Hide blurred bottom edge
           scale: 0.9,
           opacity: 0.7,
           filter: 'blur(3px) grayscale(100%)',
@@ -92,7 +93,7 @@ export const AboutSlide = React.memo(
   ({ contactSlide }: { contactSlide: boolean }) => {
     const [languageHovered, setLanguageHovered] = useState(false);
     const [contactText, setContactText] = useState('more:');
-    const { tablet } = useWindowDimensions();
+    const { tablet, width } = useWindowDimensions();
 
     useEffect(() => {
       contactSlide && setContactText('more:');
@@ -147,19 +148,19 @@ export const AboutSlide = React.memo(
                         : {
                             fontSize:
                               index === 0
-                                ? 'max(6vw, 2.5em)'
+                                ? 'max(6vw, 6em)'
                                 : index === 1
-                                ? 'max(4vw, 1.8em)'
+                                ? 'max(4vw, 4.2em)'
                                 : index === 2
-                                ? 'max(3vw, 1.4em)'
+                                ? 'max(3vw, 3.4em)'
                                 : 0,
                             lineHeight:
                               index === 0
-                                ? 'max(5.5vw, 40px)'
+                                ? 'max(5.5vw, 90px)'
                                 : index === 1
-                                ? 'max(4vw, 35px)'
+                                ? 'max(4vw, 60px)'
                                 : index === 2
-                                ? 'max(2.5vw, 20px)'
+                                ? 'max(2.5vw, 46px)'
                                 : '1vw',
                             padding: 0,
                             margin: 0,
@@ -170,28 +171,15 @@ export const AboutSlide = React.memo(
                   </motion.h1>
                 ))}
               </div>
-              <div style={{ columns: '3 100px' }}>
-                {/* <div style={{ height: 60 }}></div> */}
-                `Mauris tempus nulla a purus vulputate cursus. Vestibulum at
-                eros condimentum, dictum dui sit amet, porta augue. Lorem ipsum
-                dolor sit amet. Mauris tempus nulla a purus vulputate cursus.
-                Vestibulum at eros condimentum, dictum dui sit amet, porta
-                {/* <div style={{ height: 30 }}></div> */}
-                augue. Lorem ipsum dolor sit amet. Mauris tempus nulla a purus
-                vulputate cursus. Vestibulum at eros condimentum, dictum dui sit
-                amet, porta augue. Lorem ipsum dolor sit amet.`, `Mauris tempus
-                nulla a purus vulputate cursus. Vestibulum at eros condimentum,
-                dictum dui sit amet, porta augue. Lorem ipsum dolor sit amet.
-                Mauris tempus nulla a purus vulputate cursus. Vestibulum at eros
-                condimentum, dictum dui sit amet, porta augue. Lorem ipsum dolor
-                sit amet.`, `Mauris tempus nulla a purus vulputate cursus.
-                Vestibulum at eros condimentum, dictum dui sit amet, porta
-                augue. Lorem ipsum dolor sit amet.`
-              </div>
-              {/* <div className='row peepoTalks'>
+
+              <div className='row peepoTalks'>
                 {paragraphs.map((item, index) => (
                   <motion.div
-                    style={{ marginTop: index - index * 42 }}
+                    style={{
+                      marginTop: tablet
+                        ? index - index * (width * 0.052)
+                        : index - index * 52,
+                    }}
                     initial={{ opacity: 0 }}
                     whileInView={{
                       opacity: 1,
@@ -206,7 +194,7 @@ export const AboutSlide = React.memo(
                     <p>{item}</p>
                   </motion.div>
                 ))}
-              </div> */}
+              </div>
               {/* <div className='stats'>
                 <div
                   style={{ width: '20vw' }}
@@ -246,7 +234,7 @@ export const AboutSlide = React.memo(
                 src={placeHolderguy}
                 // width='780'
                 // height='690'
-                width='100%'
+                // width='100%'
                 // height='100%'
               />
             </AnimationWrapper>

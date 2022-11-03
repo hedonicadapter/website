@@ -176,7 +176,7 @@ header {
 
 .header-menu-content {
   width: max(40vw, 630px);
-  max-width: 780px;
+  /* max-width: 780px; */
   /* min-width: 312px; */
   height: 100%;
   display: flex;
@@ -191,7 +191,7 @@ header {
 
 .header-menu-content-space-maker {
   width: max(40vw, 630px);
-  max-width: 780px;
+  /* max-width: 780px; */
   /* min-width: 312px; */
   height: 100vh;
   display: flex;

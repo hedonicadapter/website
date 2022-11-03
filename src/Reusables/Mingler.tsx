@@ -74,6 +74,11 @@ const Mingler = () => {
     setTimelineItemClicked(index);
   };
 
+  const pauseHandler = () =>
+    minglerVideoRef.current && minglerVideoRef.current.pause();
+  const playHandler = () =>
+    minglerVideoRef.current && minglerVideoRef.current.play();
+
   return (
     <motion.div
       initial={{ opacity: 0.15, filter: 'blur(2px) grayscale(70%)' }}
@@ -135,14 +140,10 @@ const Mingler = () => {
               >
                 <div
                   className='figma-prototype-bg clicker'
-                  onMouseDown={() =>
-                    minglerVideoRef.current && minglerVideoRef.current.pause()
-                  }
-                  onMouseUp={() =>
-                    minglerVideoRef.current && minglerVideoRef.current.play()
-                  }
-                  // style={{ zIndex: 200, pointerEvents: 'all' }}
-                  onClick={() => console.log('hello')}
+                  onMouseDown={pauseHandler}
+                  onMouseUp={playHandler}
+                  onTouchStart={pauseHandler}
+                  onTouchEnd={playHandler}
                 >
                   <video
                     ref={minglerVideoRef}
