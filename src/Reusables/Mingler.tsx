@@ -241,7 +241,9 @@ const Mingler = () => {
                     animationController={animationController}
                   />
                 </div>
-                <Links align='right' links={minglerLinks} />
+                <div className='description-links-container'>
+                  <Links align='right' links={minglerLinks} />
+                </div>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0 }}

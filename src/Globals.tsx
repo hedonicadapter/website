@@ -1,5 +1,5 @@
 import { RiReactjsLine } from 'react-icons/ri';
-import { SiMongodb, SiFirebase } from 'react-icons/si';
+import { SiMongodb, SiFirebase, SiTypescript } from 'react-icons/si';
 import { HiDatabase } from 'react-icons/hi';
 import { FaPython } from 'react-icons/fa';
 import { SiJava } from 'react-icons/si';
@@ -19,34 +19,39 @@ export const ReactIcon = () => (
   />
 );
 
-export const TypeScriptIcon = ({ drip }: { drip: string }) => (
-  <span
-    className='no-select'
-    style={{
-      // transform: 'scale(1, 0.9) translateY(-22%)',
-      color:
-        drip === 'light' ? 'rgba(14, 14, 14, 1)' : 'rgba(255, 255, 255, 1)',
-      fontSize: '0.68em',
-      fontWeight: 'bold',
-      fontFamily: 'Inter-Medium',
-      backgroundColor:
-        drip === 'light' ? 'rgba(255, 255, 255, 0.87)' : 'rgba(14, 14, 14,1)',
-      borderRadius: 1,
+export const TypeScriptIcon = ({ drip }: { drip: string }) => {
+  let light = drip === 'light';
 
-      paddingBottom: 1,
-      paddingLeft: 4,
-      paddingRight: 2,
-      paddingTop: 4,
+  return (
+    <span
+      style={{
+        // transform: 'scale(1, 0.9) translateY(-22%)',
+        color: light ? 'rgba(14, 14, 14, 1)' : 'rgba(255, 255, 255, 1)',
+        fontSize: '0.68em',
+        fontWeight: 'bold',
+        fontFamily: 'Inter-Medium',
+        backgroundColor: light
+          ? 'rgba(255, 255, 255, 0.87)'
+          : 'rgba(14, 14, 14,1)',
+        borderRadius: 1,
 
-      marginTop: 1,
-      marginRight: 1,
-      marginLeft: -1,
-      marginBottom: -1,
-    }}
-  >
-    TS
-  </span>
-);
+        paddingBottom: 1,
+        paddingLeft: 4,
+        paddingRight: 2,
+        paddingTop: 4,
+
+        // These look dumb but they work
+        marginTop: 1,
+        marginRight: 1,
+        marginLeft: -1,
+        marginBottom: -1,
+      }}
+      className='no-select typescript-icon'
+    >
+      TS
+    </span>
+  );
+};
 
 export const minglerStack = [
   {
@@ -55,7 +60,7 @@ export const minglerStack = [
   },
   { icon: <SiMongodb size={21} />, title: 'MongoDB' },
   {
-    icon: <TypeScriptIcon drip='light' />,
+    icon: <SiTypescript size={20} style={{ marginLeft: -1 }} />,
     title: 'TypeScript',
   },
   {
@@ -83,7 +88,7 @@ export const languages = [
   },
   { icon: <SiMongodb size={21} />, title: 'MongoDB', rating: 'high' },
   {
-    icon: <TypeScriptIcon drip='dark' />,
+    icon: <SiTypescript size={20} style={{ marginLeft: -1 }} />,
     title: 'TypeScript',
   },
   {
@@ -93,13 +98,13 @@ export const languages = [
     opacity: old,
   },
   {
-    icon: <SiJava size={22} />,
+    icon: <SiJava size={22} style={{ marginTop: -2 }} />,
     title: 'Java',
     rating: 'mid',
     opacity: old,
   },
   {
-    icon: <FaPython size={21} />,
+    icon: <FaPython size={21} style={{ marginTop: -1 }} />,
     title: 'Python',
     rating: 'mid',
     opacity: recent,
@@ -109,22 +114,23 @@ export const languages = [
       <span
         className='language-icon'
         style={{
-          // transform: 'scale(0.8, 0.9) translateY(-56%)',
-          // top: '56%',
-          // right: '50%',
+          position: 'relative',
+
+          marginTop: -1.2,
+          marginLeft: 2.4,
+          paddingTop: 3,
+
           fontSize: '0.8rem',
           fontWeight: 'bold',
-          position: 'relative',
-          lineHeight: '0.6rem',
-          // marginBottom: -11,
-          // paddingBottom: -10,
-          paddingTop: 3,
+          lineHeight: '0.5rem',
           fontFamily: 'Inter-Regular',
         }}
       >
         .NET
         <br />
-        <span style={{ fontSize: '0.7rem', marginLeft: 2 }}>core</span>
+        <span style={{ fontSize: '0.6rem', marginLeft: 1, marginTop: 1 }}>
+          core
+        </span>
       </span>
     ),
     title: '.NET Core',

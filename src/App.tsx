@@ -12,6 +12,7 @@ import { AboutSlide } from './slides/AboutSlide';
 import { ContactSlide } from './slides/ContactSlide';
 import Background from './Reusables/Background';
 import useWindowDimensions from './helpers/useWindowDimensions';
+import FakeFooter from './Reusables/FakeFooter';
 
 const menuItems = ['projects', 'about', 'contact'];
 
@@ -240,38 +241,41 @@ function App() {
   };
 
   return (
-    <div className='container'>
-      <header>
-        <AnimateSharedLayout>
-          {menuItems.map((item) => (
-            <MenuItem
-              expanded={expanded}
-              direction={previousExpanded < expanded ? 'left' : 'right'}
-              slide={!tablet}
-              key={item}
-              text={item}
-              handleMenuItemOnclick={handleMenuItemOnclick}
-            >
-              <motion.div
-                // animate={controls}
-                className='header-menu-content-space-maker'
-              />
-            </MenuItem>
-          ))}
+    <>
+      <div className='container'>
+        <header>
+          <AnimateSharedLayout>
+            {menuItems.map((item) => (
+              <MenuItem
+                expanded={expanded}
+                direction={previousExpanded < expanded ? 'left' : 'right'}
+                slide={!tablet}
+                key={item}
+                text={item}
+                handleMenuItemOnclick={handleMenuItemOnclick}
+              >
+                <motion.div
+                  // animate={controls}
+                  className='header-menu-content-space-maker'
+                />
+              </MenuItem>
+            ))}
 
-          <motion.div
-            animate={controls}
-            transition={{ duration: 0.45, ease: 'easeOut' }}
-            className='header-menu-content'
-            onMouseEnter={() => setSliderContainerHovered(true)}
-            onMouseLeave={() => setSliderContainerHovered(false)}
-            ref={sliderContainerRef}
-          >
-            <Slider expanded={expanded} />
-          </motion.div>
-        </AnimateSharedLayout>
-      </header>
-    </div>
+            <motion.div
+              animate={controls}
+              transition={{ duration: 0.45, ease: 'easeOut' }}
+              className='header-menu-content'
+              onMouseEnter={() => setSliderContainerHovered(true)}
+              onMouseLeave={() => setSliderContainerHovered(false)}
+              ref={sliderContainerRef}
+            >
+              <Slider expanded={expanded} />
+            </motion.div>
+          </AnimateSharedLayout>
+        </header>
+      </div>
+      {tablet && <FakeFooter color='#1c1c1c' />}
+    </>
   );
 }
 

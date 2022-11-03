@@ -1,6 +1,6 @@
 .about-container {
   background-color: #fffff2;
-  height: 100vh;
+  height: calc(100vh);
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -51,6 +51,7 @@
   margin-top: 10px;
   gap: 10px;
   font-weight: bold;
+  height: 70vh;
 }
 .peepoTalks div {
   width: 15vw;
@@ -105,10 +106,12 @@
 @media only screen and (max-width: 768px) {
   .about-container {
     background-color: #fffff2;
-    height: 93vh;
+    height: calc(100vh - 70px); /* FakeFooter height */
     position: -webkit-sticky;
     position: sticky;
-    top: 0;
+    /* top: 0; */
+    bottom: 70px;
+    /* padding-bottom: 70px; */
 
     font-family: 'CormorantGaramond-Light';
     /* padding-left: 60px; */
@@ -142,7 +145,6 @@
     user-select: none;
     position: absolute;
     z-index: 1;
-    bottom: 0;
     /* left: 25%; */
     left: 30%;
     /* right: 80%; */

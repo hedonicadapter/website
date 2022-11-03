@@ -8,7 +8,7 @@ import '../styles/ProjectsSlide.css';
 export const ProjectsSlide = () => {
   return (
     <SlideWrapper>
-      <div className='column project-slide'>
+      <div className='column projects-slide'>
         <motion.div layout='position'>
           <Mingler />
         </motion.div>

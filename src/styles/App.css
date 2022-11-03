@@ -299,7 +299,6 @@ ul {
     align-content: baseline;
     /* margin-top: auto; */
     /* margin-top: 0; */
-    outline: 1px solid red;
     height: 100vh;
     width: 100vw;
   }
@@ -317,7 +316,6 @@ ul {
     padding: 1.6rem;
     /* padding-inline: 1.6em; */
     padding-inline: 1.82vw;
-    backdrop-filter: blur(3px);
     width: 100%;
     text-align: center;
   }

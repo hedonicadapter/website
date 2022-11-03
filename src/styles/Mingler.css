@@ -108,6 +108,9 @@ a:active {
 .small-arrow-and-links-container {
   justify-content: space-between;
 }
+.description-links-container {
+  margin-top: 2px;
+}
 .small-arrow-container {
   height: 40px;
   display: flex;
@@ -160,5 +163,8 @@ a:active {
   .mingler a h1 {
     font-size: max(2.5em, 17.5vw);
     margin-bottom: max(-32px, -4.4vw);
+  }
+  .description-links-container {
+    margin-top: 3px;
   }
 }

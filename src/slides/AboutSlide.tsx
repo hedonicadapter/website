@@ -170,14 +170,35 @@ export const AboutSlide = React.memo(
                   </motion.h1>
                 ))}
               </div>
-              <div className='row peepoTalks'>
+              <div style={{ columns: '3 100px' }}>
+                {/* <div style={{ height: 60 }}></div> */}
+                `Mauris tempus nulla a purus vulputate cursus. Vestibulum at
+                eros condimentum, dictum dui sit amet, porta augue. Lorem ipsum
+                dolor sit amet. Mauris tempus nulla a purus vulputate cursus.
+                Vestibulum at eros condimentum, dictum dui sit amet, porta
+                {/* <div style={{ height: 30 }}></div> */}
+                augue. Lorem ipsum dolor sit amet. Mauris tempus nulla a purus
+                vulputate cursus. Vestibulum at eros condimentum, dictum dui sit
+                amet, porta augue. Lorem ipsum dolor sit amet.`, `Mauris tempus
+                nulla a purus vulputate cursus. Vestibulum at eros condimentum,
+                dictum dui sit amet, porta augue. Lorem ipsum dolor sit amet.
+                Mauris tempus nulla a purus vulputate cursus. Vestibulum at eros
+                condimentum, dictum dui sit amet, porta augue. Lorem ipsum dolor
+                sit amet.`, `Mauris tempus nulla a purus vulputate cursus.
+                Vestibulum at eros condimentum, dictum dui sit amet, porta
+                augue. Lorem ipsum dolor sit amet.`
+              </div>
+              {/* <div className='row peepoTalks'>
                 {paragraphs.map((item, index) => (
                   <motion.div
                     style={{ marginTop: index - index * 42 }}
                     initial={{ opacity: 0 }}
                     whileInView={{
                       opacity: 1,
-                      transition: { duration: 0.65, delay: 0.15 * (index + 1) },
+                      transition: {
+                        duration: 0.65,
+                        delay: 0.15 * (index + 1),
+                      },
                     }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.15 }}
@@ -185,7 +206,7 @@ export const AboutSlide = React.memo(
                     <p>{item}</p>
                   </motion.div>
                 ))}
-              </div>
+              </div> */}
               {/* <div className='stats'>
                 <div
                   style={{ width: '20vw' }}
@@ -324,12 +345,10 @@ export const AboutSlide = React.memo(
               <motion.div
                 className='row'
                 style={{
-                  gap: 10,
-                  // position: 'absolute',
+                  gap: tablet ? 8 : 14,
 
-                  // marginTop: 290,
-                  // marginLeft: -50,
                   zIndex: 200,
+                  alignItems: 'center',
                 }}
               >
                 {languages.map((lang) => (
@@ -338,6 +357,7 @@ export const AboutSlide = React.memo(
               </motion.div>
             </AnimationWrapper>
           </div>
+
           <svg
             id='svg'
             xmlns='http://www.w3.org/2000/svg'
