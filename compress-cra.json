@@ -1,0 +1,6 @@
+{
+  "filetypes": [".js", ".html", ".css", ".png", ".webp", ".webm", ".tff"],
+  "directory": "/build",
+  "algorithms": ["br", "gz"],
+  "retainUncompressedFiles": false
+}

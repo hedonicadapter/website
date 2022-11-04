@@ -85,9 +85,12 @@ const Mingler = () => {
       exit={{ opacity: 0.15, filter: 'blur(2px) grayscale(70%)' }}
       whileInView={{ opacity: 1, filter: 'blur(0px) grayscale(0%)' }}
       viewport={{ amount: 0.5 }}
-      onViewportLeave={() =>
-        expanded && arrowOnClickHandler(false, setExpanded, animationController)
-      }
+      onViewportLeave={() => {
+        pauseHandler();
+        expanded &&
+          arrowOnClickHandler(false, setExpanded, animationController);
+      }}
+      onViewportEnter={playHandler}
       transition={{ duration: 0.15 }}
       className='mingler'
     >
