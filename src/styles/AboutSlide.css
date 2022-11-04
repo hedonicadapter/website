@@ -47,6 +47,7 @@
 }
 
 .peepoTalks {
+  /* max-height: 60vh; */
   padding-right: 150px;
   /* margin-left: 40px; */
   margin-top: 10px;
@@ -58,6 +59,12 @@
 .peepoTalks div {
   width: 15vw;
   min-width: 155px;
+}
+
+.about-languages {
+  position: absolute;
+  bottom: 15px;
+  z-index: 20;
 }
 
 .more {
@@ -129,6 +136,7 @@
   }
   .peepoTalks p {
     font-size: clamp(0.9em, 4vw, 1.3em);
+    margin-bottom: 120px;
   }
   .peepoTalks div {
     width: 100vw;

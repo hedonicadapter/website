@@ -179,6 +179,7 @@ export const AboutSlide = React.memo(
                       marginTop: tablet
                         ? index - index * (width * 0.052)
                         : index - index * 52,
+                      overflowY: 'scroll',
                     }}
                     initial={{ opacity: 0 }}
                     whileInView={{
@@ -323,12 +324,8 @@ export const AboutSlide = React.memo(
               </motion.div>
             )}
           </AnimatePresence>
-          {/* <p style={{ width: '55%' }}>
-          Mauris tempus nulla a purus vulputate cursus. Vestibulum at eros
-          condimentum, dictum dui sit amet, porta augue. Lorem ipsum dolor sit
-          amet.
-        </p> */}
-          <div style={{ marginTop: 'auto', marginBottom: 15 }}>
+
+          <div className='about-languages'>
             <AnimationWrapper contactSlide={contactSlide}>
               <motion.div
                 className='row'

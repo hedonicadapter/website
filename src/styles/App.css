@@ -124,6 +124,10 @@ body {
   /* background-size: cover; */
 }
 
+.app-container {
+  position: relative;
+}
+
 header {
   display: flex;
   flex-direction: row;
