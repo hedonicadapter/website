@@ -1,0 +1,15 @@
+{
+  "filetypes": [
+    ".js",
+    ".html",
+    ".css",
+    ".ttf",
+    ".webm",
+    ".webp",
+    ".hdr",
+    ".png"
+  ],
+  "directory": "/build",
+  "algorithms": ["br", "gz"],
+  "retainUncompressedFiles": true
+}
