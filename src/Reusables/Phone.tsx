@@ -1,38 +1,7 @@
-import * as THREE from 'three';
 import { Suspense, useEffect } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import { Environment, useGLTF, useVideoTexture } from '@react-three/drei';
-import { GLTF } from 'three-stdlib';
 import { useSpring, animated, easings } from '@react-spring/three';
-
-type GLTFResult = GLTF & {
-  nodes: {
-    Phone: THREE.Mesh;
-    Cam_module: THREE.Mesh;
-    Circle: THREE.Mesh;
-    flash: THREE.Mesh;
-    Cylinder: THREE.Mesh;
-    Cylinder_1: THREE.Mesh;
-    Cylinder_2: THREE.Mesh;
-    Cylinder007: THREE.Mesh;
-    Cylinder007_1: THREE.Mesh;
-    Cylinder007_2: THREE.Mesh;
-    Cylinder008: THREE.Mesh;
-    Cylinder008_1: THREE.Mesh;
-    Cylinder008_2: THREE.Mesh;
-    Power_switch: THREE.Mesh;
-    Screen: THREE.Mesh;
-    Volume_rocker: THREE.Mesh;
-  };
-  materials: {
-    body: THREE.MeshStandardMaterial;
-    logo: THREE.MeshStandardMaterial;
-    flash: THREE.MeshStandardMaterial;
-    ['inner lens']: THREE.MeshStandardMaterial;
-    ['focal lens']: THREE.MeshStandardMaterial;
-    screen: THREE.MeshStandardMaterial;
-  };
-};
 
 export default function Phone({
   expanded,
@@ -444,7 +413,11 @@ function Model({
 }
 
 function VideoMaterial({ video, play }: { video: string; play: boolean }) {
-  const texture = useVideoTexture(video, { loop: true, preload: 'metadata' });
+  const texture = useVideoTexture(video, {
+    loop: true,
+    autoplay: false,
+    preload: 'metadata',
+  });
 
   useEffect(() => {
     play ? texture.source.data.play() : texture.source.data.pause();
