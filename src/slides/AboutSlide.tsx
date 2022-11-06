@@ -327,7 +327,7 @@ export const AboutSlide = React.memo(
 
           <div
             className='about-languages'
-            style={{ height: `${height * 0.01}vh` }}
+            style={{ height: `${height * 0.01 - 71}vh` }}
           >
             <AnimationWrapper contactSlide={contactSlide}>
               <motion.div
