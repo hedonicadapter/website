@@ -1,12 +1,11 @@
 .about-container {
   background-color: #fffff2;
-  height: calc(100vh);
+  /* height: calc(100vh); */
   position: -webkit-sticky;
   position: sticky;
   top: 0;
 
   font-family: 'CormorantGaramond-Light';
-  /* padding-left: 60px; */
   padding-left: clamp(10px, 4vw, 60px);
 }
 
