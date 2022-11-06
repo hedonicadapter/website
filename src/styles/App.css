@@ -305,13 +305,13 @@ ul {
     height: 100vh;
     width: 100vw;
 
-    position: relative;
+    position: fixed;
   }
 
   .header-menu-item {
     z-index: 2;
-    /* margin-top: auto; */
-    /* margin-bottom: 0; */
+    margin-top: auto;
+    margin-bottom: 0;
     color: var(--on-background);
     mix-blend-mode: difference;
     font-size: 1.4rem;
