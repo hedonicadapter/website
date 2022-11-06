@@ -1,5 +1,5 @@
 import { AnimationControls, motion } from 'framer-motion';
-import { SetStateAction, useEffect } from 'react';
+import React, { SetStateAction, useEffect } from 'react';
 
 export const arrowOnClickHandler = async (
   expand: SetStateAction<boolean>,
@@ -102,4 +102,4 @@ const SmallArrow = ({
   );
 };
 
-export default SmallArrow;
+export default React.memo(SmallArrow);

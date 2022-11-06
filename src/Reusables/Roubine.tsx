@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import { isMobile } from 'react-device-detect';
 import { Skills } from './Skills';
 import { roubineStack } from '../Globals';
+import { useGLTF } from '@react-three/drei';
+
 import '../styles/Roubine.css';
 import card1 from '../assets/card1.webp';
 import card2 from '../assets/card2.webp';
@@ -11,7 +13,6 @@ import video2 from '../assets/roubineDemo2.webm';
 
 import Description from './Description';
 import SmallArrow, { arrowOnClickHandler } from './SmallArrow';
-import ExpansionWrapper from './ExpansionWrapper';
 import Phone from './Phone';
 
 const HoverWrapper = ({
@@ -72,6 +73,10 @@ const RoubineCard = ({
 );
 
 const Roubine = () => {
+  const { nodes, materials } = useGLTF('/new.glb');
+
+  useGLTF.preload('/new.glb');
+
   const [notExpandedHovered, setNotExpandedHovered] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
@@ -85,12 +90,7 @@ const Roubine = () => {
   // Separate controller so the big arrow doesn't grow right before fading out just because the small arrow grows
   const smallArrowAnimationController = useAnimationControls();
 
-  useEffect(() => {
-    //so that if you close expansion when the second phone is hovered, the filters dont persist
-    if (!expanded) setPhoneHovered(0);
-  }, [expanded]);
-
-  useEffect(() => {
+  const playHandler = () => {
     if (!enteredViewPort) {
       setFirstPhonePlay(false);
       setSecondPhonePlay(false);
@@ -108,6 +108,16 @@ const Roubine = () => {
         setSecondPhonePlay(false);
       }
     }
+  };
+
+  useEffect(() => {
+    //so that if you close expansion when the second phone is hovered, the filters dont persist
+    if (!expanded) setPhoneHovered(0);
+  }, [expanded]);
+
+  useEffect(() => {
+    window.addEventListener('load', playHandler);
+    return () => window.removeEventListener('load', playHandler);
   }, [enteredViewPort, phoneHovered, expanded]);
 
   return (
@@ -204,6 +214,8 @@ const Roubine = () => {
                 className='first-phone-container'
               >
                 <Phone
+                  nodes={nodes}
+                  materials={materials}
                   expanded={expanded}
                   play={firstPhonePlay}
                   video={video1}
@@ -272,6 +284,8 @@ const Roubine = () => {
                 className='second-phone-container'
               >
                 <Phone
+                  nodes={nodes}
+                  materials={materials}
                   expanded={false}
                   secondPhone={true}
                   play={secondPhonePlay}
@@ -284,38 +298,36 @@ const Roubine = () => {
 
         <AnimatePresence exitBeforeEnter>
           {!expanded && (
-            <ExpansionWrapper key={0}>
-              <div className='description-and-phone-container'>
-                <motion.div
-                  onHoverStart={() => setNotExpandedHovered(true)}
-                  onHoverEnd={() => setNotExpandedHovered(false)}
-                  onClick={() =>
-                    arrowOnClickHandler(true, setExpanded, animationController)
+            <motion.div key={0} className='description-and-phone-container'>
+              <motion.div
+                onHoverStart={() => setNotExpandedHovered(true)}
+                onHoverEnd={() => setNotExpandedHovered(false)}
+                onClick={() =>
+                  arrowOnClickHandler(true, setExpanded, animationController)
+                }
+              >
+                <Description
+                  links={[
+                    {
+                      title: 'github',
+                      url: 'https://github.com/hedonicadapter/Roubinous',
+                    },
+                  ]}
+                  descriptionText={
+                    <>
+                      Create
+                      <mark className='description-mark'>better</mark>
+                      routines with psychology.
+                    </>
                   }
-                >
-                  <Description
-                    links={[
-                      {
-                        title: 'github',
-                        url: 'https://github.com/hedonicadapter/Roubinous',
-                      },
-                    ]}
-                    descriptionText={
-                      <>
-                        Create
-                        <mark className='description-mark'>better</mark>
-                        routines with psychology.
-                      </>
-                    }
-                    arrowUnderneath={true}
-                    hovered={notExpandedHovered}
-                    setHovered={setNotExpandedHovered}
-                    expanded={expanded}
-                    animationController={animationController}
-                  />
-                </motion.div>
-              </div>
-            </ExpansionWrapper>
+                  arrowUnderneath={true}
+                  hovered={notExpandedHovered}
+                  setHovered={setNotExpandedHovered}
+                  expanded={expanded}
+                  animationController={animationController}
+                />
+              </motion.div>
+            </motion.div>
           )}
         </AnimatePresence>
       </div>
@@ -323,4 +335,4 @@ const Roubine = () => {
   );
 };
 
-export default Roubine;
+export default React.memo(Roubine);

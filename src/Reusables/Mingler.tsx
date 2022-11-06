@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import { minglerStack, minglerTimelineEvents } from '../Globals';
 import { Skills } from './Skills';
@@ -8,7 +8,6 @@ import '../styles/Mingler.css';
 import Description from './Description';
 import Links from './Links';
 import SmallArrow, { arrowOnClickHandler } from './SmallArrow';
-import ExpansionWrapper from './ExpansionWrapper';
 
 import minglerDemo from '../assets/minglerDemo.webm';
 
@@ -177,7 +176,7 @@ const Mingler = () => {
                 <iframe
                   title='First interactive protototype created for Mingler'
                   height='100%'
-                  src={firstMinglerPrototype}
+                  src={expanded ? firstMinglerPrototype : ''}
                   allowFullScreen
                 />
                 <div className='figma-prototype-bg' />
@@ -198,7 +197,7 @@ const Mingler = () => {
                 <iframe
                   title='Interactive figma replica of the final version of Mingler'
                   height='100%'
-                  src={productionReplica}
+                  src={expanded ? productionReplica : ''}
                   allowFullScreen
                 />
                 <div className='figma-prototype-bg' />
@@ -210,85 +209,83 @@ const Mingler = () => {
 
       <AnimatePresence exitBeforeEnter>
         {!expanded ? (
-          <ExpansionWrapper key={0}>
+          <motion.div
+            key={0}
+            onClick={() =>
+              arrowOnClickHandler(true, setExpanded, animationController)
+            }
+          >
+            <Description
+              links={minglerLinks}
+              descriptionText='Chat and share your digital life with friends.'
+              hovered={notExpandedHovered}
+              setHovered={setNotExpandedHovered}
+              expanded={expanded}
+              animationController={animationController}
+            />
+          </motion.div>
+        ) : (
+          <motion.div key={1}>
             <motion.div
-              onClick={() =>
-                arrowOnClickHandler(true, setExpanded, animationController)
-              }
+              exit={{ opacity: 0, transition: { duration: 0.25 } }}
+              className='row small-arrow-and-links-container'
             >
-              <Description
-                links={minglerLinks}
-                descriptionText='Chat and share your digital life with friends.'
-                hovered={notExpandedHovered}
-                setHovered={setNotExpandedHovered}
-                expanded={expanded}
-                animationController={animationController}
+              <div
+                onClick={() =>
+                  arrowOnClickHandler(false, setExpanded, animationController)
+                }
+                style={{ marginLeft: 38, marginTop: 10, width: 110 }}
+              >
+                <SmallArrow
+                  hovered={notExpandedHovered}
+                  expanded={expanded}
+                  animationController={animationController}
+                />
+              </div>
+              <div className='description-links-container'>
+                <Links align='right' links={minglerLinks} />
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{
+                opacity: 0,
+                transition: { duration: 0.65 },
+              }}
+              transition={{ delay: 0.25, duration: 0.55 }}
+            >
+              <AnimatePresence>
+                {timelineItemClicked !== false && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.15 }}
+                  >
+                    <Textbox
+                      timelineEvents={minglerTimelineEvents}
+                      hovered={timelineHovered}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.15 }}
+            >
+              <Timeline
+                timelineEvents={minglerTimelineEvents}
+                hovered={timelineHovered}
+                setHovered={setHovered}
+                timelineItemClicked={timelineItemClicked}
+                timelineItemClickHandler={timelineItemClickHandler}
               />
             </motion.div>
-          </ExpansionWrapper>
-        ) : (
-          <ExpansionWrapper key={1}>
-            <>
-              <motion.div
-                exit={{ opacity: 0, transition: { duration: 0.25 } }}
-                className='row small-arrow-and-links-container'
-              >
-                <div
-                  onClick={() =>
-                    arrowOnClickHandler(false, setExpanded, animationController)
-                  }
-                  style={{ marginLeft: 38, marginTop: 10, width: 110 }}
-                >
-                  <SmallArrow
-                    hovered={notExpandedHovered}
-                    expanded={expanded}
-                    animationController={animationController}
-                  />
-                </div>
-                <div className='description-links-container'>
-                  <Links align='right' links={minglerLinks} />
-                </div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{
-                  opacity: 0,
-                  transition: { duration: 0.65 },
-                }}
-                transition={{ delay: 0.25, duration: 0.55 }}
-              >
-                <AnimatePresence>
-                  {timelineItemClicked !== false && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.15 }}
-                    >
-                      <Textbox
-                        timelineEvents={minglerTimelineEvents}
-                        hovered={timelineHovered}
-                      />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.15 }}
-              >
-                <Timeline
-                  timelineEvents={minglerTimelineEvents}
-                  hovered={timelineHovered}
-                  setHovered={setHovered}
-                  timelineItemClicked={timelineItemClicked}
-                  timelineItemClickHandler={timelineItemClickHandler}
-                />
-              </motion.div>
-              {/* <motion.a
+            {/* <motion.a
                 initial={{ opacity: 0 }}
                 animate={{
                   opacity: 1,
@@ -306,12 +303,11 @@ const Mingler = () => {
                   come mingle
                 </motion.h4>
               </motion.a> */}
-            </>
-          </ExpansionWrapper>
+          </motion.div>
         )}
       </AnimatePresence>
     </motion.div>
   );
 };
 
-export default Mingler;
+export default React.memo(Mingler);

@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion } from 'framer-motion';
 
 type LinksProps = {
@@ -27,4 +28,4 @@ const Links = ({ align, links }: LinksProps) => (
   </div>
 );
 
-export default Links;
+export default React.memo(Links);

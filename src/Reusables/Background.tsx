@@ -1,5 +1,3 @@
-import background from '../assets/background.png';
-
 const Background = () => (
   <div
     className='testone no-select'

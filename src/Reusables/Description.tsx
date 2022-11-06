@@ -1,10 +1,8 @@
-import { AnimationControls, motion, useAnimationControls } from 'framer-motion';
+import { AnimationControls, motion } from 'framer-motion';
 import Links from './Links';
 import '../styles/Description.css';
-import { arrowTransition } from '../Globals';
 import SmallArrow from './SmallArrow';
-import ExpansionWrapper from './ExpansionWrapper';
-import { ReactNode, useEffect } from 'react';
+import React, { ReactNode } from 'react';
 
 type DescriptionProps = {
   descriptionText: string | ReactNode | null;
@@ -94,4 +92,4 @@ const Description = ({
   );
 };
 
-export default Description;
+export default React.memo(Description);

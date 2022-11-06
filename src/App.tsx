@@ -272,10 +272,10 @@ function App() {
             <Slider expanded={expanded} />
           </motion.div>
         </AnimateSharedLayout>
+        {tablet && <FakeFooter color='#1c1c1c' />}
       </header>
-      {tablet && <FakeFooter color='#1c1c1c' />}
     </div>
   );
 }
 
-export default App;
+export default React.memo(App);

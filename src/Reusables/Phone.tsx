@@ -1,46 +1,60 @@
-import { Suspense, useEffect } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
-import { Environment, useGLTF, useVideoTexture } from '@react-three/drei';
+import {
+  Environment,
+  PerformanceMonitor,
+  useVideoTexture,
+} from '@react-three/drei';
 import { useSpring, animated, easings } from '@react-spring/three';
+import round from 'lodash/round';
 
-export default function Phone({
+function Phone({
   expanded,
   secondPhone = false,
   play,
   video,
+  nodes,
+  materials,
 }: {
   expanded: boolean;
   secondPhone?: boolean;
   play: boolean;
   video: string;
+  nodes: any;
+  materials: any;
 }) {
-  const { nodes, materials } = useGLTF('/new.glb');
+  const [dpr, setDpr] = useState(1.6);
 
-  useGLTF.preload('/new.glb');
   return (
     <Canvas
       resize={{ scroll: false, offsetSize: true }}
       style={{
         zIndex: 100,
       }}
-      dpr={[1, 2]}
+      // dpr={[1, 2]}
+      // dpr={window.devicePixelRatio}
+      dpr={dpr}
       camera={{ fov: 5, position: [-0.4, 4, 100] }}
     >
-      {/* <ambientLight intensity={0.5} /> */}
-      {/* <directionalLight position={[3, 5, 6]} intensity={1} /> */}
-      {/* <spotLight position={[1, 1, -20]} intensity={2} /> */}
-      <Environment preset='apartment' />
-      {/* studio or apartment or warehouse */}
-      <Suspense fallback={null}>
-        <Model
-          nodes={nodes}
-          materials={materials}
-          expanded={expanded}
-          secondPhone={secondPhone}
-          play={play}
-          video={video}
-        />
-      </Suspense>
+      <PerformanceMonitor
+        onChange={({ factor }) => setDpr(round(0.9 + 1.6 * factor, 1))}
+      >
+        {/* <ambientLight intensity={0.5} /> */}
+        {/* <directionalLight position={[3, 5, 6]} intensity={1} /> */}
+        {/* <spotLight position={[1, 1, -20]} intensity={2} /> */}
+        <Environment preset='apartment' />
+        {/* studio or apartment or warehouse */}
+        <Suspense fallback={null}>
+          <Model
+            nodes={nodes}
+            materials={materials}
+            expanded={expanded}
+            secondPhone={secondPhone}
+            play={play}
+            video={video}
+          />
+        </Suspense>
+      </PerformanceMonitor>
     </Canvas>
   );
 }
@@ -441,3 +455,5 @@ function VideoMaterial({ video, play }: { video: string; play: boolean }) {
     </mesh>
   );
 }
+
+export default React.memo(Phone);
