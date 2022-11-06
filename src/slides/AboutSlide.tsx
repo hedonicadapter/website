@@ -109,6 +109,7 @@ export const AboutSlide = React.memo(
           }}
           transition={{ duration: 0.25 }}
           className='column about-container'
+          style={{ height: `${height * 0.01 - 71}vh` }}
         >
           <AnimationWrapper contactSlide={contactSlide}>
             <div className='column'>
@@ -325,10 +326,7 @@ export const AboutSlide = React.memo(
             )}
           </AnimatePresence>
 
-          <div
-            className='about-languages'
-            style={{ height: `${height * 0.01 - 71}vh` }}
-          >
+          <div className='about-languages'>
             <AnimationWrapper contactSlide={contactSlide}>
               <motion.div
                 className='row'
