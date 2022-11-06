@@ -93,7 +93,7 @@ export const AboutSlide = React.memo(
   ({ contactSlide }: { contactSlide: boolean }) => {
     const [languageHovered, setLanguageHovered] = useState(false);
     const [contactText, setContactText] = useState('more:');
-    const { tablet, width } = useWindowDimensions();
+    const { tablet, width, height } = useWindowDimensions();
 
     useEffect(() => {
       contactSlide && setContactText('more:');
@@ -325,7 +325,7 @@ export const AboutSlide = React.memo(
             )}
           </AnimatePresence>
 
-          <div className='about-languages'>
+          <div className='about-languages' style={{ height }}>
             <AnimationWrapper contactSlide={contactSlide}>
               <motion.div
                 className='row'
