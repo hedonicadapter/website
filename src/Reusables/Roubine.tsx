@@ -90,7 +90,12 @@ const Roubine = () => {
   // Separate controller so the big arrow doesn't grow right before fading out just because the small arrow grows
   const smallArrowAnimationController = useAnimationControls();
 
-  const playHandler = () => {
+  useEffect(() => {
+    //so that if you close expansion when the second phone is hovered, the filters dont persist
+    if (!expanded) setPhoneHovered(0);
+  }, [expanded]);
+
+  useEffect(() => {
     if (!enteredViewPort) {
       setFirstPhonePlay(false);
       setSecondPhonePlay(false);
@@ -108,16 +113,6 @@ const Roubine = () => {
         setSecondPhonePlay(false);
       }
     }
-  };
-
-  useEffect(() => {
-    //so that if you close expansion when the second phone is hovered, the filters dont persist
-    if (!expanded) setPhoneHovered(0);
-  }, [expanded]);
-
-  useEffect(() => {
-    window.addEventListener('load', playHandler);
-    return () => window.removeEventListener('load', playHandler);
   }, [enteredViewPort, phoneHovered, expanded]);
 
   return (
