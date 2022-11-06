@@ -62,7 +62,7 @@
 }
 
 .about-languages {
-  position: absolute;
+  position: fixed;
   bottom: 15px;
   z-index: 20;
 }

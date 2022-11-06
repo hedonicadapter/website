@@ -325,7 +325,7 @@ export const AboutSlide = React.memo(
             )}
           </AnimatePresence>
 
-          <div className='about-languages' style={{ height }}>
+          <div className='about-languages'>
             <AnimationWrapper contactSlide={contactSlide}>
               <motion.div
                 className='row'
