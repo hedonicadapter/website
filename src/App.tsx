@@ -161,7 +161,7 @@ function App() {
 
   const sliderContainerRef = useRef<HTMLInputElement | null>(null);
   const controls = useAnimationControls();
-  const { width, tablet } = useWindowDimensions();
+  const { width, height, tablet } = useWindowDimensions();
 
   useEffect(() => {
     const handleScroll = (event: WheelEvent) => {
@@ -243,7 +243,7 @@ function App() {
 
   return (
     <div className='app-container'>
-      <header>
+      <header style={{ height }}>
         <AnimateSharedLayout>
           {menuItems.map((item) => (
             <MenuItem
