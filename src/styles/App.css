@@ -302,7 +302,7 @@ ul {
     justify-content: space-evenly;
     align-content: baseline;
 
-    height: 100vh;
+    height: 100%;
     width: 100vw;
 
     position: fixed;
