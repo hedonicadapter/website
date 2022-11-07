@@ -91,7 +91,6 @@ const IconWrapper = React.memo(
 
 export const AboutSlide = React.memo(
   ({ contactSlide }: { contactSlide: boolean }) => {
-    const [languageHovered, setLanguageHovered] = useState(false);
     const [contactText, setContactText] = useState('more:');
     const { tablet, width, height } = useWindowDimensions();
 
