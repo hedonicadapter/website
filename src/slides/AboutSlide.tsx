@@ -108,7 +108,7 @@ export const AboutSlide = React.memo(
           }}
           transition={{ duration: 0.25 }}
           className='column about-container'
-          style={{ height: height - 71 }}
+          style={{ height: tablet ? height - 71 : height }}
         >
           <AnimationWrapper contactSlide={contactSlide}>
             <div className='column'>
