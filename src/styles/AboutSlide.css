@@ -30,7 +30,7 @@
   z-index: 1;
   bottom: 0;
   /* left: 25%; */
-  right: -30vw;
+  right: -38vw;
   /* right: 50%; */
 }
 .me img {
@@ -38,8 +38,8 @@
   object-fit: contain;
   object-position: bottom;
   /* height: 72%; */
-  width: 72vw;
-  max-height: 60vh;
+  width: 92vw;
+  max-height: 70vh;
 
   /* height: 72vh; */
   vertical-align: middle;
@@ -155,7 +155,18 @@
     position: absolute;
     z-index: 1;
     /* left: 25%; */
-    left: 30%;
+    left: 18%;
     /* right: 80%; */
+  }
+  .me img {
+    /* width: clamp(410px, 40.2vw, 760px); */
+    object-fit: contain;
+    object-position: bottom;
+    /* height: 72%; */
+    width: 120vw;
+    max-height: 70vh;
+
+    /* height: 72vh; */
+    vertical-align: middle;
   }
 }
