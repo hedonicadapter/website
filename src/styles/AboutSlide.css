@@ -115,11 +115,11 @@
 @media only screen and (max-width: 768px) {
   .about-container {
     background-color: #fffff2;
-    height: calc(100vh - 70px); /* FakeFooter height */
+    height: calc(100vh - 71px); /* FakeFooter height */
     position: -webkit-sticky;
     position: sticky;
-    /* top: 0; */
-    bottom: 70px;
+    top: 0;
+    /* bottom: 70px; */
     /* padding-bottom: 70px; */
 
     font-family: 'CormorantGaramond-Light';
