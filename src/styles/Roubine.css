@@ -254,7 +254,7 @@ a:active {
     margin-bottom: 4px;
   }
   .roubine-card p {
-    font-size: max(0.98vw, 1.1em);
+    font-size: max(0.98vw, 0.8em);
   }
   .first img {
     object-fit: contain;
