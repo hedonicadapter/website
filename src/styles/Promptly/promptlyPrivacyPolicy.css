@@ -6,7 +6,7 @@
 
   height: 100vh;
   overflow-y: scroll;
-  margin-inline: 30vw;
 }
 #privacyPolicyContainer > div {
+  margin-inline: 30vw;
 }
