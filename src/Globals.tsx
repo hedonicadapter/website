@@ -2,7 +2,7 @@ import { RiReactjsLine } from 'react-icons/ri';
 import { SiMongodb, SiFirebase, SiTypescript } from 'react-icons/si';
 import { HiDatabase } from 'react-icons/hi';
 import { FaPython } from 'react-icons/fa';
-import { SiJava } from 'react-icons/si';
+import { FaJava } from 'react-icons/fa';
 
 const recent = 0.86;
 const old = 0.6;
@@ -98,7 +98,7 @@ export const languages = [
     opacity: old,
   },
   {
-    icon: <SiJava size={22} style={{ marginTop: -2 }} />,
+    icon: <FaJava size={22} style={{ marginTop: -2 }} />,
     title: 'Java',
     rating: 'mid',
     opacity: old,

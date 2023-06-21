@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
+import React from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import '../../styles/Promptly/promptlyPrivacyPolicy.css';
 
 function PromptlyPrivacyPolicy() {

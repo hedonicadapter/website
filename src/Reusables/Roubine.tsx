@@ -73,7 +73,7 @@ const RoubineCard = ({
 );
 
 const Roubine = () => {
-  const { nodes, materials } = useGLTF('/new.glb');
+  const { nodes, materials } = useGLTF('/new.glb') as any;
 
   useGLTF.preload('/new.glb');
 
