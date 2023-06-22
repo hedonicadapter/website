@@ -147,13 +147,7 @@ const Mingler = () => {
                   onTouchStart={pauseHandler}
                   onTouchEnd={playHandler}
                 >
-                  <video
-                    ref={minglerVideoRef}
-                    src={minglerDemo}
-                    autoPlay
-                    muted
-                    loop
-                  />
+                  <video ref={minglerVideoRef} src={minglerDemo} muted loop />
                 </div>
               </motion.div>
 

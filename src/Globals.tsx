@@ -1,8 +1,14 @@
 import { RiReactjsLine } from 'react-icons/ri';
-import { SiMongodb, SiFirebase, SiTypescript } from 'react-icons/si';
+import {
+  SiMongodb,
+  SiFirebase,
+  SiTypescript,
+  SiJavascript,
+} from 'react-icons/si';
 import { HiDatabase } from 'react-icons/hi';
 import { FaPython } from 'react-icons/fa';
 import { FaJava } from 'react-icons/fa';
+import { BsStripe } from 'react-icons/bs';
 
 const recent = 0.86;
 const old = 0.6;
@@ -52,6 +58,18 @@ export const TypeScriptIcon = ({ drip }: { drip: string }) => {
     </span>
   );
 };
+
+export const promptlyStack = [
+  {
+    icon: <SiJavascript size={21} />,
+    title: 'JavaScript',
+  },
+  { icon: <SiMongodb size={21} />, title: 'MongoDB' },
+  {
+    icon: <BsStripe size={21} />,
+    title: 'Stripe',
+  },
+];
 
 export const minglerStack = [
   {
