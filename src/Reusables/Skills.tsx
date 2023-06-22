@@ -64,7 +64,7 @@ export const Skills = ({
   return (
     <div
       className={vertical ? 'column' : 'row'}
-      style={{ gap: vertical ? 1 : 6 }}
+      style={{ gap: vertical ? 1 : 10 }}
     >
       {skills.map((skill, index) => (
         <motion.div

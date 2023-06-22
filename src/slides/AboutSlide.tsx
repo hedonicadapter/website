@@ -8,6 +8,7 @@ import '../styles/AboutSlide.css';
 import { BsGithub, BsLinkedin, BsPhoneFill } from 'react-icons/bs';
 import { SiMaildotru } from 'react-icons/si';
 import useWindowDimensions from '../helpers/useWindowDimensions';
+import { Skills } from '../Reusables/Skills';
 
 const paragraphs = [
   `Mauris tempus nulla a purus vulputate cursus. Vestibulum at eros condimentum, dictum dui sit amet, porta augue. Lorem ipsum dolor sit amet. Mauris tempus nulla a purus vulputate cursus. Vestibulum at eros condimentum, dictum dui sit amet, porta augue. Lorem ipsum dolor sit amet. Mauris tempus nulla a purus vulputate cursus. Vestibulum at eros condimentum, dictum dui sit amet, porta augue. Lorem ipsum dolor sit amet.`,
@@ -330,7 +331,8 @@ export const AboutSlide = React.memo(
             style={{ height: `${height * 0.01 - 71}vh` }}
           >
             <AnimationWrapper contactSlide={contactSlide}>
-              <motion.div
+              <Skills skills={languages} tooltips={true} />
+              {/* <motion.div
                 className='row'
                 style={{
                   gap: tablet ? 8 : 14,
@@ -340,9 +342,9 @@ export const AboutSlide = React.memo(
                 }}
               >
                 {languages.map((lang) => (
-                  <motion.div>{lang.icon}</motion.div>
+                  <div>{lang.icon}</div>
                 ))}
-              </motion.div>
+              </motion.div> */}
             </AnimationWrapper>
           </div>
 

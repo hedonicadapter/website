@@ -6,8 +6,8 @@ import {
   SiJavascript,
 } from 'react-icons/si';
 import { HiDatabase } from 'react-icons/hi';
-import { FaPython } from 'react-icons/fa';
-import { FaJava } from 'react-icons/fa';
+import { FaPython, FaJava } from 'react-icons/fa';
+import { GrNode } from 'react-icons/gr';
 import { BsStripe } from 'react-icons/bs';
 
 const recent = 0.86;
@@ -64,10 +64,14 @@ export const promptlyStack = [
     icon: <SiJavascript size={21} />,
     title: 'JavaScript',
   },
-  { icon: <SiMongodb size={21} />, title: 'MongoDB' },
   {
     icon: <BsStripe size={21} />,
     title: 'Stripe',
+  },
+  { icon: <GrNode size={21} />, title: 'Node.js' },
+  {
+    icon: <SiMongodb size={21} style={{ marginInline: -6 }} />,
+    title: 'MongoDB',
   },
 ];
 
@@ -76,14 +80,18 @@ export const minglerStack = [
     icon: <ReactIcon />,
     title: 'React',
   },
-  { icon: <SiMongodb size={21} />, title: 'MongoDB' },
   {
-    icon: <SiTypescript size={20} style={{ marginLeft: -1 }} />,
+    icon: <SiTypescript size={21} style={{ marginLeft: 2 }} />,
     title: 'TypeScript',
   },
   {
     icon: <FaPython size={21} />,
     title: 'Python',
+  },
+  { icon: <GrNode size={21} />, title: 'Node.js' },
+  {
+    icon: <SiMongodb size={21} style={{ marginInline: -6 }} />,
+    title: 'MongoDB',
   },
 ];
 
@@ -104,9 +112,18 @@ export const languages = [
     title: 'React & React Native',
     rating: 'max',
   },
-  { icon: <SiMongodb size={21} />, title: 'MongoDB', rating: 'high' },
   {
-    icon: <SiTypescript size={20} style={{ marginLeft: -1 }} />,
+    icon: <SiMongodb size={21} style={{ marginInline: -2 }} />,
+    title: 'MongoDB',
+    rating: 'high',
+  },
+  {
+    icon: <GrNode size={21} style={{ marginLeft: -1 }} />,
+    title: 'Node.js',
+    rating: 'high',
+  },
+  {
+    icon: <SiTypescript size={20} />,
     title: 'TypeScript',
   },
   {
@@ -116,7 +133,7 @@ export const languages = [
     opacity: old,
   },
   {
-    icon: <FaJava size={22} style={{ marginTop: -2 }} />,
+    icon: <FaJava size={22} style={{ marginTop: -2, marginInline: -3 }} />,
     title: 'Java',
     rating: 'mid',
     opacity: old,
@@ -132,10 +149,11 @@ export const languages = [
       <span
         className='language-icon'
         style={{
+          cursor: 'default',
           position: 'relative',
 
           marginTop: -1.2,
-          marginLeft: 2.4,
+          marginLeft: 2.6,
           paddingTop: 3,
 
           fontSize: '0.8rem',
