@@ -74,6 +74,18 @@
   src: local('Inter-ExtraLight'),
     url(../assets/fonts/Inter-ExtraLight.ttf) format('truetype');
 }
+@font-face {
+  font-display: swap;
+  font-family: 'InterTight-Regular';
+  src: local('InterTight-Regular'),
+    url(../assets/fonts/InterTight-Regular.ttf) format('truetype');
+}
+@font-face {
+  font-display: swap;
+  font-family: 'InterTight-Light';
+  src: local('InterTight-Light'),
+    url(../assets/fonts/InterTight-Light.ttf) format('truetype');
+}
 
 ::-moz-selection {
   background-color: var(--off-white);

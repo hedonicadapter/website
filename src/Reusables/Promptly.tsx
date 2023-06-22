@@ -120,6 +120,7 @@ const Promptly = () => {
       <motion.div
         key={0}
         onClick={() => window.open(promptlyLinks[0].url, '_blank')?.focus()}
+        className='promptlyDescription'
       >
         <Description
           links={promptlyLinks}
