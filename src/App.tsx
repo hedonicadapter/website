@@ -73,57 +73,6 @@ const MenuItem = ({
   );
 };
 
-// const skills = [
-//   { icon: <GrReactjs size={22} />, title: 'Database design', rating: 'mid' },
-//   { icon: <SiMongodb size={22} />, title: 'UX Design', rating: 'high' },
-//   {
-//     icon: <HiDatabase size={22} />,
-//     title: 'Requirements analysis',
-//     rating: 'low',
-//     opacity: old,
-//   },
-//   {
-//     icon: <HiDatabase size={22} />,
-//     title: 'Agile',
-//     rating: 'high',
-//   },
-//   {
-//     icon: <HiDatabase size={22} />,
-//     title: 'Coding',
-//     rating: 'high',
-//   },
-//   {
-//     icon: <HiDatabase size={22} />,
-//     title: 'Mixing & Mastering',
-//     rating: 'high',
-//     opacity: oldest,
-//   },
-//   {
-//     icon: <HiDatabase size={22} />,
-//     title: 'Music production',
-//     rating: 'high',
-//     opacity: oldest,
-//   },
-//   {
-//     icon: <HiDatabase size={22} />,
-//     title: 'Piano',
-//     rating: 'low',
-//     opacity: oldest,
-//   },
-//   {
-//     icon: <HiDatabase size={22} />,
-//     title: 'Figma',
-//     rating: 'high',
-//     opacity: recent,
-//   },
-//   {
-//     icon: <HiDatabase size={22} />,
-//     title: 'Gimp',
-//     rating: 'high',
-//     opacity: oldest,
-//   },
-// ];
-
 type SliderProps = { expanded: number };
 const Slider = ({ expanded }: SliderProps) => {
   return (
@@ -136,11 +85,6 @@ const Slider = ({ expanded }: SliderProps) => {
           position: 'relative',
           transition: '0.4s ease',
           WebkitTransition: '0.4s ease',
-
-          // transform:
-          //   expanded === 0
-          //     ? 'translateX(0%)'
-          //     : 'translateX(max(-40vw, -780px))', // same size as slide-wrapper
         }}
       >
         <ProjectsSlide />

@@ -10,6 +10,8 @@ import { FaPython, FaJava } from 'react-icons/fa';
 import { GrNode } from 'react-icons/gr';
 import { BsStripe } from 'react-icons/bs';
 
+export const menuItems = ['projects', 'about', 'contact'];
+
 const recent = 0.86;
 const old = 0.6;
 const oldest = 0.38;
