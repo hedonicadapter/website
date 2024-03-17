@@ -234,6 +234,7 @@ export const AboutSlide = React.memo(
               <img
                 alt='Sam Herman'
                 src={placeHolderguy}
+                loading='lazy'
                 // width='780'
                 // height='690'
                 // width='100%'

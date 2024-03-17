@@ -107,6 +107,7 @@ const Promptly = () => {
                   width='100%'
                   ref={promptlyVideoRef}
                   src={promptlyDemo}
+                  preload='none'
                   //   autoPlay
                   muted
                   loop
