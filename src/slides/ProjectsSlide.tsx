@@ -5,11 +5,15 @@ import Mingler from '../Reusables/Mingler';
 import Roubine from '../Reusables/Roubine';
 import '../styles/ProjectsSlide.css';
 import Promptly from '../Reusables/Promptly';
+import Kulufornia from '../Reusables/Kulufornia';
 
 export const ProjectsSlide = () => {
   return (
     <SlideWrapper>
       <div className='column projects-slide'>
+        <motion.div layout='position'>
+          <Kulufornia />
+        </motion.div>
         <motion.div layout='position'>
           <Promptly />
         </motion.div>

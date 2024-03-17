@@ -4,6 +4,9 @@ import {
   SiFirebase,
   SiTypescript,
   SiJavascript,
+  SiGooglecloud,
+  SiAstro,
+  SiTailwindcss,
 } from 'react-icons/si';
 import { HiDatabase } from 'react-icons/hi';
 import { FaPython, FaJava } from 'react-icons/fa';
@@ -61,6 +64,32 @@ export const TypeScriptIcon = ({ drip }: { drip: string }) => {
   );
 };
 
+export const kuluforniaStack = [
+  {
+    icon: <SiAstro size={21} />,
+    title: 'Astro',
+  },
+  {
+    icon: <ReactIcon />,
+    title: 'React',
+  },
+  {
+    icon: <SiTypescript size={21} style={{ marginLeft: 2 }} />,
+    title: 'TypeScript',
+  },
+  {
+    icon: <SiTailwindcss size={21} />,
+    title: 'Tailwind CSS',
+  },
+  {
+    icon: <SiFirebase className='firebase-icon' size={21} />,
+    title: 'Firestore',
+  },
+  {
+    icon: <SiGooglecloud size={21} />,
+    title: 'Google Cloud',
+  },
+];
 export const promptlyStack = [
   {
     icon: <SiJavascript size={21} />,

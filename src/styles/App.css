@@ -36,6 +36,12 @@
 
   --error: #cf6679;
   --disabled: rgba(255, 255, 255, 0.38);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-kerning: normal;
 }
 
 @font-face {
@@ -85,6 +91,24 @@
   font-family: 'InterTight-Light';
   src: local('InterTight-Light'),
     url(../assets/fonts/InterTight-Light.ttf) format('truetype');
+}
+@font-face {
+  font-display: swap;
+  font-family: 'Kaisei Haruno Umi';
+  src: local('KaiseiHarunoUmi-Regular'),
+    url(../assets/fonts/KaiseiHarunoUmi-Regular.ttf) format('truetype');
+}
+@font-face {
+  font-display: swap;
+  font-family: 'Lato';
+  src: local('Lato-Regular'),
+    url(../assets/fonts/Lato-Regular.ttf) format('truetype');
+}
+@font-face {
+  font-display: swap;
+  font-family: 'Montserrat';
+  src: local('Montserrat-Light'),
+    url(../assets/fonts/Montserrat-Light.ttf) format('truetype');
 }
 
 ::-moz-selection {
