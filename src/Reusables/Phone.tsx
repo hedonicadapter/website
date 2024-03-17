@@ -312,7 +312,9 @@ function Model({
               material-color={0x000000}
               // material={materials.Wallpaper}
             >
-              <VideoMaterial video={video} play={play} />
+              <React.Suspense fallback={<meshBasicMaterial wireframe />}>
+                <VideoMaterial video={video} play={play} />
+              </React.Suspense>
             </mesh>
             <mesh
               name='Apple_Logo_Logo_0'
